@@ -1,0 +1,56 @@
+  {
+        "companyName": "ATP INVESTMENT",
+        "invest": "Invest",
+        "promotions": "Promotions",
+        "signIn": "Sign In",
+        "signUp": "Sign Up",
+        "downloadApp": "Download App",
+        "ongoingInvestments": "Ongoing Investment Options",
+          "investmentDescription": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore.",
+          "targetAchieved": "Target Achieved",
+          "seeDetails": "See Details",
+          "viewAllProjects": "View All Projects",
+          "loadingInvestments": "Loading investments...",
+          "howToInvest": "How to Invest on the Projects?",
+          "investmentStepsDescription": "Follow these simple steps to start investing in our projects.",
+          "step1Title": "Create Account",
+          "step1Description": "Sign up and verify your identity to start investing",
+          "step2Title": "Choose Project",
+          "step2Description": "Browse and select investment opportunities that match your goals",
+          "step3Title": "Invest",
+          "step3Description": "Fund your account and confirm your investment choices",
+          "step4Title": "Track Progress",
+          "step4Description": "Monitor your investments and watch your portfolio grow",
+          "hero": {
+            "title": "Invest Today and Build Your Future",
+            "description": "Get easy market access and enjoy monthly returns. United States stocks and ETFs!",
+            "cta": "Get Started Now"
+          },
+          "stats": {
+    "investments": "Investments",
+    "international": "International",
+    "financial": "Financial",
+    "investmentStart": "Investment Start from $500"
+  },
+  "toggleMenu": "Toggle Menu",
+  "faq": {
+    "title": "Frequently Asked Questions",
+    "loading": "Loading...",
+    "fetchError": "Failed to fetch FAQ data",
+    "error": "Error: {{error}}",
+    "noData": "No FAQ data available",
+    "questions": {
+      "0": "How does the trial work?",
+      "1": "Can I change my plans later?",
+      "2": "Is it animated?",
+      "3": "Can I add custom items?"
+    },
+    "answers": {
+      "0": "You get a 14-day free trial where you get access to all the features for unlimited users & clients. After the 14-day free trial, you will get the option of choosing our standard package or contacting sales to further continue using it.",
+      "1": "You get a 14-day free trial where you get access to all the features for unlimited users & clients. After the 14-day free trial, you will get the option of choosing our standard package or contacting sales to further continue using it.",
+      "2": "You get a 14-day free trial where you get access to all the features for unlimited users & clients. After the 14-day free trial, you will get the option of choosing our standard package or contacting sales to further continue using it.",
+      "3": "You get a 14-day free trial where you get access to all the features for unlimited users & clients. After the 14-day free trial, you will get the option of choosing our standard package or contacting sales to further continue using it."
+    }
+  }
+    }
+ 

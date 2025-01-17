@@ -1,0 +1,38 @@
+.investment-details-container {
+    @apply container mx-auto px-4 py-8;
+  }
+  
+  .investment-grid {
+    @apply grid gap-8 lg:grid-cols-2;
+  }
+  
+  .gallery-section {
+    @apply space-y-4;
+  }
+  
+  .details-section {
+    @apply space-y-6;
+  }
+  
+  .project-details-section {
+    @apply mt-12;
+  }
+  
+  /* Responsive adjustments */
+  @media (max-width: 1024px) {
+    .investment-grid {
+      @apply grid-cols-1;
+    }
+  }
+  
+  /* Animation for hover states */
+  .investment-option:hover {
+    @apply transform scale-105 transition-transform duration-200;
+  }
+  
+  /* Progress bar animation */
+  .progress-animation {
+    @apply transition-all duration-500 ease-in-out;
+  }
+  
+  
