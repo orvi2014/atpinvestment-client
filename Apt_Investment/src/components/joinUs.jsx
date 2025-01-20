@@ -24,6 +24,7 @@ export default function NewsletterForm() {
           <Button 
             type="submit"
             className="sign-up-btn"
+            style={{ backgroundColor: "#4285f4", color: "white" }}
           >
             Sign Up
           </Button>
@@ -33,4 +34,3 @@ export default function NewsletterForm() {
     </div>
   )
 }
-

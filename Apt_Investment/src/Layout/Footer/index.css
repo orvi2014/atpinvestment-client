@@ -105,18 +105,19 @@ footer {
   }
   
   .sign-up-btn {
-    height: 40px;
-    padding: 0 20px;
-    background: #4285f4;
-    color: white;
-    font-weight: 500;
-    font-size: 14px;
-    border-radius: 4px;
+    background-color: #4285f4;
+    color: white; /* Ensures the text is visible on the blue background */
+    border: none;
+    padding: 10px 20px; /* Adjust padding as needed */
+    border-radius: 5px; /* Optional: Makes the button slightly rounded */
+    cursor: pointer;
+    font-size: 16px; /* Optional: Adjusts the font size */
   }
   
   .sign-up-btn:hover {
-    background: #3b78e7;
+    background-color: #3367d6; /* Slightly darker shade for hover effect */
   }
+  
   
  @media (max-width: 640px) {
   .newsletter-container {
@@ -136,6 +137,7 @@ footer {
     
     .sign-up-btn {
       width: 100%;
+      
     }
     
     .blue-accent {
@@ -248,6 +250,8 @@ footer {
     padding: 1rem 0;
     margin: 0;
   }
+
+ 
   
   @media (max-width: 768px) {
     .footer-content {

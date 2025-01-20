@@ -5,6 +5,8 @@ import i18n from './i18n';
 import Home from "./Pages/home";
 import ViewDetails from "./Pages/viewDetails";
 import './i18n';
+import './Pages/login';
+import LogIn from './Pages/login';
 
 function App() {
   return (
@@ -13,7 +15,9 @@ function App() {
         <Router>
           <Routes>
             <Route path="/" element={<Home />} />
-            <Route path="/investments/details/:id" element={<ViewDetails />} /> 
+            <Route path="/investments/details/:id" element={<ViewDetails />} />
+            <Route path="/signin" element={<LogIn />} />
+           
           </Routes>
         </Router>
       </Suspense>
@@ -22,4 +26,3 @@ function App() {
 }
 
 export default App;
-
