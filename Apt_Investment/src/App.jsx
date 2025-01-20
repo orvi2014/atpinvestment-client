@@ -7,6 +7,9 @@ import ViewDetails from "./Pages/viewDetails";
 import './i18n';
 import './Pages/login';
 import LogIn from './Pages/login';
+import PhoneVerification from './Pages/phnVarification';
+
+
 
 function App() {
   return (
@@ -17,7 +20,7 @@ function App() {
             <Route path="/" element={<Home />} />
             <Route path="/investments/details/:id" element={<ViewDetails />} />
             <Route path="/signin" element={<LogIn />} />
-           
+            <Route path="/signup" element={<PhoneVerification />} />
           </Routes>
         </Router>
       </Suspense>

@@ -1,71 +1,90 @@
-import { Button } from "@/components/ui/button.jsx";
-import { Input } from "@/components/ui/input";
-import { ArrowLeft } from "lucide-react";
-import { Link } from "react-router-dom";
-import logo from "../../assets/Image/logo-blue.png";
-import PromoSection from "../../components/promotionalSection.jsx";
-import "./index.css";
+import { useState } from "react"; 
+import { Button } from "@/components/ui/button"; 
+import { Input } from "@/components/ui/input"; 
+import { ChevronLeft } from "lucide-react"; 
+import { Link } from "react-router-dom"; 
+import logo from "../../assets/Image/logo-blue.png"; 
+import PromoSection from "../../components/promotionalSection.jsx"; 
+import "./index.css";  
 
-export default function LoginForm() {
-  return (
-    <div className="login-section flex">
-      <div className="flex-1 lg:w-1/2"> {/* Left side for login on large screens */}
-        <div className="flex items-center gap-2">
-          <Button variant="ghost" size="icon" asChild >
-            <Link to="/">
-              <ArrowLeft className="h-4 w-4" />
-            </Link>
-          </Button>
-          <div className="flex items-center gap-2">
-            <img
-              src={logo}
-              alt="ATP Investment Logo"
-              className="h-8 w-8"
-            />
-            <span className="company ">ATP Investment</span>
-          </div>
-        </div>
+export default function SignIn() { 
+  const [username, setUsername] = useState(""); 
+  const [membershipId, setMembershipId] = useState(""); 
 
-        <div className="space-y-6 max-w-sm mx-auto w-full mt-20">
-          <div className="space-y-2">
-            <h1 className="text-2xl font-semibold tracking-tight">Log In</h1>
-          </div>
+  return ( 
+    <div className="flex flex-col lg:flex-row min-h-screen"> 
+      {/* Main Content Section */}
+      <main className="flex-1 p-6 lg:p-12"> 
+        <header className="space-y-6"> 
+          <Button variant="ghost" size="icon" className="w-8 h-8 -ml-2"> 
+            <ChevronLeft className="h-5 w-5" /> 
+          </Button> 
+          <div className="flex items-center gap-2"> 
+            <img src={logo} alt="ATP Investment Logo" /> 
+            <h1 className="text-blue-500 text-2xl font-semibold">ATP Investment</h1> 
+          </div> 
+        </header> 
 
-          <div className="space-y-4">
-          <div className="space-y-2">
-            <label className="text-sm text-muted-foreground">Username</label>
-                <Input type="text" placeholder="Your email" className="custom-input" />
-          </div>
+        <section className="mt-12 space-y-8"> 
+          <div className="space-y-2"> 
+            <h2 className="text-xl font-semibold text-gray-900">Sign In</h2> 
+            <p className="text-sm text-gray-500">Please enter your credentials</p> 
+          </div> 
 
-            <div className="space-y-2">
-              <label className="text-sm text-muted-foreground">Membership ID</label>
-              <Input type="text"  className="custom-input"/>
-            </div>
-            <div className="text-right">
-                <Button variant="ghost" className="text-sm text-gray-600 bg-transparent hover:text-blue-400 hover:bg-transparent">
-                   Need Help?
-                </Button>
-            </div>
+          <form className="space-y-4"> 
+            {/* Username Input */}
+            <div className="space-y-2"> 
+              <label className="text-sm text-muted-foreground">Username</label> 
+              <Input 
+                type="text" 
+                value={username} 
+                onChange={(e) => setUsername(e.target.value)} 
+                placeholder="Your email" 
+                className="h-12" 
+              /> 
+            </div> 
 
-            <Button className="login" size="lg">
-              Log In
-            </Button>
-          </div>
+            {/* Membership ID Input */}
+            <div className="space-y-2"> 
+              <label className="text-sm text-muted-foreground">Membership ID</label> 
+              <Input 
+                type="text" 
+                value={membershipId} 
+                onChange={(e) => setMembershipId(e.target.value)} 
+                placeholder="Your Membership ID" 
+                className="h-12" 
+              /> 
+            </div> 
 
-          <div className="text-center text-sm">
-              {"Don't have an account? "}
-            <Link to="/signup" className="text-blue-600 hover:underline">
-               Sign Up
-            </Link>
-          </div>
+            {/* Need Help Button */}
+            <div className="text-right"> 
+              <Button 
+                variant="ghost" 
+                className="text-sm text-gray-600 bg-transparent hover:text-blue-400 hover:bg-transparent" 
+              > 
+                Need Help? 
+              </Button> 
+            </div> 
 
-        </div>
-      </div>
+            {/* Sign In Button */}
+            <Button className="w-full h-12 text-base bg-blue-500 hover:bg-blue-600"> 
+              Sign In 
+            </Button> 
+          </form> 
 
-      {/* Promotional Section on the Right Side for large screens */}
-      <div className="promotional-section hidden lg:block lg:w-1/2"> {/* Visible on large screens */}
-        <PromoSection />
-      </div>
-    </div>
-  );
+          <footer className="text-sm text-center text-gray-500"> 
+            Don't have an account?{" "} 
+            <Link to="/signup" className="text-blue-500 hover:underline"> 
+              Sign Up 
+            </Link> 
+          </footer> 
+        </section> 
+      </main> 
+
+      {/* Promotional Section (Now on the Right) */}
+      <aside className="hidden lg:block lg:w-1/2 promotional-section"> 
+        <PromoSection /> 
+      </aside> 
+    </div> 
+  ); 
 }
