@@ -99,3 +99,15 @@
     font-size: 0.9rem;
   }
 }
+
+.back-button {
+  color: #4285f4;
+  background-color: transparent; /* Ensures the background is transparent */
+  border: none; /* Removes any default borders */
+  padding: 0; /* Removes any padding */
+}
+
+.back-button:hover{
+  color: #2563eb;
+}
+

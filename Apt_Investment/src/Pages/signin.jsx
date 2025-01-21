@@ -1,4 +1,4 @@
-import Layout from "../Layout/Login"; 
+import Layout from "../Layout/Signin"; 
 
 export default function Login() {
   return (

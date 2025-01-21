@@ -51,6 +51,49 @@
       "2": "You get a 14-day free trial where you get access to all the features for unlimited users & clients. After the 14-day free trial, you will get the option of choosing our standard package or contacting sales to further continue using it.",
       "3": "You get a 14-day free trial where you get access to all the features for unlimited users & clients. After the 14-day free trial, you will get the option of choosing our standard package or contacting sales to further continue using it."
     }
-  }
+  },
+
+  "title": "Verification",
+    "Enter Verification Code": "Enter Verification Code",
+    "An SMS with a verification code has been sent to your phone": "An sms with verification code has been sent to your phone",
+    "verify": "Verify",
+    "Didn't receive a code?": "Didn't receive a code?",
+    "resend": "Resend",
+    "Already have an account?": "Already have an account?",
+    "Sign In": "Sign In",
+    "verifyPhoneNumber": "Verify Phone Number",
+  "confirmCountry": "Please confirm country code and enter your phone number",
+  "continue": "Continue",
+  "alreadyHaveAccount": "Already have an account?",
+  "signIn": "Sign In",
+  "phoneNumberError": "Please enter a valid phone number.",
+  "signInTitle": "Sign In",
+  "signInDescription": "Please enter your credentials",
+  "usernameLabel": "Username",
+  "membershipIdLabel": "Membership ID",
+  "usernamePlaceholder": "Your email",
+  "membershipIdPlaceholder": "Your Membership ID",
+  "needHelp": "Need Help?",
+  "signInButton": "Sign In",
+  "noAccount": "Don't have an account?",
+  "signUpLink": "Sign Up",
+  "promotional": {
+    "headline": "This is your very own headline to describe your product",
+    "subheadline": "This is a headline",
+    "description": "Lorem ipsum dolor sit amet, consectetur adipisc sed do eiusmod tempor incididunt ut labore et do",
+    "highlight": "Lorem esum",
+    "buttons": {
+      "explore": "Explore",
+      "invest": "Invest",
+      "profit": "Get Profit"
     }
+  },
+  "signupTitle": "Your Information",
+  "usernameLabel": "Username",
+  "emailLabel": "Email",
+  "optional": "(Optional)",
+  "finishSignUp": "Finish Signing Up",
+  "required": "*"
+
+}
  

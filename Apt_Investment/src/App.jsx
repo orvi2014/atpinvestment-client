@@ -5,9 +5,11 @@ import i18n from './i18n';
 import Home from "./Pages/home";
 import ViewDetails from "./Pages/viewDetails";
 import './i18n';
-import './Pages/login';
-import LogIn from './Pages/login';
+import './Pages/signin';
+import LogIn from './Pages/signin';
 import PhoneVerification from './Pages/phnVarification';
+import CodeVerification from './Pages/codeVerification';
+import Signupinfo from './Pages/signupInfo';
 
 
 
@@ -21,6 +23,8 @@ function App() {
             <Route path="/investments/details/:id" element={<ViewDetails />} />
             <Route path="/signin" element={<LogIn />} />
             <Route path="/signup" element={<PhoneVerification />} />
+            <Route path="/signup/verify" element={<CodeVerification />} />
+            <Route path="/signup/info" element={<Signupinfo />} />
           </Routes>
         </Router>
       </Suspense>
