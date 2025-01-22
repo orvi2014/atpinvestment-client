@@ -67,16 +67,21 @@
   "alreadyHaveAccount": "Already have an account?",
   "signIn": "Sign In",
   "phoneNumberError": "Please enter a valid phone number.",
+  "companyName": "Your Company",
   "signInTitle": "Sign In",
-  "signInDescription": "Please enter your credentials",
-  "usernameLabel": "Username",
-  "membershipIdLabel": "Membership ID",
-  "usernamePlaceholder": "Your email",
-  "membershipIdPlaceholder": "Your Membership ID",
-  "needHelp": "Need Help?",
+  "signInDescription": "Please sign in to continue.",
+  "emailLabel": "Email",
+  "emailPlaceholder": "Enter your email",
+  "passwordLabel": "Password",
+  "passwordPlaceholder": "Enter your password",
   "signInButton": "Sign In",
+  "loginSuccess": "Login successful!",
+  "loginFailed": "Login failed. Please check your credentials.",
+  "networkError": "Network error. Please try again.",
+  "loading": "Signing in...",
   "noAccount": "Don't have an account?",
   "signUpLink": "Sign Up",
+  "needHelp": "Need help?",
   "promotional": {
     "headline": "This is your very own headline to describe your product",
     "subheadline": "This is a headline",
@@ -88,12 +93,16 @@
       "profit": "Get Profit"
     }
   },
-  "signupTitle": "Your Information",
-  "usernameLabel": "Username",
-  "emailLabel": "Email",
-  "optional": "(Optional)",
-  "finishSignUp": "Finish Signing Up",
-  "required": "*"
-
+  "signupTitle": "Sign Up",
+  "customIdLabel": "Custom ID",
+  "fullnameLabel": "Full Name",
+  "emailLabel": "Email Address",
+  "passwordLabel": "Password",
+  "customIdPlaceholder": "Enter your custom ID",
+  "fullnamePlaceholder": "Enter your full name",
+  "emailPlaceholder": "Enter your email address",
+  "passwordPlaceholder": "Enter your password",
+  "finishSignUp": "Finish Sign Up",
+  "required": "(Required)"
 }
  

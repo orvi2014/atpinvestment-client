@@ -2,29 +2,66 @@ import React, { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { ChevronLeft } from "lucide-react";
-import { Link } from "react-router-dom";
-import { useTranslation } from "react-i18next"; // Import i18next hook
+import { Link, useNavigate } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 import logo from "../../assets/Image/logo-blue.png";
 import PromoSection from "../../components/promotionalSection.jsx";
 import "./index.css";
 
 export default function SignIn() {
-  const { t, i18n } = useTranslation(); // Initialize translation
-  const [username, setUsername] = useState("");
-  const [membershipId, setMembershipId] = useState("");
+  const { t, i18n } = useTranslation();
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [error, setError] = useState("");
+  const [loading, setLoading] = useState(false);
+  const navigate = useNavigate();
 
-  // Read language from localStorage and update i18n
   useEffect(() => {
     const storedLanguage = localStorage.getItem("lang") || "en";
-    i18n.changeLanguage(storedLanguage); // Set language based on stored value
+    i18n.changeLanguage(storedLanguage);
   }, [i18n]);
+
+  const handleLogin = async (e) => {
+    e.preventDefault();
+    setLoading(true);
+    setError("");
+
+    const requestBody = {
+      email,
+      password,
+    };
+
+    try {
+      const response = await fetch("https://atpinvestment.onrender.com/api/auth/login", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(requestBody),
+      });
+
+      const data = await response.json();
+
+      if (response.ok) {
+        console.log(data.message);
+        localStorage.setItem("token", data.token);
+        alert(t("loginSuccess"));
+        navigate("/"); // Redirect after successful login
+      } else {
+        setError(data.message || t("loginFailed"));
+      }
+    } catch (err) {
+      console.error("Login error:", err);
+      setError(t("networkError"));
+    } finally {
+      setLoading(false);
+    }
+  };
 
   return (
     <div className="flex flex-col lg:flex-row min-h-screen">
-      {/* Main Content Section */}
       <main className="flex-1 p-6 lg:p-12">
         <header className="space-y-6">
-          {/* Back Arrow Redirects to Home */}
           <Link to="/" className="back-button">
             <ChevronLeft className="h-6 w-6" />
           </Link>
@@ -40,44 +77,39 @@ export default function SignIn() {
             <p className="text-sm text-gray-500">{t("signInDescription")}</p>
           </div>
 
-          <form className="space-y-4">
-            {/* Username Input */}
+          <form className="space-y-4" onSubmit={handleLogin}>
             <div className="space-y-2">
-              <label className="text-sm text-muted-foreground">{t("usernameLabel")}</label>
+              <label className="text-sm text-muted-foreground">{t("emailLabel")}</label>
               <Input
-                type="text"
-                value={username}
-                onChange={(e) => setUsername(e.target.value)}
-                placeholder={t("usernamePlaceholder")}
-                className="h-12"
+                type="email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                placeholder={t("emailPlaceholder")}
+                className="custom-input h-12"
+                required
               />
             </div>
 
-            {/* Membership ID Input */}
             <div className="space-y-2">
-              <label className="text-sm text-muted-foreground">{t("membershipIdLabel")}</label>
+              <label className="text-sm text-muted-foreground">{t("passwordLabel")}</label>
               <Input
-                type="text"
-                value={membershipId}
-                onChange={(e) => setMembershipId(e.target.value)}
-                placeholder={t("membershipIdPlaceholder")}
-                className="h-12"
+                type="password"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                placeholder={t("passwordPlaceholder")}
+                className="custom-input h-12"
+                required
               />
             </div>
 
-            {/* Need Help Button */}
-            <div className="text-right">
-              <Button
-                variant="ghost"
-                className="text-sm text-gray-600 bg-transparent hover:text-blue-400 hover:bg-transparent"
-              >
-                {t("needHelp")}
-              </Button>
-            </div>
+            {error && <p className="text-red-500 text-sm">{error}</p>}
 
-            {/* Sign In Button */}
-            <Button className="w-full h-12 text-base bg-blue-500 hover:bg-blue-600">
-              {t("signInButton")}
+            <Button
+              type="submit"
+              className="w-full h-12 text-base bg-blue-500 hover:bg-blue-600"
+              disabled={loading}
+            >
+              {loading ? t("loading") : t("signInButton")}
             </Button>
           </form>
 
@@ -90,7 +122,6 @@ export default function SignIn() {
         </section>
       </main>
 
-      {/* Promotional Section */}
       <aside className="hidden lg:block lg:w-1/2 promotional-section">
         <PromoSection />
       </aside>
