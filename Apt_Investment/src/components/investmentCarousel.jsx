@@ -15,7 +15,7 @@ export default function InvestmentCarousel() {
   useEffect(() => {
     async function fetchInvestments() {
       try {
-        const response = await fetch(`/data/investments-en.json`);
+        const response = await fetch(`/data/investments.json`);
         if (!response.ok) {
           throw new Error(`Failed to fetch: ${response.statusText}`);
         }

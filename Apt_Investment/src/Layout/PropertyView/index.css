@@ -1,38 +1,42 @@
-.investment-details-container {
-    @apply container mx-auto px-4 py-8;
-  }
-  
-  .investment-grid {
-    @apply grid gap-8 lg:grid-cols-2;
-  }
-  
-  .gallery-section {
-    @apply space-y-4;
-  }
-  
-  .details-section {
-    @apply space-y-6;
-  }
-  
-  .project-details-section {
-    @apply mt-12;
-  }
-  
-  /* Responsive adjustments */
-  @media (max-width: 1024px) {
-    .investment-grid {
-      @apply grid-cols-1;
-    }
-  }
-  
-  /* Animation for hover states */
-  .investment-option:hover {
-    @apply transform scale-105 transition-transform duration-200;
-  }
-  
-  /* Progress bar animation */
-  .progress-animation {
-    @apply transition-all duration-500 ease-in-out;
-  }
-  
-  
+/* Global reset for body and html */
+html, body {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  height: 100%;
+  background-color:  #F3F4F6;
+  ; /* Same color for the whole page */
+}
+
+/* Make sure the entire investment page has the same background */
+.investment-page {
+  width: 100%;
+  height: 100%;
+  background-color:#F3F4F6; /* Tailwind's gray-100 */
+}
+
+/* Investment grid layout */
+.investment-grid {
+  display: flex;
+  flex-direction: row;
+  gap: 8px;
+  width: 100%;
+  justify-content: space-between;
+}
+
+.gallery-section {
+  flex: 2;
+}
+
+.details-section {
+  flex: 1;
+}
+
+/* Project description section with the same background */
+.project-details-section {
+  font-size: 1.2rem;
+  margin-top: 20px;
+  background-color: #F3F4F6; /* Same background color */
+  padding: 20px; /* Padding to give space around the content */
+  border-radius: 8px; /* Optional: gives rounded corners for the section */
+}

@@ -12,6 +12,7 @@ export default function SignIn() {
   const { t, i18n } = useTranslation();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [emailError, setEmailError] = useState("");
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
@@ -21,41 +22,49 @@ export default function SignIn() {
     i18n.changeLanguage(storedLanguage);
   }, [i18n]);
 
+  const handleEmailChange = (e) => {
+    const value = e.target.value;
+    setEmail(value);
+
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(value)) {
+      setEmailError(t("invalidEmail"));
+    } else {
+      setEmailError("");
+    }
+  };
+
   const handleLogin = async (e) => {
     e.preventDefault();
     setLoading(true);
     setError("");
 
-    const requestBody = {
-      email,
-      password,
-    };
+    if (!emailError) {
+      const requestBody = { email, password };
 
-    try {
-      const response = await fetch("https://atpinvestment.onrender.com/api/auth/login", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(requestBody),
-      });
+      try {
+        const response = await fetch("https://atpinvestment.onrender.com/api/auth/login", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(requestBody),
+        });
 
-      const data = await response.json();
+        const data = await response.json();
 
-      if (response.ok) {
-        console.log(data.message);
-        localStorage.setItem("token", data.token);
-        alert(t("loginSuccess"));
-        navigate("/"); // Redirect after successful login
-      } else {
-        setError(data.message || t("loginFailed"));
+        if (response.ok) {
+          localStorage.setItem("token", data.token);
+          alert(t("loginSuccess"));
+          navigate("/");
+        } else {
+          setError(data.message || t("loginFailed"));
+        }
+      } catch (err) {
+        console.error("Login error:", err);
+        setError(t("networkError"));
       }
-    } catch (err) {
-      console.error("Login error:", err);
-      setError(t("networkError"));
-    } finally {
-      setLoading(false);
     }
+
+    setLoading(false);
   };
 
   return (
@@ -81,13 +90,15 @@ export default function SignIn() {
             <div className="space-y-2">
               <label className="text-sm text-muted-foreground">{t("emailLabel")}</label>
               <Input
-                type="email"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                placeholder={t("emailPlaceholder")}
-                className="custom-input h-12"
-                required
-              />
+                  type="email"
+                  value={email}
+                  onChange={handleEmailChange}
+                  placeholder={t("emailPlaceholder")}
+                  className={`custom-input h-12 ${emailError ? "invalid-input" : ""}`}
+                  required
+               />
+
+              {emailError && <p className="error-text">{emailError}</p>}
             </div>
 
             <div className="space-y-2">
@@ -102,7 +113,7 @@ export default function SignIn() {
               />
             </div>
 
-            {error && <p className="text-red-500 text-sm">{error}</p>}
+            {error && <p className="error-text">{error}</p>}
 
             <Button
               type="submit"
@@ -114,10 +125,7 @@ export default function SignIn() {
           </form>
 
           <div className="text-sm text-center text-gray-500">
-            {t("noAccount")}{" "}
-            <Link to="/signup" className="text-blue-500 hover:underline">
-              {t("signUpLink")}
-            </Link>
+            {t("noAccount")} <Link to="/signup" className="text-blue-500 hover:underline">{t("signUpLink")}</Link>
           </div>
         </section>
       </main>

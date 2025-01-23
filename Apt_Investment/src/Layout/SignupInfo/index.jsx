@@ -1,7 +1,5 @@
-"use client";
-
-import { useState } from "react";
-import { useNavigate } from "react-router-dom"; // Use react-router-dom for navigation
+import { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -11,21 +9,49 @@ import { useTranslation } from "react-i18next";
 import "./index.css";
 
 const SignUpForm = () => {
-  const { t, i18n } = useTranslation();
-  const navigate = useNavigate(); // Initialize useNavigate for navigation
+  const { t } = useTranslation();
+  const navigate = useNavigate();
   const [formData, setFormData] = useState({
-    customId: "",
+    customerId: "", // This will be generated automatically
     fullname: "",
     email: "",
     password: "",
   });
-  const [error, setError] = useState("");
+  const [error, setError] = useState(""); // General error state
   const [success, setSuccess] = useState("");
+  const [emailValid, setEmailValid] = useState(true); // Track email validity
+
+  useEffect(() => {
+    // Generate a unique customerId (example implementation)
+    const customerId = `iv${Math.floor(Math.random() * 100000)}`; // Randomly generate customer ID
+    setFormData((prev) => ({
+      ...prev,
+      customerId,
+    }));
+  }, []);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    setError(""); // Clear previous errors
-    setSuccess(""); // Clear previous success message
+    setError("");
+    setSuccess("");
+
+    // Simple email validation
+    if (!/\S+@\S+\.\S+/.test(formData.email)) {
+      setEmailValid(false); // Mark email as invalid
+      setError(t("invalidEmail")); // Set error message
+      return; // Prevent form submission if email is invalid
+    }
+
+    setEmailValid(true); // If email is valid, proceed with form submission
+
+    const payload = {
+      customId: formData.customerId, // Match the backend's expected field name
+      fullname: formData.fullname,
+      email: formData.email,
+      password: formData.password,
+    };
+
+    console.log("Request Payload:", payload); // Debugging
 
     try {
       const response = await fetch("https://atpinvestment.onrender.com/api/auth/signup", {
@@ -33,21 +59,23 @@ const SignUpForm = () => {
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify(formData),
+        body: JSON.stringify(payload),
       });
 
       const data = await response.json();
+      console.log("Response Data:", data); // Debugging
 
       if (response.ok) {
-        setSuccess(data.message); // "user created"
-        setTimeout(() => {
-          navigate("/"); // Redirect to homepage
-        }, 2000); // Delay for showing the success message
+        setSuccess(data.message); // e.g., "User created successfully"
+
+        // Show alert and navigate to homepage on confirmation
+        window.alert(data.message);
+        navigate("/"); // Redirect to homepage
       } else {
-        setError(data.error); // "User already exists" or other errors
+        setError(data.error || "An error occurred. Please try again.");
       }
     } catch (err) {
-      setError("Something went wrong. Please try again.");
+      setError("Something went wrong. Please try again later.");
     }
   };
 
@@ -61,7 +89,6 @@ const SignUpForm = () => {
 
   return (
     <div className="flex min-h-screen signup">
-      {/* Left side: Form container */}
       <div className="flex-1 p-8">
         <div className="max-w-md mx-auto">
           <div className="header mb-8 mt-20">
@@ -71,31 +98,13 @@ const SignUpForm = () => {
             </div>
           </div>
 
-          {/* Sign up form */}
           <form onSubmit={handleSubmit} className="space-y-6 mt-20">
             <div className="space-y-4">
               <h2 className="text-xl font-semibold">{t("signupTitle")}</h2>
 
-              {/* Custom ID Input */}
-              <div className="space-y-2">
-                <Label htmlFor="customId" className="text-blue-500">
-                  {t("customIdLabel")} <span className="text-red-500">{t("required")}</span>
-                </Label>
-                <Input
-                  id="customId"
-                  name="customId"
-                  placeholder={t("customIdPlaceholder")}
-                  value={formData.customId}
-                  onChange={handleChange}
-                  required
-                  className="w-full custom-input"
-                />
-              </div>
-
-              {/* Full Name Input */}
               <div className="space-y-2">
                 <Label htmlFor="fullname" className="text-blue-500">
-                  {t("fullnameLabel")} <span className="text-red-500">{t("required")}</span>
+                  {t("fullnameLabel")}
                 </Label>
                 <Input
                   id="fullname"
@@ -108,26 +117,28 @@ const SignUpForm = () => {
                 />
               </div>
 
-              {/* Email Input */}
               <div className="space-y-2">
-                <Label htmlFor="email" className="text-blue-500">
-                  {t("emailLabel")}
-                </Label>
-                <Input
-                  id="email"
-                  name="email"
-                  type="email"
-                  placeholder={t("emailPlaceholder")}
-                  value={formData.email}
-                  onChange={handleChange}
-                  className="w-full custom-input"
-                />
-              </div>
+  <Label htmlFor="email" className="text-blue-500">
+    {t("emailLabel")}
+  </Label>
+  <Input
+    id="email"
+    name="email"
+    type="email"
+    placeholder={t("emailPlaceholder")}
+    value={formData.email}
+    onChange={handleChange}
+    className={`custom-input h-12 ${!emailValid ? "invalid-input" : ""}`}
+    required
+  />
+  {/* Show email validation error message */}
+  {!emailValid && <p className="error-text mt-1">{t("invalidEmail")}</p>}
+</div>
 
-              {/* Password Input */}
+
               <div className="space-y-2">
                 <Label htmlFor="password" className="text-blue-500">
-                  {t("passwordLabel")} <span className="text-red-500">{t("required")}</span>
+                  {t("passwordLabel")}
                 </Label>
                 <Input
                   id="password"
@@ -142,19 +153,16 @@ const SignUpForm = () => {
               </div>
             </div>
 
-            {/* Submit Button */}
             <Button type="submit" className="w-full bg-blue-500 hover:bg-blue-600 text-white">
               {t("finishSignUp")}
             </Button>
 
-            {/* Display success or error message */}
             {error && <p className="text-red-500 mt-4">{error}</p>}
             {success && <p className="text-green-500 mt-4">{success}</p>}
           </form>
         </div>
       </div>
 
-      {/* Right side: Promotional Section */}
       <div className="flex-1">
         <PromotionalSection />
       </div>

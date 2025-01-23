@@ -67,9 +67,10 @@
   "alreadyHaveAccount": "Already have an account?",
   "signIn": "Sign In",
   "phoneNumberError": "Please enter a valid phone number.",
-  "companyName": "Your Company",
+ 
   "signInTitle": "Sign In",
   "signInDescription": "Please sign in to continue.",
+  "invalidEmail": "Please enter a valid email",
   "emailLabel": "Email",
   "emailPlaceholder": "Enter your email",
   "passwordLabel": "Password",

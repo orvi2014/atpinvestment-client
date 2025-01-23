@@ -58,7 +58,7 @@ const Header = () => {
                 <Link to="/signin" className="signin-button">{t('signIn')}</Link>
               </DropdownMenuItem>
               <DropdownMenuItem asChild>
-                <Link to="/signup" className="signup-button">{t('signUp')}</Link>
+                <Link to="/signup/verify" className="signup-button">{t('signUp')}</Link>
               </DropdownMenuItem>
               <DropdownMenuItem asChild>
                 <Link to="/download" className="download-button">{t('downloadApp')}</Link>
@@ -83,7 +83,7 @@ const Header = () => {
               <Link to="/signin">{t('signIn')}</Link>
             </Button>
             <Button variant="ghost" asChild className="signup-button">
-              <Link to="/signup">{t('signUp')}</Link>
+              <Link to="/signup/verify">{t('signUp')}</Link>
             </Button>
             <Button variant="outline" asChild className="download-button">
               <Link to="/download">{t('downloadApp')}</Link>

@@ -22,9 +22,9 @@ function App() {
             <Route path="/" element={<Home />} />
             <Route path="/investments/details/:id" element={<ViewDetails />} />
             <Route path="/signin" element={<LogIn />} />
-            <Route path="/signup" element={<PhoneVerification />} />
-            <Route path="/signup/verify" element={<CodeVerification />} />
-            <Route path="/signup/info" element={<Signupinfo />} />
+            <Route path="/signup/verify" element={<PhoneVerification />} />
+            <Route path="/signup/verify/OTP" element={<CodeVerification />} />
+            <Route path="/signup" element={<Signupinfo />} />
           </Routes>
         </Router>
       </Suspense>

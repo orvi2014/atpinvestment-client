@@ -6,43 +6,45 @@ import Hero from '../../components/Hero';
 import Status from '../../components/Status';
 import { Button } from "@/components/ui/button";
 import GroupImage from '@/assets/Image/Group.png'; // Import the image properly
+import "./index.css";
 
-export default function Homeinfo() {
-    const { t } = useTranslation();
 
+
+export default function HomeInfo() {
+    const { t } = useTranslation()
+  
     return (
-        <div className="py-8 container mx-auto px-4">
-            <section className="mb-16 flex flex-col lg:flex-row items-center">
-                <div className="lg:w-1/2 lg:pr-8">
-                    <Hero />
-                    <Status />
-                </div>
-                <div className="lg:w-1/2 mt-8 lg:mt-0">
-                    {/* Use img tag to display the image */}
-                    <img
-                        src={GroupImage}
-                        alt="Investment Illustration"
-                        className="w-full" // You can style it if necessary
-                    />
-                </div>
-            </section>
-
-            <section className="mb-16 mt-24">
-                <h2 className="text-3xl font-bold text-center mb-4">
-                    {t('howToInvest')}
-                </h2>
-                <p className="text-center text-gray-600 mb-8 mt-10">
-                    {t('investmentStepsDescription')}
-                </p>
-                <Steps />
-            </section>
-
-            <section className="mb-16">
-                <h2 className="text-3xl font-bold text-center mb-8">
-                    {t('ongoingInvestments')}
-                </h2>
-                <InvestmentCarousel />
-            </section>
-        </div>
-    );
-}
+      <div className="w-full">
+        <section className="home-section ">
+          <div className="grid lg:grid-cols-2 gap-8 items-center">
+            <div>
+              <Hero />
+              <Status />
+            </div>
+            <div className="relative aspect-[4/3]">
+              <img
+                src={GroupImage} 
+                alt="Investment Illustration"
+                className="w-full h-full object-contain"
+              />
+            </div>
+          </div>
+        </section>
+  
+        <section className=" mx-auto px-4 py-16 bg-white mb-12 mt-20">
+          <div className="max-w-3xl mx-auto text-center space-y-4 mb-12">
+            <h2 className="text-3xl font-bold">{t("howToInvest")}</h2>
+            <p className="text-gray-600">{t("investmentStepsDescription")}</p>
+          </div>
+          <Steps />
+        </section>
+  
+        <section className="ongoing-project">
+          <h2 className="text-3xl font-bold text-center mb-8">{t("ongoingInvestments")}</h2>
+          <InvestmentCarousel />
+        </section>
+      </div>
+    )
+  }
+  
+  

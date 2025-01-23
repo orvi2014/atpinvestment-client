@@ -27,8 +27,8 @@ body {
 }
 
 .logo-headline-container img {
-  width: 50px; /* Logo size */
-  height: 50px;
+  width: 60px; /* Logo size */
+  height: 60px;
   transition: transform 0.3s ease;
 }
 
@@ -39,7 +39,7 @@ body {
 .logo-headline-container h1 {
   font-size: 2em; /* Headline font size */
   color: #2563eb; /* Blue headline */
-  font-weight: 600;
+  font-weight: 700;
   margin: 0; /* Remove extra spacing */
 }
 
@@ -87,9 +87,10 @@ body {
   color: #fff;
   background-color: #4285f4;
   border: none;
-  border-radius: 4px;
+  border-radius: 20px;
   cursor: pointer;
   transition: all 0.3s ease;
+  width: 500px;
 }
 
 .verify-button:hover {

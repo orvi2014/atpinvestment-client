@@ -21,42 +21,42 @@ function Footer() {
         <Joinus />
        </div>
      {/*other info */}
-      <div className="footer-content">
-        <div className="footer-left">
-          <div className="logo">
-            <img src={logo} alt="logo" />
-            ATP Investment
-          </div>
-          <p className="contact-text">
-            Please contact us if you have any specific request.
-          </p>
-          <a href="mailto:abc@gmail.com" className="email-link">
-            abc@gmail.com
-          </a>
-        </div>
-
-        <div className="footer-right">
-          <div className="footer-column">
-            <h3>COMPANY</h3>
-            <a href="#how-it-works">How it works</a>
-          </div>
-          
-          <div className="footer-column">
-            <h3>SOCIALS</h3>
-            <div className="social-links">
-              <a href="#twitter">Twitter</a>
-              <a href="#instagram">Instagram</a>
-              <a href="#twitter-2">Twitter</a>
-            </div>
-          </div>
-        </div>
+     <div className='footer-info'>
+       <div className="footer-content">
+  <div className="footer-left">
+    <div className="logo">
+      <img src={logo} alt="logo" />
+      ATP Investment
+    </div>
+    <p className="contact-text">
+      Please contact us if you have any specific request.
+    </p>
+    <a href="mailto:abc@gmail.com" className="email-link">
+      abc@gmail.com
+    </a>
+  </div>
+  <div className="footer-right">
+    <div className="footer-column">
+      <h3>COMPANY</h3>
+      <a href="#how-it-works">How it works</a>
+    </div>
+    <div className="footer-column">
+      <h3>SOCIALS</h3>
+      <div className="social-links">
+        <a href="#twitter">Twitter</a>
+        <a href="#instagram">Instagram</a>
+        <a href="#twitter-2">Twitter</a>
       </div>
-      <div className="footer-center">
-          <p className="copyright">
-            © 2023 lorem epsum All rights reserved
-          </p>
-        </div>
-
+    </div>
+  </div>
+</div>
+<div className="footer-center">
+  <div className="horizontal-line"></div>
+  <p className="copyright">© 2023 lorem epsum All rights reserved</p>
+</div>
+ 
+     </div>
+    
 
     </footer>
   )

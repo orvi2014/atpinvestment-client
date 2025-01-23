@@ -9,7 +9,7 @@ export default function ViewDetails() {
   return (
     <div>
       <Header />
-      <div className="container mx-auto px-4">
+      <div className=" mx-auto px-4">
         <PropertyDetails />
       </div>
       <Footer />

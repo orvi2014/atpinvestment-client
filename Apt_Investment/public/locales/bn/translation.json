@@ -95,6 +95,7 @@
   "signupTitle": "নিবন্ধন করুন",
   "customIdLabel": "কাস্টম আইডি",
   "fullnameLabel": "পূর্ণ নাম",
+  "invalidEmail": "দয়া করে একটি সঠিক ইমেইল প্রদান করুন",
   "emailLabel": "ইমেল ঠিকানা",
   "passwordLabel": "পাসওয়ার্ড",
   "customIdPlaceholder": "আপনার কাস্টম আইডি লিখুন",
