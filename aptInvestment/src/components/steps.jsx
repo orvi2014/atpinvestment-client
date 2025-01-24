@@ -45,8 +45,8 @@ export function Steps() {
                   <Lightbulb className="h-5 w-5" />
                 </div>
               </div>
-              <h3 className="text-xl font-semibold mb-3 text-center">{step.title}</h3>
-              <p className="text-gray-600 text-sm leading-relaxed text-center">{step.description}</p>
+              <h3 className="text-xl font-semibold mb-3 text-left">{step.title}</h3>
+              <p className="text-gray-600 text-sm leading-relaxed text-left">{step.description}</p>
             </CardContent>
           </Card>
         ))}
