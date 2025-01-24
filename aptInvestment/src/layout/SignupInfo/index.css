@@ -1,0 +1,69 @@
+/* Reset any underline styles */
+.no-underline,
+.no-underline:hover,
+.no-underline:focus,
+.no-underline:active {
+  text-decoration: none !important;
+}
+
+input:focus {
+  outline: none;
+  box-shadow: none;
+}
+
+/* Custom styles for input */
+.custom-input {
+  border: 1px solid #ccc; /* Default light gray border */
+  padding: 0.75rem 1rem;
+  border-radius: 4px;
+  width: 100%;
+  outline: none;
+  transition: border-color 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+}
+
+.custom-input:focus {
+  border-color: #4285f4; /* Vibrant blue border */
+  box-shadow: 0 0 8px rgba(66, 133, 244, 0.8); /* Vibrant glow effect */
+  background-color: #f0f9ff; /* Light blue background on focus */
+}
+
+
+
+label:hover {
+  text-decoration: none !important;
+  cursor: default;
+}
+
+/* Custom styles for the form */
+.signup {
+  background-color: white;
+}
+
+.header {
+  margin-bottom: 2rem;
+}
+
+.logo {
+  object-fit: contain;
+}
+
+/* Override any shadcn button hover effects */
+.button:hover {
+  text-decoration: none !important;
+}
+
+/* Remove focus rings from all interactive elements */
+* {
+  outline: none !important;
+}
+
+*:hover {
+  text-decoration: none !important;
+}
+
+.error-text {
+  color: red;
+  font-size: 0.875rem; /* Optional: Adjust font size as needed */
+  margin-top: 0.25rem; /* Optional: Adjust margin */
+}
+

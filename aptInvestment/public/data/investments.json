@@ -1,0 +1,101 @@
+{
+    "investments": [
+      {
+        "id": 1,
+        "image": "../../src/assets/Image/HOUSE.png",
+        "title": "Shareware Vegetable Farm",
+        "price": "55,000 BOT/Unit",
+        "description": "Invest in our sustainable vegetable farm project. Help us grow organic produce while earning returns.",
+        "targetAchieved": 85,
+        "location": "New Market, South Kunapara, Khagrachori",
+        "roi": 12,
+        "raisedAmount": 650000,
+        "investmentOptions": [32000, 30000, 30000, 30000],
+        "galleryImages": [
+         "../../src/assets/Image/HOUSE.png", 
+        "../../src/assets/Image/Frame 2085667178.png"
+      ]
+      },
+      {
+        "id": 2,
+        "image": "../../src/assets/Image/house_big.png",
+        "title": "Urban Rooftop Garden",
+        "price": "40,000 BOT/Unit",
+        "description": "Support local food production with our innovative urban rooftop garden project.",
+        "targetAchieved": 70,
+        "location": "New Market, South Kunapara, Khagrachori",
+        "roi": 12,
+        "raisedAmount": 650000,
+        "investmentOptions": [32000, 30000, 30000, 30000],
+        "galleryImages": [
+          "../../src/assets/Image/house_big.png",
+          "../../src/assets/Image/Frame 2085667178.png"
+        ]
+      },
+      {
+        "id": 3,
+        "image": "../../src/assets/Image/photo.png",
+        "title": "Hydroponic Lettuce Farm",
+        "price": "62,000 BOT/Unit",
+        "description": "Invest in cutting-edge hydroponic technology for year-round lettuce production.",
+        "targetAchieved": 92,
+        "location": "New Market, South Kunapara, Khagrachori",
+        "roi": 12,
+        "raisedAmount": 650000,
+        "investmentOptions": [32000, 30000, 30000, 30000],
+        "galleryImages": [
+          "../../src/assets/Image/photo.png",
+          "../../src/assets/Image/Frame 2085667178.png"
+        ]
+      },
+      {
+        "id": 4,
+        "image": "../../src/assets/Image/photo2.png",
+        "title": "Organic Berry Orchard",
+        "price": "48,000 BOT/Unit",
+        "description": "Be part of our organic berry orchard expansion, bringing fresh berries to local markets.",
+        "targetAchieved": 78,
+        "location": "New Market, South Kunapara, Khagrachori",
+        "roi": 12,
+        "raisedAmount": 650000,
+        "investmentOptions": [32000, 30000, 30000, 30000],
+        "galleryImages": [
+          "../../src/assets/Image/photo2.png",
+          "../../src/assets/Image/Frame 2085667178.png"
+        ]
+      },
+      {
+        "id": 5,
+        "image": "../../src/assets/Image/photo3.png",
+        "title": "Vertical Farming Initiative",
+        "price": "70,000 BOT/Unit",
+        "description": "Join our vertical farming project, maximizing crop yield in minimal space.",
+        "targetAchieved": 65,
+        "location": "New Market, South Kunapara, Khagrachori",
+        "roi": 12,
+        "raisedAmount": 650000,
+        "investmentOptions": [32000, 30000, 30000, 30000],
+        "galleryImages": [
+          "../../src/assets/Image/photo3.png",
+          "../../src/assets/Image/Frame 2085667178.png"
+        ]
+      },
+      {
+        "id": 6,
+        "image": "../../src/assets/Image/photo4.png",
+        "title": "Community Supported Agriculture",
+        "price": "35,000 BOT/Unit",
+        "description": "Support local farmers and get a share of fresh, seasonal produce with our CSA program.",
+        "targetAchieved": 88,
+        "location": "New Market, South Kunapara, Khagrachori",
+        "roi": 12,
+        "raisedAmount": 650000,
+        "investmentOptions": [32000, 30000, 30000, 30000],
+        "galleryImages": [
+          "../../src/assets/Image/photo4.png",
+          "../../src/assets/Image/Frame 2085667178.png"
+        ]
+      }
+    ]
+  }
+  
