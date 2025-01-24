@@ -52,7 +52,7 @@ function Footer() {
 </div>
 <div className="footer-center">
   <div className="horizontal-line"></div>
-  <p className="copyright">© 2023 lorem epsum All rights reserved</p>
+  <p className="copyright">© {new Date().getFullYear()} lorem epsum All rights reserved</p>
 </div>
  
      </div>
