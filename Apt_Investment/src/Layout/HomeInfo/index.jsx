@@ -5,7 +5,7 @@ import InvestmentCarousel from '../../components/investmentCarousel';
 import Hero from '../../components/hero';
 import Status from '../../components/status';
 import { Button } from "@/components/ui/button";
-import GroupImage from '@/assets/Image/group.png'; // Import the image properly
+import GroupImage from '../../assets/image/group.png'; 
 import "./index.css";
 
 
