@@ -83,7 +83,7 @@ const Header = () => {
               <Link to="/signin">{t('signIn')}</Link>
             </Button>
             <Button variant="ghost" asChild className="signup-button">
-              <Link to="/signup/verify">{t('signUp')}</Link>
+              <Link to="/signup">{t('signUp')}</Link>
             </Button>
             <Button variant="outline" asChild className="download-button">
               <Link to="/download">{t('downloadApp')}</Link>
