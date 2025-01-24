@@ -10,7 +10,7 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 
-import logo from "../../assets/Image/logo.png";
+import logo from "../../assets/image/logo.png";
 import "./index.css";
 
 const Header = () => {

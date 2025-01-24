@@ -3,7 +3,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Link } from "react-router-dom";
 import { ArrowLeft } from "lucide-react";
-import logo from "../../assets/Image/logo-blue.png";
+import logo from "../../assets/image/logo-blue.png";
 import PromotionalSection from "../../components/promotionalSection.jsx.jsx";
 import { useTranslation } from "react-i18next";
 import "./index.css";

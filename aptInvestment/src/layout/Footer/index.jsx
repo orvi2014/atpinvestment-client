@@ -2,7 +2,7 @@ import React from 'react'
 import FAQ from '../../components/faq'
 import Joinus from '../../components/joinUs'
 import './index.css'
-import logo from "../../assets/Image/logo.png"
+import logo from "../../assets/image/logo.png"
 
 function Footer() {
   return (

@@ -4,7 +4,7 @@ import { Input } from "@/components/ui/input";
 import { ChevronLeft } from "lucide-react";
 import { Link, useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
-import logo from "../../assets/Image/logo-blue.png";
+import logo from "../../assets/image/logo-blue.png";
 import PromoSection from "../../components/promotionalSection.jsx.jsx";
 import "./index.css";
 
