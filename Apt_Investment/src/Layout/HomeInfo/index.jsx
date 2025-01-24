@@ -1,11 +1,11 @@
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { Steps } from '../../components/steps';
-import InvestmentCarousel from '../../components/InvestmentCarousel';
-import Hero from '../../components/Hero';
-import Status from '../../components/Status';
+import InvestmentCarousel from '../../components/investmentCarousel';
+import Hero from '../../components/hero';
+import Status from '../../components/status';
 import { Button } from "@/components/ui/button";
-import GroupImage from '@/assets/Image/Group.png'; // Import the image properly
+import GroupImage from '@/assets/Image/group.png'; // Import the image properly
 import "./index.css";
 
 
@@ -46,5 +46,3 @@ export default function HomeInfo() {
       </div>
     )
   }
-  
-  
