@@ -3,7 +3,7 @@ import { Search, Plus } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import Layout from "../layout/AdminDashboard"
-import DataTable from "../components/DataTable"
+import DataTable from "../components/datatable"
 
 export default function AdminDashboard() {
   const [activeTab, setActiveTab] = useState("users")
