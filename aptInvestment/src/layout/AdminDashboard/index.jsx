@@ -2,7 +2,7 @@ import React from "react"
 import { Menu } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import logo from "../../assets/image/logo-blue.png"
-import Sidebar from "../../components/Sidebar"
+import Sidebar from "../../components/sidebar"
 import "./index.css"
 
 export default function Layout({ children, activeTab, onTabChange, sidebarOpen, setSidebarOpen }) {
