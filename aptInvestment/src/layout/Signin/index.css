@@ -85,6 +85,7 @@
 .signup {
   color: #4285f4;
   text-decoration: none;
+  background: transparent;
 }
 
 .signup:hover {

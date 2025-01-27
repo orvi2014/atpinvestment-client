@@ -11,6 +11,7 @@ import PhoneVerification from './pages/phnVarification';
 import CodeVerification from './pages/codeVerification';
 import Signupinfo from './pages/signupInfo';
 import AdminDashboard from './pages/adminDashboard';
+import AdminLogin from './pages/adminLogin';
 
 
 
@@ -27,6 +28,7 @@ function App() {
             <Route path="/signup/verify/OTP" element={<CodeVerification />} />
             <Route path="/signup" element={<Signupinfo />} />
             <Route path="/admin" element={<AdminDashboard />} />
+            <Route path="/admin/login" element={<AdminLogin />} />
           </Routes>
         </Router>
       </Suspense>

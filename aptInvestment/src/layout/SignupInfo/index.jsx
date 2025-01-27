@@ -1,57 +1,54 @@
-import { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
-import PromotionalSection from "../../components/promotionalSection.jsx.jsx";
-import logo from "../../assets/image/logo-blue.png";
-import { useTranslation } from "react-i18next";
-import "./index.css";
+'use client'
+
+import { useState, useEffect } from "react"
+import { useNavigate } from "react-router-dom"
+import { Button } from "@/components/ui/button"
+import { Input } from "@/components/ui/input"
+import { Label } from "@/components/ui/label"
+import PromotionalSection from "../../components/promotionalSection.jsx"
+import { useTranslation } from "react-i18next"
+import logo from "../../assets/image/logo-blue.png"
 
 const SignUpForm = () => {
-  const { t } = useTranslation();
-  const navigate = useNavigate();
+  const { t } = useTranslation()
+  const navigate = useNavigate()
   const [formData, setFormData] = useState({
-    customerId: "", // This will be generated automatically
+    customerId: "",
     fullname: "",
     email: "",
     password: "",
-  });
-  const [error, setError] = useState(""); // General error state
-  const [success, setSuccess] = useState("");
-  const [emailValid, setEmailValid] = useState(true); // Track email validity
+  })
+  const [error, setError] = useState("")
+  const [success, setSuccess] = useState("")
+  const [emailValid, setEmailValid] = useState(true)
 
   useEffect(() => {
-    // Generate a unique customerId (example implementation)
-    const customerId = `iv${Math.floor(Math.random() * 100000)}`; // Randomly generate customer ID
+    const customerId = `iv${Math.floor(Math.random() * 100000)}`
     setFormData((prev) => ({
       ...prev,
       customerId,
-    }));
-  }, []);
+    }))
+  }, [])
 
   const handleSubmit = async (e) => {
-    e.preventDefault();
-    setError("");
-    setSuccess("");
+    e.preventDefault()
+    setError("")
+    setSuccess("")
 
-    // Simple email validation
     if (!/\S+@\S+\.\S+/.test(formData.email)) {
-      setEmailValid(false); // Mark email as invalid
-      setError(t("invalidEmail")); // Set error message
-      return; // Prevent form submission if email is invalid
+      setEmailValid(false)
+      setError(t("invalidEmail"))
+      return
     }
 
-    setEmailValid(true); // If email is valid, proceed with form submission
+    setEmailValid(true)
 
     const payload = {
-      customId: formData.customerId, // Match the backend's expected field name
+      customId: formData.customerId,
       fullname: formData.fullname,
       email: formData.email,
       password: formData.password,
-    };
-
-    console.log("Request Payload:", payload); // Debugging
+    }
 
     try {
       const response = await fetch("https://atpinvestment.onrender.com/api/auth/signup", {
@@ -60,47 +57,48 @@ const SignUpForm = () => {
           "Content-Type": "application/json",
         },
         body: JSON.stringify(payload),
-      });
+      })
 
-      const data = await response.json();
-      console.log("Response Data:", data); // Debugging
+      const data = await response.json()
 
       if (response.ok) {
-        setSuccess(data.message); // e.g., "User created successfully"
-
-        // Show alert and navigate to homepage on confirmation
-        window.alert(data.message);
-        navigate("/"); // Redirect to homepage
+        setSuccess(data.message)
+        window.alert(data.message)
+        navigate("/")
       } else {
-        setError(data.error || "An error occurred. Please try again.");
+        setError(data.error || "An error occurred. Please try again.")
       }
     } catch (err) {
-      setError("Something went wrong. Please try again later.");
+      setError("Something went wrong. Please try again later.")
     }
-  };
+  }
 
   const handleChange = (e) => {
-    const { name, value } = e.target;
+    const { name, value } = e.target
     setFormData((prev) => ({
       ...prev,
       [name]: value,
-    }));
-  };
+    }))
+  }
 
   return (
-    <div className="flex min-h-screen signup">
-      <div className="flex-1 p-8">
-        <div className="max-w-md mx-auto">
-          <div className="header mb-8 mt-20">
+    <div className="flex min-h-screen">
+      <div className="flex-1 px-4 py-6 sm:px-6 md:px-8 lg:px-12">
+        <div className="mx-auto max-w-md w-full">
+          <div className="mb-6 sm:mb-8 mt-4 sm:mt-8">
             <div className="flex items-center gap-2">
-              <img src={logo || "/placeholder.svg"} alt="ATP Investment" width={40} height={40} className="logo" />
-              <span className="text-2xl font-bold text-blue-500">ATP INVESTMENT</span>
+              <img
+                src={logo || "/placeholder.svg"}
+                alt="ATP Investment"
+                className="w-8 h-8 sm:w-10 sm:h-10"
+              />
+              <span className="text-xl sm:text-2xl font-bold text-blue-500">ATP INVESTMENT</span>
             </div>
           </div>
 
-          <form onSubmit={handleSubmit} className="space-y-6 mt-20">
+          <form onSubmit={handleSubmit} className="space-y-6">
             <div className="space-y-4">
-              <h2 className="text-xl font-semibold">{t("signupTitle")}</h2>
+              <h2 className="text-lg sm:text-xl font-semibold">{t("signupTitle")}</h2>
 
               <div className="space-y-2">
                 <Label htmlFor="fullname" className="text-blue-500">
@@ -113,28 +111,26 @@ const SignUpForm = () => {
                   value={formData.fullname}
                   onChange={handleChange}
                   required
-                  className="w-full custom-input"
+                  className="w-full h-11 sm:h-12"
                 />
               </div>
 
               <div className="space-y-2">
-  <Label htmlFor="email" className="text-blue-500">
-    {t("emailLabel")}
-  </Label>
-  <Input
-    id="email"
-    name="email"
-    type="email"
-    placeholder={t("emailPlaceholder")}
-    value={formData.email}
-    onChange={handleChange}
-    className={`custom-input h-12 ${!emailValid ? "invalid-input" : ""}`}
-    required
-  />
-  {/* Show email validation error message */}
-  {!emailValid && <p className="error-text mt-1">{t("invalidEmail")}</p>}
-</div>
-
+                <Label htmlFor="email" className="text-blue-500">
+                  {t("emailLabel")}
+                </Label>
+                <Input
+                  id="email"
+                  name="email"
+                  type="email"
+                  placeholder={t("emailPlaceholder")}
+                  value={formData.email}
+                  onChange={handleChange}
+                  className={`w-full h-11 sm:h-12 ${!emailValid ? "border-red-500 focus:border-red-500" : ""}`}
+                  required
+                />
+                {!emailValid && <p className="text-red-500 text-sm mt-1">{t("invalidEmail")}</p>}
+              </div>
 
               <div className="space-y-2">
                 <Label htmlFor="password" className="text-blue-500">
@@ -148,26 +144,26 @@ const SignUpForm = () => {
                   value={formData.password}
                   onChange={handleChange}
                   required
-                  className="w-full custom-input"
+                  className="w-full h-11 sm:h-12"
                 />
               </div>
             </div>
 
-            <Button type="submit" className="w-full bg-blue-500 hover:bg-blue-600 text-white">
+            <Button type="submit" className="w-full h-11 sm:h-12 bg-blue-500 hover:bg-blue-600 text-white">
               {t("finishSignUp")}
             </Button>
 
-            {error && <p className="text-red-500 mt-4">{error}</p>}
-            {success && <p className="text-green-500 mt-4">{success}</p>}
+            {error && <p className="text-red-500 text-sm mt-4">{error}</p>}
+            {success && <p className="text-green-500 text-sm mt-4">{success}</p>}
           </form>
         </div>
       </div>
 
-      <div className="flex-1">
+      <div className="hidden lg:block lg:flex-1">
         <PromotionalSection />
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default SignUpForm;
+export default SignUpForm
