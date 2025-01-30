@@ -34,33 +34,36 @@ export default function ProjectsTable({ fetchTrigger }) {
 
   return (
     <div className="p-4">
-      {/* Loading and Error Handling */}
       {loading && <p className="text-center">Loading projects...</p>}
       {error && <p className="text-center text-red-500">{error}</p>}
 
-      {/* Projects Table */}
       {!loading && !error && projects.length > 0 && (
         <div className="overflow-x-auto bg-white rounded-lg p-4">
-          <table className="w-full border-collapse border border-gray-300">
+          <table className="w-full border-collapse border border-gray-300 text-xs md:text-base">
             <thead>
-              <tr className="bg-blue-500 text-white">
-                <th className="border px-4 py-2">Title</th>
-                <th className="border px-4 py-2">Price</th>
-                <th className="border px-4 py-2">ROI (%)</th>
-                <th className="border px-4 py-2">Raised Amount</th>
-                <th className="border px-4 py-2">Target Achieved (%)</th>
-                <th className="border px-4 py-2">Location</th>
+              <tr className="bg-blue-500 text-white text-xs md:text-sm">
+                <th className="border px-2 py-2 md:px-4">Title</th>
+                <th className="border px-2 py-2 md:px-4">Price</th>
+                <th className="border px-2 py-2 md:px-4">ROI (%)</th>
+                <th className="border px-2 py-2 md:px-4">Raised</th>
+                <th className="border px-2 py-2 md:px-4">Target (%)</th>
+                <th className="border px-2 py-2 md:px-4">Location</th>
               </tr>
             </thead>
             <tbody>
               {projects.map((project, index) => (
-                <tr key={project._id} className={index % 2 === 0 ? "bg-gray-100" : "bg-white"}>
-                  <td className="border px-4 py-2">{project.title}</td>
-                  <td className="border px-4 py-2">{project.price}</td>
-                  <td className="border px-4 py-2">{project.roi}</td>
-                  <td className="border px-4 py-2">{project.raisedAmount}</td>
-                  <td className="border px-4 py-2">{project.targetAchieved}%</td>
-                  <td className="border px-4 py-2">{project.location}</td>
+                <tr
+                  key={project._id}
+                  className={`${
+                    index % 2 === 0 ? "bg-gray-100" : "bg-white"
+                  } text-xs md:text-base`}
+                >
+                  <td className="border px-2 py-2 md:px-4">{project.title}</td>
+                  <td className="border px-2 py-2 md:px-4">{project.price}</td>
+                  <td className="border px-2 py-2 md:px-4">{project.roi}</td>
+                  <td className="border px-2 py-2 md:px-4">{project.raisedAmount}</td>
+                  <td className="border px-2 py-2 md:px-4">{project.targetAchieved}%</td>
+                  <td className="border px-2 py-2 md:px-4">{project.location}</td>
                 </tr>
               ))}
             </tbody>
@@ -68,8 +71,9 @@ export default function ProjectsTable({ fetchTrigger }) {
         </div>
       )}
 
-      {/* No Projects Found Message */}
-      {!loading && !error && projects.length === 0 && <p className="text-center">No projects found.</p>}
+      {!loading && !error && projects.length === 0 && (
+        <p className="text-center">No projects found.</p>
+      )}
     </div>
   );
 }
