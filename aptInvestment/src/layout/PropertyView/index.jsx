@@ -8,9 +8,7 @@ import "./index.css";
 export default function InvestmentPage() {
   const [investment, setInvestment] = useState(null);
   const [loading, setLoading] = useState(true);
-  const [galleryLoading, setGalleryLoading] = useState(true); // Gallery loading state
-  const [detailsLoading, setDetailsLoading] = useState(true); // Details loading state
-  const { id } = useParams(); // Get the id from the URL
+  const { id } = useParams();
 
   useEffect(() => {
     async function fetchInvestment() {
@@ -21,18 +19,14 @@ export default function InvestmentPage() {
       }
 
       try {
-        const response = await fetch('/data/investments.json');
+        const response = await fetch(`https://atpinvestment.onrender.com/api/project/${id}`);
         if (!response.ok) {
           throw new Error('Failed to fetch investment data');
         }
         const data = await response.json();
-
-        const foundInvestment = data.investments?.find(
-          (inv) => inv.id === parseInt(id)
-        );
-
-        if (foundInvestment) {
-          setInvestment(foundInvestment);
+        
+        if (data.project) {
+          setInvestment(data.project);
         } else {
           console.error('Investment not found for ID:', id);
         }
@@ -59,26 +53,20 @@ export default function InvestmentPage() {
       <div className="investment-grid">
         {/* Image Gallery Section */}
         <div className="gallery-section mt-10">
-          <ImageGallery 
-            investment={investment} 
-            onLoad={() => setGalleryLoading(false)}  
-          />
-          {galleryLoading}
+          <ImageGallery investment={investment} />
         </div>
 
         {/* Investment Details Section */}
-        <div className="details-section mt-20 ml-[-50px]"> {/* Move left by 50px */}
+        <div className="details-section mt-20 ml-[-50px]">
           <InvestmentDetails
             title={investment.title}
             location={investment.location || "Location not provided"}
             totalPayment={investment.price}
             roi={investment.roi || 10}
-            raisedAmount={(investment.targetAchieved * investment.price) / 100}
+            raisedAmount={investment.raisedAmount}
             raisedPercentage={investment.targetAchieved}
-            investmentOptions={[10000, 20000, 30000, 40000]}
-            onLoad={() => setDetailsLoading(false)}  
+            investmentOptions={investment.investmentOptions}
           />
-          {detailsLoading}
         </div>
       </div>
 

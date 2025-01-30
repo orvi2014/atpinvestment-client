@@ -15,101 +15,86 @@ export default function InvestmentCarousel() {
   useEffect(() => {
     async function fetchInvestments() {
       try {
-        const response = await fetch(`/data/investments.json`);
-        if (!response.ok) {
-          throw new Error(`Failed to fetch: ${response.statusText}`);
-        }
-  
+        const response = await fetch('https://atpinvestment.onrender.com/api/project/list');
+        if (!response.ok) throw new Error(`Failed to fetch: ${response.statusText}`);
+
         const data = await response.json();
-        setInvestments(data.investments);
+        if (Array.isArray(data.projects)) {
+          const uniqueProjects = Array.from(new Map(data.projects.map(p => [p._id, p])).values());
+          setInvestments(uniqueProjects);
+        } else {
+          setInvestments([]);
+        }
       } catch (error) {
         console.error('Error fetching investments:', error);
-        setInvestments([]); // Optionally set an empty array or show a message
+        setInvestments([]);
       }
     }
-  
     fetchInvestments();
   }, [i18n.language]);
-  
 
   const nextSlide = () => {
-    setCurrentSlide((prev) =>
-      prev === investments.length - 1 ? 0 : prev + 1
-    );
+    setCurrentSlide((prev) => (prev + 1) % investments.length);
   };
 
   const prevSlide = () => {
-    setCurrentSlide((prev) =>
-      prev === 0 ? investments.length - 1 : prev - 1
-    );
+    setCurrentSlide((prev) => (prev - 1 + investments.length) % investments.length);
   };
 
-  if (investments.length === 0) {
-    return <div>{t('loadingInvestments')}</div>;
-  }
+  if (!investments.length) return <div>{t('loadingInvestments')}</div>;
 
-  const visibleInvestments = [
+  const visibleInvestments = investments.length > 2 ? [
     investments[currentSlide],
     investments[(currentSlide + 1) % investments.length],
     investments[(currentSlide + 2) % investments.length],
-  ];
+  ] : investments;
 
   return (
     <div className="relative mb-16">
       <div className="flex flex-col items-center">
         <div className="w-full">
-          {/* Mobile view (single card) */}
           <div className="md:hidden">
-            <InvestmentCard {...investments[currentSlide]} />
+            <InvestmentCard key={investments[currentSlide]._id} {...investments[currentSlide]} />
           </div>
-          
-          {/* Tablet and desktop view (multiple cards) */}
           <div className="hidden md:flex gap-6 overflow-hidden">
             {visibleInvestments.map((investment, index) => (
-              <div key={investment.id} className="w-1/3 flex-shrink-0">
+              <div key={investment._id} className="w-1/3 flex-shrink-0">
                 <InvestmentCard {...investment} />
               </div>
             ))}
           </div>
         </div>
-        
         <div className="flex justify-center gap-2 mt-4">
           {investments.map((_, index) => (
             <button
-              key={index}
+              key={`dot-${index}`}
               className={`w-2 h-2 rounded-full ${currentSlide === index ? 'bg-blue-600' : 'bg-gray-300'}`}
               onClick={() => setCurrentSlide(index)}
             />
           ))}
         </div>
       </div>
-      
       <Button
         variant="outline"
         size="icon"
         className="absolute left-0 top-1/2 -translate-y-1/2 bg-white shadow-lg"
         onClick={prevSlide}
-        disabled={investments.length <= 1} // Disable if there's only one investment
+        disabled={investments.length <= 1}
       >
         <ChevronLeft className="h-4 w-4" />
       </Button>
-      
       <Button
         variant="outline"
         size="icon"
         className="absolute right-0 top-1/2 -translate-y-1/2 bg-white shadow-lg"
         onClick={nextSlide}
-        disabled={investments.length <= 1} // Disable if there's only one investment
+        disabled={investments.length <= 1}
       >
         <ChevronRight className="h-4 w-4" />
       </Button>
-
       <div className="flex justify-center mt-6">
         <Link to="/investments">
-          <Button 
-            variant="link" 
-            className="text-black-600 hover:text-blue-600 bg-white px-4 py-2 rounded-full shadow-md"
-          >
+          <Button variant="link" className="text-black-600 hover:text-blue-600 bg-white px-4 py-2 rounded-full shadow-md">
             {t('viewAllProjects')}
           </Button>
         </Link>
