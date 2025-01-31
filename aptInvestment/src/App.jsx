@@ -12,6 +12,7 @@ import CodeVerification from './pages/codeVerification';
 import Signupinfo from './pages/signupInfo';
 import AdminDashboard from './pages/adminDashboard';
 import AdminLogin from './pages/adminLogin';
+import CreateProject from './pages/createProject';
 
 
 
@@ -29,6 +30,7 @@ function App() {
             <Route path="/signup" element={<Signupinfo />} />
             <Route path="/admin" element={<AdminDashboard />} />
             <Route path="/admin/login" element={<AdminLogin />} />
+            <Route path="/admin/project/create" element={<CreateProject />} />
           </Routes>
         </Router>
       </Suspense>
