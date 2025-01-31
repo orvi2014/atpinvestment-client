@@ -17,7 +17,7 @@ import AdminLogin from './pages/adminLogin';
 
 function App() {
   return (
-    <I18nextProvider i18n={i18n}>
+    <I18nextProvider i18n={i18n} >
       <Suspense fallback="Loading...">
         <Router>
           <Routes>
