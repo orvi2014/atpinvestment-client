@@ -33,7 +33,7 @@ export default function HomeInfo() {
   
         <section className=" mx-auto px-4 py-16 bg-white mb-12 mt-20">
           <div className="max-w-3xl mx-auto text-center space-y-4 mb-12">
-            <h2 className="text-3xl font-bold">{t("howToInvest")}</h2>
+            <h2 className="text-3xl font-bold">{ t("howToInvest")}</h2>
             <p className="text-gray-600">{t("investmentStepsDescription")}</p>
           </div>
           <Steps />

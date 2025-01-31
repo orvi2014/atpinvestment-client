@@ -4,6 +4,7 @@ import Header from "../layout/Header";
 import Footer from "../layout/Footer";
 import Homeinfo from "../layout/HomeInfo";
 import { useTranslation } from 'react-i18next';
+import About from "../layout/Aboutus";
 
 export default function Home() {
     const { t } = useTranslation();
@@ -13,6 +14,7 @@ export default function Home() {
             <Header />
             <div className=" mx-auto px-4">
                 <Homeinfo />
+                <About />
             </div>
             <Footer />
         </div>
