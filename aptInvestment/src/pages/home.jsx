@@ -6,6 +6,10 @@ import Homeinfo from "../layout/HomeInfo";
 import { useTranslation } from 'react-i18next';
 import About from "../layout/Aboutus";
 import InvestApproach from "../layout/InvestmentApproach";
+import Service from "../layout/OurServices";
+import Whychoose from "../layout/Whychoose";
+import Contactus from "@/layout/Contactus";
+
 
 
 export default function Home() {
@@ -18,6 +22,9 @@ export default function Home() {
                 <Homeinfo />
                 <About />
                 <InvestApproach />
+                <Service />
+                <Whychoose />
+                <Contactus />
             </div>
             <Footer />
         </div>
