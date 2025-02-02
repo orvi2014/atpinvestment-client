@@ -13,6 +13,7 @@ import Signupinfo from './pages/signupInfo';
 import AdminDashboard from './pages/adminDashboard';
 import AdminLogin from './pages/adminLogin';
 import CreateProject from './pages/createProject';
+import Allinvestment from './pages/allInvestment';
 
 
 
@@ -31,6 +32,7 @@ function App() {
             <Route path="/admin" element={<AdminDashboard />} />
             <Route path="/admin/login" element={<AdminLogin />} />
             <Route path="/admin/project/create" element={<CreateProject />} />
+            <Route path="/investment/all" element={<Allinvestment />} />
           </Routes>
         </Router>
       </Suspense>

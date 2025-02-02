@@ -32,6 +32,30 @@ export default function ProjectsTable({ fetchTrigger }) {
       });
   };
 
+  const handleEdit = (projectId) => {
+    alert(`Edit project: ${projectId}`);
+  };
+
+  const handleDelete = async (projectId) => {
+    const confirmDelete = window.confirm("Are you sure you want to delete this project?");
+    if (!confirmDelete) return;
+
+    try {
+      const response = await fetch(`https://atpinvestment.onrender.com/api/project/${projectId}`, {
+        method: "DELETE",
+      });
+
+      if (!response.ok) {
+        throw new Error("Failed to delete project");
+      }
+
+      // Remove project from state
+      setProjects(projects.filter((project) => project._id !== projectId));
+    } catch (error) {
+      alert(error.message);
+    }
+  };
+
   return (
     <div className="p-4">
       {loading && <p className="text-center">Loading projects...</p>}
@@ -48,6 +72,8 @@ export default function ProjectsTable({ fetchTrigger }) {
                 <th className="border px-2 py-2 md:px-4">Raised</th>
                 <th className="border px-2 py-2 md:px-4">Target (%)</th>
                 <th className="border px-2 py-2 md:px-4">Location</th>
+                <th className="border px-2 py-2 md:px-4">Edit</th>
+                <th className="border px-2 py-2 md:px-4">Delete</th>
               </tr>
             </thead>
             <tbody>
@@ -64,6 +90,22 @@ export default function ProjectsTable({ fetchTrigger }) {
                   <td className="border px-2 py-2 md:px-4">{project.raisedAmount}</td>
                   <td className="border px-2 py-2 md:px-4">{project.targetAchieved}%</td>
                   <td className="border px-2 py-2 md:px-4">{project.location}</td>
+                  <td className="border px-2 py-2 md:px-4 text-center">
+                    <button
+                      onClick={() => handleEdit(project._id)}
+                      className="text-blue-500 hover:underline"
+                    >
+                      Edit
+                    </button>
+                  </td>
+                  <td className="border px-2 py-2 md:px-4 text-center">
+                    <button
+                      onClick={() => handleDelete(project._id)}
+                      className="text-red-500 hover:underline"
+                    >
+                      Delete
+                    </button>
+                  </td>
                 </tr>
               ))}
             </tbody>
