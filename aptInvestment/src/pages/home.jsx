@@ -8,7 +8,6 @@ import About from "../layout/Aboutus";
 import InvestApproach from "../layout/InvestmentApproach";
 import Service from "../layout/OurServices";
 import Whychoose from "../layout/Whychoose";
-import Contactus from "@/layout/Contactus";
 
 
 
@@ -24,7 +23,7 @@ export default function Home() {
                 <InvestApproach />
                 <Service />
                 <Whychoose />
-                <Contactus />
+               
             </div>
             <Footer />
         </div>
