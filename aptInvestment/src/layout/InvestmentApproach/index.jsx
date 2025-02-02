@@ -1,32 +1,47 @@
-import "./index.css"
+import "./index.css";
+import { useState, useEffect } from "react";
+import { useTranslation } from "react-i18next";
 
 export default function InvestApproach() {
-  return (
-    <div className="body-container mx-auto px-4 py-8 ">
-        <div className="p-8 px-40 text-gray-600">
-            <h1 className="title">Shariah-Compliant Investment Approach</h1>
+  const { t, i18n } = useTranslation();
+  
+    const [language, setLanguage] = useState(localStorage.getItem("lang") || "en");
+  
+    useEffect(() => {
+      i18n.changeLanguage(language);
+    }, [language, i18n]);
+  
+    const changeLanguage = (lang) => {
+      i18n.changeLanguage(lang);
+      setLanguage(lang);
+      localStorage.setItem("lang", lang);
+    };
 
-      <div className="space-y-8">
-        <section>
-          <h2 className="Cardtitle">What Makes ATP Investment Different?</h2>
-          <ul className="list-disc pl-5 space-y-2">
-            <li>
-              <strong>No Interest-Based (Riba) Transactions:</strong> ATP Investment strictly avoids any investment that involves interest, aligning with Islamic financial laws.
-            </li>
-            <li>
-              <strong>Risk-Sharing Model:</strong> Instead of profiting from interest, we engage in partnerships and profit-sharing models like <strong>Mudarabah (investment partnerships)</strong> and <strong>Musharakah (joint ventures).</strong>
-            </li>
-            <li>
-              <strong>Ethical & Halal Investments:</strong> We do not invest in businesses involving alcohol, gambling, speculation, or unethical activities.
-            </li>
-            <li>
-              <strong>Asset-Backed Investments:</strong> We focus on tangible assets like <strong>real estate, halal stocks, and ethical startups.</strong>
-            </li>
-          </ul>
-        </section>
+  return (
+    <div className="body-container mx-auto px-4 py-8">
+      <div className="p-8 px-40 text-gray-600">
+        <h1 className="title">{t("investApproach.title")}</h1>
+
+        <div className="space-y-8">
+          <section>
+            <h2 className="Cardtitle">{t("investApproach.subtitle")}</h2>
+            <ul className="list-disc pl-5 space-y-2">
+              <li>
+                <strong>{t("investApproach.noRiba.title")}:</strong> {t("investApproach.noRiba.description")}
+              </li>
+              <li>
+                <strong>{t("investApproach.riskSharing.title")}:</strong> {t("investApproach.riskSharing.description")}
+              </li>
+              <li>
+                <strong>{t("investApproach.halalInvestment.title")}:</strong> {t("investApproach.halalInvestment.description")}
+              </li>
+              <li>
+                <strong>{t("investApproach.assetBacked.title")}:</strong> {t("investApproach.assetBacked.description")}
+              </li>
+            </ul>
+          </section>
+        </div>
       </div>
-      </div>
-      
     </div>
   );
 }

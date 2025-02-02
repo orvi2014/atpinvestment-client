@@ -27,6 +27,9 @@ export default function Hero() {
         <h1 className="text-4xl font-bold tracking-tighter sm:text-5xl xl:text-6xl">
           {t('hero.title')}
         </h1>
+        <h4 className="text-xl font-semibold">
+          {t('hero.subtitle')}  
+        </h4>
         <p className="text-lg text-muted-foreground">
           {t('hero.description')}
         </p>

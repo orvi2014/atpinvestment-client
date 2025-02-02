@@ -1,60 +1,53 @@
 import "./index.css";
+import { useState, useEffect } from "react";
+import { useTranslation } from "react-i18next";
 
 export default function About() {
+  const { t, i18n } = useTranslation();
+
+  const [language, setLanguage] = useState(localStorage.getItem("lang") || "en");
+
+  useEffect(() => {
+    i18n.changeLanguage(language);
+  }, [language, i18n]);
+
+  const changeLanguage = (lang) => {
+    i18n.changeLanguage(lang);
+    setLanguage(lang);
+    localStorage.setItem("lang", lang);
+  };
+
   return (
     <div className="container mx-auto px-4 py-8 max-w-4xl mb-10">
-      <div className="bg-white p-8 px-40 text-gray-600"> 
-        <h1 className="title">About Us</h1>
+
+      <div className="bg-white p-8 px-10 md:px-40 text-gray-600"> 
+        <h1 className="title">{t("about.title")}</h1>
 
         <div className="space-y-8">
           <section>
-            <h2 className="Cardtitle">Who We Are</h2>
-            <p className="text-muted-foreground ext-gray-600">
-              ATP Investment is a Shariah-compliant investment firm committed to ethical wealth-building by adhering to
-              Islamic financial principles. We focus on halal investments that avoid interest (riba) and unethical
-              businesses.
-            </p>
+            <h2 className="Cardtitle">{t("about.who_we_are.title")}</h2>
+            <p className="text-muted-foreground">{t("about.who_we_are.description")}</p>
           </section>
 
           <section>
-            <h2 className="Cardtitle">Our Mission</h2>
-            <p className="text-muted-foreground">
-              To provide secure, interest-free investment opportunities that align with Islamic financial ethics while
-              delivering sustainable growth.
-            </p>
+            <h2 className="Cardtitle">{t("about.mission.title")}</h2>
+            <p className="text-muted-foreground">{t("about.mission.description")}</p>
           </section>
 
           <section>
-            <h2 className="Cardtitle">Our Vision</h2>
-            <p className="text-muted-foreground">
-              To be the most trusted Sunnah-based investment firm in Bangladesh, empowering investors with
-              Shariah-compliant financial solutions.
-            </p>
+            <h2 className="Cardtitle">{t("about.vision.title")}</h2>
+            <p className="text-muted-foreground">{t("about.vision.description")}</p>
           </section>
 
           <section>
-            <h2 className="Cardtitle">Core Values</h2>
+            <h2 className="Cardtitle">{t("about.core_values.title")}</h2>
             <ul className="list-none space-y-2">
-              <li className="flex items-center">
-                <span className="h-1.5 w-1.5 rounded-full bg-primary mr-2"></span>
-                <span>Integrity</span>
-              </li>
-              <li className="flex items-center">
-                <span className="h-1.5 w-1.5 rounded-full bg-primary mr-2"></span>
-                <span>Ethical Finance</span>
-              </li>
-              <li className="flex items-center">
-                <span className="h-1.5 w-1.5 rounded-full bg-primary mr-2"></span>
-                <span>Transparency</span>
-              </li>
-              <li className="flex items-center">
-                <span className="h-1.5 w-1.5 rounded-full bg-primary mr-2"></span>
-                <span>Risk Sharing</span>
-              </li>
-              <li className="flex items-center">
-                <span className="h-1.5 w-1.5 rounded-full bg-primary mr-2"></span>
-                <span>Long-Term Prosperity</span>
-              </li>
+              {t("about.core_values.values", { returnObjects: true }).map((value, index) => (
+                <li key={index} className="flex items-center">
+                  <span className="h-1.5 w-1.5 rounded-full bg-primary mr-2"></span>
+                  <span>{value}</span>
+                </li>
+              ))}
             </ul>
           </section>
         </div>

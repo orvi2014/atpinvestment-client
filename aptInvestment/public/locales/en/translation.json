@@ -22,9 +22,10 @@
           "step4Title": "Track Progress",
           "step4Description": "Monitor your investments and watch your portfolio grow",
           "hero": {
-            "title": "Invest Today and Build Your Future",
-            "description": "Get easy market access and enjoy monthly returns. United States stocks and ETFs!",
-            "cta": "Get Started Now"
+            "title": "Ethical & Shariah-Compliant Wealth Growth",
+            "description": "ATP Investment follows Shariah-compliant investment strategies, ensuring interest-free and ethical wealth growth.",
+            "cta": "Explore Halal Investment Opportunities",
+            "subtitle": "Ethical Investments, Prosperous Future"
           },
           "stats": {
     "investments": "Investments",
@@ -104,6 +105,111 @@
   "emailPlaceholder": "Enter your email address",
   "passwordPlaceholder": "Enter your password",
   "finishSignUp": "Finish Sign Up",
-  "required": "(Required)"
-}
+  "required": "(Required)",
+  "about": {
+    "title": "About Us",
+    "who_we_are": {
+      "title": "Who We Are",
+      "description": "ATP Investment is a Shariah-compliant investment firm committed to ethical wealth-building by adhering to Islamic financial principles. We focus on halal investments that avoid interest (riba) and unethical businesses."
+    },
+    "mission": {
+      "title": "Our Mission",
+      "description": "To provide secure, interest-free investment opportunities that align with Islamic financial ethics while delivering sustainable growth."
+    },
+    "vision": {
+      "title": "Our Vision",
+      "description": "To be the most trusted Sunnah-based investment firm in Bangladesh, empowering investors with Shariah-compliant financial solutions."
+    },
+    "core_values": {
+      "title": "Core Values",
+      "values": [
+        "Integrity",
+        "Ethical Finance",
+        "Transparency",
+        "Risk Sharing",
+        "Long-Term Prosperity"
+      ]
+    }
+  },
+  "investApproach": {
+    "title": "Shariah-Compliant Investment Approach",
+    "subtitle": "What Makes ATP Investment Different?",
+    "noRiba": {
+      "title": "No Interest-Based (Riba) Transactions",
+      "description": "ATP Investment strictly avoids any investment that involves interest, aligning with Islamic financial laws."
+    },
+    "riskSharing": {
+      "title": "Risk-Sharing Model",
+      "description": "Instead of profiting from interest, we engage in partnerships and profit-sharing models like Mudarabah (investment partnerships) and Musharakah (joint ventures)."
+    },
+    "halalInvestment": {
+      "title": "Ethical & Halal Investments",
+      "description": "We do not invest in businesses involving alcohol, gambling, speculation, or unethical activities."
+    },
+    "assetBacked": {
+      "title": "Asset-Backed Investments",
+      "description": "We focus on tangible assets like real estate, halal stocks, and ethical startups."
+    }
+  },
+  "contact": {
+    "title": "Contact Us",
+    "address": {
+      "title": "Office Address",
+      "value": "517, Shah Amanot Market, Chittagong"
+    },
+    "phone": {
+      "title": "Phone",
+      "value": "01670407666"
+    },
+    "email": {
+      "title": "Email",
+      "value": "investmentatp@gmail.com"
+    }
+  },
+
+  
+    "whyChoose": {
+      "title": "Why Choose ATP Investment?",
+      "compliant": {
+        "title": "100% Shariah-compliant",
+        "description": "Free from riba and unethical practices."
+      },
+      "experts": {
+        "title": "Experts in halal investments",
+        "description": "Providing ethical financial solutions."
+      },
+      "transparent": {
+        "title": "Transparent, risk-sharing business models",
+        "description": ""
+      },
+      "trusted": {
+        "title": "A trusted name in Sunnah-based investing",
+        "description": ""
+      }
+    },
+    "services": {
+      "title": "Our Services",
+      "halalInvestment": {
+        "title": "Halal Investment Advisory",
+        "description": "Personalized Shariah-compliant investment strategies."
+      },
+      "realEstate": {
+        "title": "Shariah-Compliant Real Estate Investments",
+        "description": "Property investments with ethical and transparent financing."
+      },
+      "startupFunding": {
+        "title": "Halal Business & Startup Funding",
+        "description": "Supporting businesses that align with Islamic finance."
+      },
+      "wealthManagement": {
+        "title": "Wealth Management (Without Interest)",
+        "description": "Ethical asset growth without relying on riba-based financial products."
+      },
+      "stockMarket": {
+        "title": "Islamic Stock Market & Trading",
+        "description": "Investments in halal stock exchanges and businesses."
+      }
+    }
+  }
+  
  
