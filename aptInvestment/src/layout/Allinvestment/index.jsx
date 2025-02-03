@@ -34,7 +34,7 @@ export default function InvestmentsPage() {
   return (
     <div className="min-h-screen">
       {/* Header */}
-      <div className="title container mx-auto px-4">
+      <div className="titleIN container mx-auto px-4">
         <h1>Investment Opportunities</h1>
         <p>Discover and invest in promising projects</p>
       </div>

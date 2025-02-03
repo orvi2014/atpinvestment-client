@@ -18,8 +18,8 @@ export default function InvestApproach() {
     };
 
   return (
-    <div className="body-container mx-auto px-4 py-8">
-      <div className="p-8 px-40 text-gray-600">
+    <div className="body-container  mx-auto px-4 py-8">
+      <div className="p-8 px-10 md:px-40 text-gray-600">
         <h1 className="title">{t("investApproach.title")}</h1>
 
         <div className="space-y-8">

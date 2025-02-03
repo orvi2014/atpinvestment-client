@@ -29,7 +29,7 @@ export default function UsersTable() {
   
     try {
       const response = await fetch(
-        `https://atpinvestment.onrender.com/api/api/v1/accounts/${_id}`, 
+        `https://atpinvestment.onrender.com/api/api/v1/accounts/${_id}`,
         { method: "DELETE" }
       );
   
@@ -37,8 +37,7 @@ export default function UsersTable() {
         throw new Error("Failed to delete user");
       }
   
-      // Remove user from state
-      setUsers(users.filter((user) => user._id !== userId));
+      setUsers(users.filter((user) => user._id !== _id));
     } catch (error) {
       alert(error.message);
     }

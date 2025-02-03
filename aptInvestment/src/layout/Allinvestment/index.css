@@ -1,16 +1,16 @@
 /* General Styles */
-.title {
+.titleIN {
     background-color: #4285f4;
     padding: 2px;
   }
 
-  .title h1{
+  .titleIN h1{
     color: #fff;
     font-size: 2.5rem;
     margin-top :20px;
   }
 
-  .title p{
+  .titleIN p{
     color: #fff;
     font-size: 1.5rem;
     font-weight: 500;
