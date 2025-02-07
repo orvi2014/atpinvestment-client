@@ -93,7 +93,7 @@ export default function InvestmentCarousel() {
         <ChevronRight className="h-4 w-4" />
       </Button>
       <div className="flex justify-center mt-6">
-        <Link to="/investments">
+        <Link to="/investment/all">
           <Button variant="link" className="text-black-600 hover:text-blue-600 bg-white px-4 py-2 rounded-full shadow-md">
             {t('viewAllProjects')}
           </Button>

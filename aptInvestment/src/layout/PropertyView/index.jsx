@@ -57,7 +57,7 @@ export default function InvestmentPage() {
         </div>
 
         {/* Investment Details Section */}
-        <div className="details-section mt-20 ml-[-50px]">
+        <div className="details-section mt-20 ml-[0px]">
           <InvestmentDetails
             title={investment.title}
             location={investment.location || "Location not provided"}

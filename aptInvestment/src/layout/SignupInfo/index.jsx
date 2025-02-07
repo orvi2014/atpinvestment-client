@@ -64,7 +64,7 @@ const SignUpForm = () => {
       if (response.ok) {
         setSuccess(data.message)
         window.alert(data.message)
-        navigate("/")
+        navigate("/investment/all")
       } else {
         setError(data.error || "An error occurred. Please try again.")
       }

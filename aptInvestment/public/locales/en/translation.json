@@ -209,7 +209,13 @@
         "title": "Islamic Stock Market & Trading",
         "description": "Investments in halal stock exchanges and businesses."
       }
-    }
+    },
+    
+      "loading": "Loading investments...",
+      "investment_opportunities": "Investment Opportunities",
+      "discover_investments": "Discover and invest in promising projects"
+    
+    
   }
   
  

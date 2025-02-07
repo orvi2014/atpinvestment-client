@@ -3,6 +3,8 @@ import { Card, CardContent } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
 import { useTranslation } from "react-i18next"
 
+
+
 function InvestmentCard({ _id, defaultImage, title, location, price, description, targetAchieved }) {
   const { t } = useTranslation()
 
@@ -33,7 +35,7 @@ function InvestmentCard({ _id, defaultImage, title, location, price, description
               <span className="text-sm font-medium text-gray-600">{targetAchieved}%</span>
             </div>
             <Link to={`/investments/details/${_id}`}>
-              <Button variant="outline" size="lg" className="text-blue-600 hover:bg-blue-50 border-blue-500 hover:border-blue-600 hover:text-blue-800 rounded-full">
+              <Button variant="outline" size="lg" className="text-blue-600 hover:bg-blue-500 border-blue-500 hover:border-blue-600 hover:text-white rounded-full">
                 {t("seeDetails")}
               </Button>
             </Link>
