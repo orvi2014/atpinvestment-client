@@ -52,7 +52,7 @@ export default function SignIn() {
         if (response.ok) {
           localStorage.setItem("token", data.token)
           alert("Login successful!")
-          window.location.href = "/"
+          window.location.href = "/investment/all"
         } else {
           setError(data.message || "Login failed")
         }
@@ -69,7 +69,7 @@ export default function SignIn() {
     <div className="flex min-h-screen">
       <main className="flex-1 p-6 lg:p-12">
         <header className="space-y-6 ">
-          <Link to="/investment/all" className="inline-flex items-center text-sm">
+          <Link to="/" className="inline-flex items-center text-sm">
             <ChevronLeft className="back-button" />
            
           </Link>
@@ -116,6 +116,12 @@ export default function SignIn() {
             </div>
 
             {error && <p className="text-sm text-red-500">{error}</p>}
+
+            <div className="text-sm text-left text-blue-500 hover:underline focus:underline">
+              <Link>
+              Forget Password?
+              </Link>
+            </div>
 
             <Button type="submit" className="w-full h-12 text-base bg-blue-500 hover:bg-blue-600" disabled={loading}>
               {loading ? "Signing in..." : "Sign In"}

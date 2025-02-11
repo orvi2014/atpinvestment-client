@@ -30,8 +30,8 @@ function App() {
             <Route path="/signup/verify" element={<PhoneVerification />} />
             <Route path="/signup/verify/OTP" element={<CodeVerification />} />
             <Route path="/signup" element={<Signupinfo />} />
-            <Route path="/admin" element={<AdminDashboard />} />
-            <Route path="/admin/login" element={<AdminLogin />} />
+            <Route path="/admin/dashboard" element={<AdminDashboard />} />
+            <Route path="/admin" element={<AdminLogin />} />
             <Route path="/admin/project/create" element={<CreateProject />} />
             <Route path="/investment/all" element={<Allinvestment />} />
             <Route path="/admin/deposite" element={<Deposite />} />

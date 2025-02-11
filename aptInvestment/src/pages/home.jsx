@@ -8,11 +8,14 @@ import About from "../layout/Aboutus";
 import InvestApproach from "../layout/InvestmentApproach";
 import Service from "../layout/OurServices";
 import Whychoose from "../layout/Whychoose";
+import FooterBelow from "@/layout/FooterBelow";
 
 
 
 export default function Home() {
     const { t } = useTranslation();
+    const isAuthenticated = localStorage.getItem('token') !== null;
+
 
     return (
         <div>
@@ -25,7 +28,9 @@ export default function Home() {
                 <Whychoose />
                
             </div>
-            <Footer />
+            {!isAuthenticated && <Footer />}
+            <FooterBelow />
+            
         </div>
     );
 }

@@ -26,7 +26,7 @@ function InvestmentCard({ _id, defaultImage, title, location, price, description
             {location && <p className="text-sm text-gray-500 mt-1">{location}</p>}
           </div>
           <p className="text-xl font-bold text-gray-900">
-            {price} <span className="text-sm font-normal text-gray-500">BDT/Unit</span>
+            {price} 
           </p>
           <p className="text-sm text-gray-600 line-clamp-2">{description}</p>
           <div className="flex items-center justify-between">
@@ -34,7 +34,7 @@ function InvestmentCard({ _id, defaultImage, title, location, price, description
               <span className="text-sm text-gray-600">{t("targetAchieved")}:</span>
               <span className="text-sm font-medium text-gray-600">{targetAchieved}%</span>
             </div>
-            <Link to={`/investments/details/${_id}`}>
+            < Link to={`/investments/details/${_id}`}>
               <Button variant="outline" size="lg" className="text-blue-600 hover:bg-blue-500 border-blue-500 hover:border-blue-600 hover:text-white rounded-full">
                 {t("seeDetails")}
               </Button>

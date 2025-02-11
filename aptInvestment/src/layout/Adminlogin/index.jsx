@@ -23,7 +23,7 @@ export default function LoginPage() {
     setLoading(true);
 
     // Validate email
-    if (!email || !/\S+@\S+\.\S+/.test(email)) {
+    if ( !email || !/\S+@\S+\.\S+/.test(email)) {
       setEmailError("Please enter a valid email address.");
       setLoading(false);
       return;
@@ -76,7 +76,7 @@ export default function LoginPage() {
               value={email}
               onChange={handleEmailChange}
               placeholder="Enter your email"
-              className={`h-12 ${emailError ? "border-red-500" : ""}`}
+              className={ `h-12 ${emailError ? "border-red-500" : ""}`}
               required
             />
             {emailError && <p className="text-sm text-red-500">{emailError}</p>}
@@ -95,6 +95,12 @@ export default function LoginPage() {
           </div>
 
           {error && <p className="text-sm text-red-500">{error}</p>}
+
+          <div className="text-sm text-left text-blue-500 hover:underline focus:underline">
+              <Link>
+              Forget Password?
+              </Link>
+            </div>
 
           <Button
             type="submit"
