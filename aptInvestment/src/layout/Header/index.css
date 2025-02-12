@@ -63,6 +63,28 @@
   color: #002793;
 }
 
+.profile-button {
+  background-color: transparent !important;
+  color: #456fe8;
+  padding: 0.5rem 1rem;
+  border: none;
+  border-radius: 0;
+  text-align: center;
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: color 0.3s;
+  display: flex;
+  align-items: center;
+  box-shadow: none;
+}
+
+.profile-button:hover {
+  background-color: transparent;
+  border: 1.6px solid #456fe8;
+  border-radius: 20px;
+  color: #002793;
+}
+
 .language-button {
   background-color: transparent;
   color: #456FE8;

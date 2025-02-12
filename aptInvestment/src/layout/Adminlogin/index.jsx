@@ -1,5 +1,5 @@
 import { ChevronLeft } from "lucide-react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useState } from "react";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
@@ -12,6 +12,8 @@ export default function LoginPage() {
   const [emailError, setEmailError] = useState("");
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
+  
+  const navigate = useNavigate(); // Hook for navigation
 
   const handleEmailChange = (e) => {
     setEmail(e.target.value);
@@ -23,17 +25,17 @@ export default function LoginPage() {
     setLoading(true);
 
     // Validate email
-    if ( !email || !/\S+@\S+\.\S+/.test(email)) {
+    if (!email || !/\S+@\S+\.\S+/.test(email)) {
       setEmailError("Please enter a valid email address.");
       setLoading(false);
       return;
     }
 
-    // Perform login logic here (e.g., API call)
+    // Simulating API call
     setTimeout(() => {
-      // Simulating API call
       if (email === "user@example.com" && password === "password") {
         alert("Login successful!");
+        navigate("/admin/dashboard"); // Redirect after successful login
       } else {
         setError("Invalid email or password.");
       }
@@ -63,12 +65,10 @@ export default function LoginPage() {
         </div>
 
         <div className="space-y-2 mx-16 mb-12 mt-20">
-         <h2 className="text-2xl font-semibold text-gray-900">Admin Log In</h2>
- 
+          <h2 className="text-2xl font-semibold text-gray-900">Admin Log In</h2>
         </div>
 
-
-        <form className="space-y-4 mx-16 " onSubmit={handleLogin}>
+        <form className="space-y-4 mx-16" onSubmit={handleLogin}>
           <div className="space-y-2">
             <label className="text-sm text-gray-500">Email Address</label>
             <Input
@@ -76,7 +76,7 @@ export default function LoginPage() {
               value={email}
               onChange={handleEmailChange}
               placeholder="Enter your email"
-              className={ `h-12 ${emailError ? "border-red-500" : ""}`}
+              className={`h-12 ${emailError ? "border-red-500" : ""}`}
               required
             />
             {emailError && <p className="text-sm text-red-500">{emailError}</p>}
@@ -97,14 +97,12 @@ export default function LoginPage() {
           {error && <p className="text-sm text-red-500">{error}</p>}
 
           <div className="text-sm text-left text-blue-500 hover:underline focus:underline">
-              <Link>
-              Forget Password?
-              </Link>
-            </div>
+            <Link to="/forgot-password">Forget Password?</Link>
+          </div>
 
           <Button
             type="submit"
-            className="w-full h-12 text-base bg-blue-500 hover:bg-blue-600 "
+            className="w-full h-12 text-base bg-blue-500 hover:bg-blue-600"
             disabled={loading}
           >
             {loading ? "Signing in..." : "Sign In"}

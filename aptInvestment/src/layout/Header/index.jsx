@@ -16,6 +16,7 @@ import "./index.css";
 const Header = () => {
   const { t, i18n } = useTranslation();
   const [language, setLanguage] = useState(localStorage.getItem("lang") || "en");
+  const isAuthenticated = localStorage.getItem('token') !== null;
   
   useEffect(() => {
     console.log('Current language:', i18n.language);
@@ -54,15 +55,25 @@ const Header = () => {
               <DropdownMenuItem asChild>
                 <Link to="/promotions">{t('promotions')}</Link>
               </DropdownMenuItem>
-              <DropdownMenuItem asChild>
-                <Link to="/signin" className="signin-button">{t('signIn')}</Link>
-              </DropdownMenuItem>
-              <DropdownMenuItem asChild>
-                <Link to="/signup/verify" className="signup-button">{t('signUp')}</Link>
-              </DropdownMenuItem>
-              <DropdownMenuItem asChild>
-                <Link to="/download" className="download-button">{t('downloadApp')}</Link>
-              </DropdownMenuItem>
+              {!isAuthenticated ? (
+                <>
+                  <DropdownMenuItem asChild>
+                    <Link to="/signin" className="signin-button">{t('signIn')}</Link>
+                  </DropdownMenuItem>
+                  <DropdownMenuItem asChild>
+                    <Link to="/signup/verify" className="signup-button">{t('signUp')}</Link>
+                  </DropdownMenuItem>
+                  <DropdownMenuItem asChild>
+                    <Link to="/download" className="download-button">{t('downloadApp')}</Link>
+                  </DropdownMenuItem>
+                </>
+              ) : (
+                <DropdownMenuItem asChild>
+                  <Link to="/profile" className="profile-button">
+                 {t('profile')}
+                  </Link>
+                </DropdownMenuItem>
+              )}
               <DropdownMenuItem onSelect={() => changeLanguage("en")}>
                 English
               </DropdownMenuItem>
@@ -79,18 +90,25 @@ const Header = () => {
             <Link to="/promotions" className="text-black hover:text-[#456FE8]">
               {t('promotions')}
             </Link>
-            <Button variant="ghost" asChild className="ghost-button">
-              <Link to="/signin">{t('signIn')}</Link>
-            </Button>
-            <Button variant="ghost" asChild className="signup-button">
-              <Link to="/signup">{t('signUp')}</Link>
-            </Button>
             
-           
+            {!isAuthenticated ? (
+              <>
+                <Button variant="ghost" asChild className="ghost-button">
+                  <Link to="/signin">{t('signIn')}</Link>
+                </Button>
+                <Button variant="ghost" asChild className="signup-button">
+                  <Link to="/signup">{t('signUp')}</Link>
+                </Button>
+                <Button variant="outline" asChild className="download-button">
+                  <Link to="/download">{t('downloadApp')}</Link>
+                </Button>
+              </>
+            ) : (
+              <Button variant="outline" asChild className="profile-button">
+                <Link to="/profile">{t('profile')}</Link>
+              </Button>
+            )}
 
-            <Button variant="outline" asChild className="download-button">
-              <Link to="/download">{t('downloadApp')}</Link>
-            </Button>
             <DropdownMenu>
               <DropdownMenuTrigger asChild>
                 <Button variant="outline" className="language-button">
