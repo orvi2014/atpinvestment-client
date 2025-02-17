@@ -34,7 +34,7 @@ function App() {
             <Route path="/admin" element={<AdminLogin />} />
             <Route path="/admin/project/create" element={<CreateProject />} />
             <Route path="/investment/all" element={<Allinvestment />} />
-            <Route path="/admin/deposite" element={<Deposite />} />
+            <Route path="/deposite" element={<Deposite />} />
           </Routes>
         </Router>
       </Suspense>

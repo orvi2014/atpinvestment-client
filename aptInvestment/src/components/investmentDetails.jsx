@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { MapPin } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Progress } from "@/components/ui/progress";
+import { Link } from "react-router-dom";
 
 export default function InvestmentDetails({
   title,
@@ -71,8 +72,16 @@ export default function InvestmentDetails({
       </div>
 
       {/* Deposit Button */}
-      <Button className="w-full sm:w-40 bg-blue-500 hover:bg-blue-600 text-white mx-auto text-sm py-2 rounded-[20px]">
-        Deposit Now
+      <Button 
+        className="w-full sm:w-40 bg-blue-500 hover:bg-blue-600 text-white mx-auto text-sm py-2 rounded-[20px]"
+        disabled={selectedOption === null}
+      >
+        <Link 
+          to="/deposite" 
+          state={{ amount: selectedOption !== null ? investmentOptions[selectedOption] : null }}
+        >
+          Deposit Now
+        </Link>
       </Button>
     </div>
   );
