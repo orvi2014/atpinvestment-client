@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Menu } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useNavigate } from "react-router-dom";
-import logo from "../../assets/image/logo-blue.png";
+import logo from "../../assets/image/logo.png";
 import Sidebar from "../../components/sidebar";
 import UsersTable from "../../components/userTable";
 import ProjectsTable from "../../components/projectsTable";
@@ -22,7 +22,8 @@ export default function Layout() {
   {/* Logo and Company Name */}
   <div className="flex items-center gap-2 md:flex-row flex-col">
     <img src={logo || "/placeholder.svg"} alt="logo" className="h-10 w-10" />
-    <span className="font-semibold text-xl text-blue-500 ">ATP INVESTMENT</span>
+    <span className="font-semibold text-xl text-blue-500 ">Aim To Prosperity
+    </span>
   </div>
 
   {/* Admin Dashboard Title */}

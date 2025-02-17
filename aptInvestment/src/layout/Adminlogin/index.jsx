@@ -4,7 +4,7 @@ import { useState } from "react";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import PromoSection from "../../components/promotionalSection.jsx";
-import logo from "../../assets/image/logo-blue.png";
+import logo from "../../assets/image/logo.png";
 
 export default function LoginPage() {
   const [email, setEmail] = useState("");
@@ -57,10 +57,10 @@ export default function LoginPage() {
           <div className="flex items-center gap-2 text-3xl font-semibold text-blue-500">
             <img
               src={logo || "/placeholder.svg"}
-              alt="ATP Investment"
+              alt="Aim To Prosperity"
               className="h-10 w-10"
             />
-            ATP Investment
+            Aim To Prosperity
           </div>
         </div>
 

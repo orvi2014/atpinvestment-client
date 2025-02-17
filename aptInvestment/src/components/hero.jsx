@@ -23,7 +23,7 @@ export default function Hero() {
 
   return (
     <div className="flex flex-col gap-6">
-      <div className="space-y-4">
+      <div className="space-y-4 mt-12">
         <h1 className="text-4xl font-bold tracking-tighter sm:text-5xl xl:text-6xl">
           {t('hero.title')}
         </h1>

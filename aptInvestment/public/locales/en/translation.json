@@ -1,38 +1,34 @@
   {
-        "companyName": "ATP INVESTMENT",
+        "companyName": "Aim To Prosperity",
         "invest": "Invest",
         "promotions": "Promotions",
         "signIn": "Sign In",
         "signUp": "Sign Up",
         "profile": "Profile",
         "downloadApp": "Download App",
-        "ongoingInvestments": "Ongoing Investment Options",
+        "ongoingInvestments": "Running Projects",
           "investmentDescription": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore.",
           "targetAchieved": "Target Achieved",
           "seeDetails": "See Details",
           "viewAllProjects": "View All Projects",
           "loadingInvestments": "Loading investments...",
-          "howToInvest": "How to Invest on the Projects?",
-          "investmentStepsDescription": "Follow these simple steps to start investing in our projects.",
-          "step1Title": "Create Account",
-          "step1Description": "Sign up and verify your identity to start investing",
-          "step2Title": "Choose Project",
-          "step2Description": "Browse and select investment opportunities that match your goals",
-          "step3Title": "Invest",
-          "step3Description": "Fund your account and confirm your investment choices",
-          "step4Title": "Track Progress",
-          "step4Description": "Monitor your investments and watch your portfolio grow",
+          "shariahFirstTitle": "Shariah First",
+  "shariahFirstDescription": "Halal options only. Our internationally recognized Shariah advisors make sure that your profits are always halal.",
+  "hassleFreeTitle": "Hassle-free",
+  "hassleFreeDescription": "We take care of business assessment, legal contracts and repayments. You just choose which business you want to invest in.",
+  "beatsInflationTitle": "Beats Inflation",
+  "beatsInflationDescription": "Higher profits offered from traditional investment options. Preserve the value of your hard-earned money.",
           "hero": {
-            "title": "Ethical & Shariah-Compliant Wealth Growth",
-            "description": "ATP Investment follows Shariah-compliant investment strategies, ensuring interest-free and ethical wealth growth.",
+            "title": "Ethical & Shariah-Compliant Wealth Growth ",
+            "description": "ATP Investment follows Shariah-compliant investment strategies, ensuring interest-free and ethical wealth growth. - ATP Investment follows interest fee investment strategies, ensuring collaboration and ethical wealth growth.",
             "cta": "Explore Halal Investment Opportunities",
-            "subtitle": "Ethical Investments, Prosperous Future"
+            "subtitle": "Interest free Cooperative investment group"
           },
           "stats": {
-    "investments": "Investments",
-    "international": "International",
-    "financial": "Financial",
-    "investmentStart": "Investment Start from $500"
+    "investments": "Investment-Projects",
+    "international": "International-Investors",
+    "financial": "Financial-Transactions",
+    "investmentStart": "Investment Start from 1 Lakh"
   },
   "toggleMenu": "Toggle Menu",
   "faq": {
@@ -86,14 +82,19 @@
   "signUpLink": "Sign Up",
   "needHelp": "Need help?",
   "promotional": {
-    "headline": "This is your very own headline to describe your product",
-    "subheadline": "This is a headline",
-    "description": "Lorem ipsum dolor sit amet, consectetur adipisc sed do eiusmod tempor incididunt ut labore et do",
-    "highlight": "Lorem esum",
+    "headline": "Your Future Starts Here",
+    "subheadline": "Unlock New Opportunities",
+    "description": "Join us to explore limitless possibilities.",
+    "highlight": "Start your journey today!",
     "buttons": {
       "explore": "Explore",
       "invest": "Invest",
-      "profit": "Get Profit"
+      "profit": "Profit"
+    },
+    "lines": {
+      "line1": "Aim to prosperity ",
+      "line2": "To grow together",
+      "line3": "To ensure a better future"
     }
   },
   "signupTitle": "Sign Up",
@@ -160,7 +161,7 @@
     },
     "phone": {
       "title": "Phone",
-      "value": "01670407666"
+      "value": "+880 1610-407666"
     },
     "email": {
       "title": "Email",

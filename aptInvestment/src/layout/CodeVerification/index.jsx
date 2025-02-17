@@ -3,7 +3,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Link } from "react-router-dom";
 import { ArrowLeft } from "lucide-react";
-import logo from "../../assets/image/logo-blue.png";
+import logo from "../../assets/image/logo.png";
 import PromotionalSection from "../../components/promotionalSection.jsx.jsx";
 import { useTranslation } from "react-i18next";
 import "./index.css";
@@ -68,7 +68,7 @@ const VerificationCode = () => {
         {/* Logo and Headline */}
         <div className="absolute top-8 left-8 logo-headline-container flex items-center gap-2 mt-10">
           <img src={logo} alt="ATP Investment Logo" />
-          <h1>ATP Investment</h1>
+          <h1>Aim To Prosperity</h1>
         </div>
 
        

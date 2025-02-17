@@ -1,24 +1,29 @@
-/* Input and Textarea focus styles */
-input:focus, textarea:focus {
-    outline: 2px solid #3b82f6; /* Blue color */
-    outline-offset: 2px;
-    box-shadow: 0 0 0 1px #3b82f6; /* Blue shadow */
-  }
-  
-  /* Button focus styles */
-  button:focus {
-    outline: 2px solid #3b82f6; /* Blue color */
-    outline-offset: 2px;
-    box-shadow: 0 0 0 1px #3b82f6; /* Blue shadow */
-  }
+.header {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 20px;
+}
 
-  
-  .header{
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 20px;
-  }
+.header h2 {
+  font-size: 1.75rem;
+  font-weight: bold;
+  color: #3b82f6;
+  text-align: center;
+}
+
+input:focus,
+textarea:focus {
+  outline: 2px solid #3b82f6;
+  outline-offset: 2px;
+  box-shadow: 0 0 0 1px #3b82f6;
+}
+
+button:focus {
+  outline: 2px solid #3b82f6;
+  outline-offset: 2px;
+  box-shadow: 0 0 0 1px #3b82f6;
+}
 
 .border-red-500 {
   border-color: #ef4444 !important;
@@ -36,3 +41,4 @@ input:focus, textarea:focus {
 .mt-1 {
   margin-top: 0.25rem;
 }
+

@@ -5,9 +5,9 @@ export default function Stats() {
   const { t } = useTranslation();
 
   const stats = [
-    { value: '12K+', label: t('stats.investments') },
-    { value: '10K+', label: t('stats.international') },
-    { value: '12K+', label: t('stats.financial') },
+    { value: '100+', label: t('stats.investments') },
+    { value: '100+', label: t('stats.international') },
+    { value: '10Cr+', label: t('stats.financial') },
   ];
 
   return (

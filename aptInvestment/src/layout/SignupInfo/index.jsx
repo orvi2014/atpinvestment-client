@@ -7,7 +7,7 @@ import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import PromotionalSection from "../../components/promotionalSection.jsx"
 import { useTranslation } from "react-i18next"
-import logo from "../../assets/image/logo-blue.png"
+import logo from "../../assets/image/logo.png"
 
 const SignUpForm = () => {
   const { t } = useTranslation()

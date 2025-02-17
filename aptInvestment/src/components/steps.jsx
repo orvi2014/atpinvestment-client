@@ -1,52 +1,40 @@
-import React from "react";
 import { useTranslation } from "react-i18next";
 import { Card, CardContent } from "@/components/ui/card";
-import { Lightbulb } from "lucide-react";
-import "../layout/HomeInfo/index.css";
+import { BookOpen, ClockAlert, ChartNoAxesCombined } from "lucide-react"; // Import icons
 
-export function Steps() {
+export default function Features() {
   const { t } = useTranslation();
 
-  const steps = [
+  const features = [
     {
-      number: 1,
-      title: t("step1Title", "Lorem Community"),
-      description: t("step1Description", "Unprecedented access to investment projects in the real economy globally"),
+      icon: <BookOpen className="h-8 w-8 text-yellow-500" />, 
+      title: t("shariahFirstTitle"),
+      description: t("shariahFirstDescription"),
     },
     {
-      number: 2,
-      title: t("step2Title", "Lorem Community"),
-      description: t("step2Description", "Unprecedented access to investment projects in the real economy globally"),
+      icon: <ClockAlert className="h-8 w-8 text-green-500" />,
+      title: t("hassleFreeTitle"),
+      description: t("hassleFreeDescription"),
     },
     {
-      number: 3,
-      title: t("step3Title", "Lorem Community"),
-      description: t("step3Description", "Unprecedented access to investment projects in the real economy globally"),
-    },
-    {
-      number: 4,
-      title: t("step4Title", "Lorem Community"),
-      description: t("step4Description", "Unprecedented access to investment projects in the real economy globally"),
+      icon: <ChartNoAxesCombined className="h-8 w-8 text-blue-500" />,
+      title: t("beatsInflationTitle"),
+      description: t("beatsInflationDescription"),
     },
   ];
 
   return (
-    <div className="steps-container mx-auto px-4 py-12 mt-24 bg-white w-full">
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-        {steps.map((step, index) => (
-          <Card
-            key={step.number}
-            className={`relative bg-gray-100 border-0 ${index % 2 === 0 ? "lg:-translate-y-4" : "lg:translate-y-4"} h-[320px] w-full transition-transform hover:-translate-y-1`}
-          >
-            <CardContent className="p-6">
-              <div className="flex flex-col items-start mt-10 mb-4">
-                <span className="text-xl font-semibold text-gray-900 mb-3">{step.number}</span>
-                <div className="bg-blue-500 text-white p-2 rounded-lg">
-                  <Lightbulb className="h-5 w-5" />
-                </div>
+    <div className="mx-auto px-4 py-12 mt-24 bg-white w-full">
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-6xl mx-auto">
+        {features.map((feature, index) => (
+          <Card key={index} className="border-0 bg-transparent shadow-none">
+            <CardContent className="p-6 flex flex-col items-center text-center">
+              <div className="mb-6 flex items-center space-x-3">
+                {feature.icon} {/* Render SVG icon */}
+                
               </div>
-              <h3 className="text-xl font-semibold mb-3 text-left">{step.title}</h3>
-              <p className="text-gray-600 text-sm leading-relaxed text-left">{step.description}</p>
+              <h3 className="text-2xl font-semibold mb-4 text-gray-900">{feature.title}</h3>
+              <p className="text-gray-600 leading-relaxed">{feature.description}</p>
             </CardContent>
           </Card>
         ))}

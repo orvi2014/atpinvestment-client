@@ -2,7 +2,7 @@
 
 import "../layout/CreateProject/index.css";
 import CreateProject from "../layout/CreateProject";
-import logo from '../assets/image/logo-blue.png';
+import logo from '../assets/image/logo.png';
 
 export default function ProjectLayout({ children }) {
   return (
@@ -14,7 +14,7 @@ export default function ProjectLayout({ children }) {
                      alt="logo"
                      className="h-10 w-10 mt-4"
                    />
-                   <span className="company font-bold text-2xl">ATP INVESTMENT</span>
+                   <span className="company font-bold text-2xl">Aim To Prosperity</span>
         </div>
 
       </header>

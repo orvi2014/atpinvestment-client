@@ -8,7 +8,7 @@ import { Card } from "@/components/ui/card"
 import {Link} from "react-router-dom"
 import "./index.css"
 import { useTranslation } from "react-i18next"
-import logo from "../../assets/image/logo-blue.png"
+import logo from "../../assets/image/logo.png"
 import PromotionalSection from "@/components/promotionalSection.jsx"
 
 
@@ -73,14 +73,15 @@ export default function SignIn() {
             <ChevronLeft className="back-button" />
            
           </Link>
-          <div className="flex items-center gap-2 ml-16 ">
-            <img
-              src={logo || "/placeholder.svg"}
-              alt="ATP Investment"
-              className="h-10 w-10 "
-            />
-            <h1 className="text-blue-500 text-3xl font-bold">ATP Investment</h1>
-          </div>
+          <div className="flex items-center gap-2 ml-16">
+  <img
+    src={logo || "/placeholder.svg"}
+    alt="ATP Investment"
+    className="h-10 w-10"
+  />
+  <span className="text-blue-500 text-3xl font-bold">Aim To Prosperity</span>
+</div>
+
         </header>
 
         <section className="login-section">

@@ -1,46 +1,60 @@
-import React from "react";
-import { Button } from "@/components/ui/button";
-import { Lightbulb } from "lucide-react";
-import { Card, CardContent } from "@/components/ui/card";
-import { useTranslation } from "react-i18next";
+import { useTranslation } from "react-i18next"
+import { Button } from "@/components/ui/button"
+import { ArrowRight, Rocket, TrendingUp } from "lucide-react"
 
-export default function PromotionalSection() {
-  const { t } = useTranslation();
+const PromotionalSection = () => {
+  const { t } = useTranslation()
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-blue-500 to-blue-600 p-8 md:p-16">
-      <div className="w-full mx-auto space-y-24">
-        {/* Main Headline */}
-        <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold text-white leading-tight max-w-2xl">
-          {t("promotional.headline")}
-        </h1>
+    <div className="min-h-screen bg-gradient-to-br from-blue-600 via-blue-700 to-indigo-800 p-8 md:p-16 flex flex-col justify-center items-start text-left overflow-hidden">
+      <div className="max-w-4xl">
+      <h2 className="text-4xl md:text-5xl lg:text-6xl text-white font-bold mb-6 animate-fade-in-down w-full whitespace-nowrap">
+  {t("promotional.headline")}
+</h2>
 
-        {/* Card Section */}
-        <Card className="w-full bg-white shadow-lg ml-20">
-          <CardContent className="p-6 space-y-4">
-            {/* Icon */}
-            <div className="bg-blue-100 rounded-full w-12 h-12 flex items-center justify-center">
-              <Lightbulb className="h-6 w-6 text-yellow-400 " />
-            </div>
+        <p className="text-2xl md:text-3xl lg:text-4xl text-blue-100 font-semibold mb-4 animate-fade-in-left">
+          {t("promotional.lines.line1")}
+        </p>
+        <p className="text-2xl md:text-3xl lg:text-4xl text-blue-100 font-semibold mb-4  animate-fade-in-left delay-150">
+          {t("promotional.lines.line2")}
+        </p>
+        <p className="text-2xl md:text-3xl lg:text-4xl text-blue-100 font-semibold mb-8  animate-fade-in-left delay-300">
+          {t("promotional.lines.line3")}
+        </p>
 
-            {/* Subheadline */}
-            <h2 className="text-xl font-semibold text-gray-900">{t("promotional.subheadline")}</h2>
-
-            {/* Description */}
-            <p className="text-gray-500">{t("promotional.description")}</p>
-
-            {/* Highlighted Text */}
-            <p className="font-medium text-gray-900">{t("promotional.highlight")}</p>
-
-            {/* Buttons */}
-            <div className="flex flex-wrap gap-3 pt-2">
-              <Button className="bg-blue-500 hover:bg-blue-600">{t("promotional.buttons.explore")}</Button>
-              <Button className="bg-orange-500 hover:bg-orange-600">{t("promotional.buttons.invest")}</Button>
-              <Button className="bg-green-500 hover:bg-green-600">{t("promotional.buttons.profit")}</Button>
-            </div>
-          </CardContent>
-        </Card>
+        <div className="flex flex-wrap gap-4 mt-8">
+          <div className="animate-fade-in-up delay-450">
+            <Button
+              className="bg-white text-blue-700 hover:bg-blue-50 px-8 py-5 text-lg font-semibold rounded-full shadow-lg transition-all duration-300 ease-in-out transform hover:scale-105"
+              variant="outline"
+            >
+              {t("promotional.buttons.explore")}
+              
+            </Button>
+          </div>
+          <div className="animate-fade-in-up delay-600">
+            <Button
+              className="bg-orange-500 hover:bg-orange-600 text-white px-8 py-5 text-lg font-semibold rounded-full shadow-lg transition-all duration-300 ease-in-out transform hover:scale-105"
+              variant="default"
+            >
+              {t("promotional.buttons.invest")}
+           
+            </Button>
+          </div>
+          <div className="animate-fade-in-up delay-750">
+            <Button
+              className="bg-green-500 hover:bg-green-600 text-white px-8 py-5 text-lg font-semibold rounded-full shadow-lg transition-all duration-300 ease-in-out transform hover:scale-105"
+              variant="default"
+            >
+              {t("promotional.buttons.profit")}
+             
+            </Button>
+          </div>
+        </div>
       </div>
     </div>
-  );
+  )
 }
+
+export default PromotionalSection
+
