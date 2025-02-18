@@ -37,8 +37,11 @@ const Header = () => {
       <div className="container mx-auto px-4 w-full max-w-full">
         <div className="flex h-16 items-center justify-between">
           <div className="flex items-center space-x-2">
-            <img src={logo || "/placeholder.svg"} alt={t('companyName')} className="h-8 w-8" />
-            <span className="font-bold">{t('companyName')}</span>
+          <Link to="/" className="flex items-center space-x-2">
+  <img src={logo || "/placeholder.svg"} alt={t('companyName')} className="h-8 w-8" />
+  <span className="font-bold">{t('companyName')}</span>
+</Link>
+
           </div>
 
           <DropdownMenu>
