@@ -8,6 +8,9 @@ import { Label } from "@/components/ui/label"
 import PromotionalSection from "../../components/promotionalSection.jsx"
 import { useTranslation } from "react-i18next"
 import logo from "../../assets/image/logo.png"
+import { ChevronLeft } from "lucide-react"
+import {Link} from "react-router-dom"
+
 
 const SignUpForm = () => {
   const { t } = useTranslation()
@@ -85,6 +88,10 @@ const SignUpForm = () => {
     <div className="flex min-h-screen">
       <div className="flex-1 px-4 py-6 sm:px-6 md:px-8 lg:px-12">
         <div className="mx-auto max-w-md w-full">
+        <Link to="/" className="inline-flex items-center text-sm mb-8">
+            <ChevronLeft className="back-button" />
+           
+          </Link>
           <div className="mb-6 sm:mb-8 mt-4 sm:mt-8">
             <div className="flex items-center gap-2">
               <img
@@ -92,7 +99,7 @@ const SignUpForm = () => {
                 alt="ATP Investment"
                 className="w-8 h-8 sm:w-10 sm:h-10"
               />
-              <span className="text-xl sm:text-2xl font-bold text-blue-500">ATP INVESTMENT</span>
+              <span className="text-xl sm:text-2xl font-bold text-blue-500">{t("companyName")}</span>
             </div>
           </div>
 

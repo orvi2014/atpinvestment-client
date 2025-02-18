@@ -9,6 +9,9 @@ import { Button } from "@/components/ui/button"
 import { Label } from "@/components/ui/label"
 import { Textarea } from "@/components/ui/textarea"
 
+
+
+
 export default function CreateProject() {
   const [formData, setFormData] = useState({
     title: "",
@@ -16,7 +19,7 @@ export default function CreateProject() {
     description: "",
     targetAchieved: "",
     location: "",
-    roi: "",
+    profitRatio: "",
     raisedAmount: "",
     investmentOptions: "",
     duration: "",
@@ -42,10 +45,10 @@ export default function CreateProject() {
           : ""
       case "location":
         return !value.trim() ? "Location is required" : ""
-      case "roi":
-        const roi = Number(value)
-        return !value || isNaN(roi) || roi < 0 || roi > 100
-          ? "Please enter a valid ROI percentage between 0 and 100"
+      case "profitRatio":
+        const profitRatio = Number(value)
+        return !value || isNaN(profitRatio) || profitRatio < 0 || profitRatio > 100
+          ? "Please enter a valid Profit Ratio/Year percentage between 0 and 100"
           : ""
       case "raisedAmount":
         return !value || isNaN(Number(value)) ? "Please enter a valid amount" : ""
@@ -58,12 +61,12 @@ export default function CreateProject() {
       case "duration":
         return !value || isNaN(Number(value)) ? "Please enter a valid duration" : ""
       case "defaultImage":
-        const urlRegex = /^(https?:\/\/)?([\da-z.-]+)\.([a-z.]{2,6})([/\w .-]*)*\/?$/
+        const urlRegex = /^(https?:\/\/)?([\da-z.-]+)\.([a-z.]{2,6})([\/\w .-]*)*\/?$/
         return !urlRegex.test(value) ? "Please enter a valid URL" : ""
       case "galleryImages":
         if (!value) return ""
         const urls = value.split(",")
-        const urlRegexGallery = /^(https?:\/\/)?([\da-z.-]+)\.([a-z.]{2,6})([/\w .-]*)*\/?$/
+        const urlRegexGallery = /^(https?:\/\/)?([\da-z.-]+)\.([a-z.]{2,6})([\/\w .-]*)*\/?$/
         return !urls.every((url) => urlRegexGallery.test(url.trim()))
           ? "Please enter valid URLs separated by commas"
           : ""
@@ -102,7 +105,7 @@ export default function CreateProject() {
     const payload = {
       ...formData,
       targetAchieved: Number(formData.targetAchieved),
-      roi: Number(formData.roi),
+      profitRatio: Number(formData.profitRatio),
       raisedAmount: Number(formData.raisedAmount),
       investmentOptions: formData.investmentOptions.split(",").map(Number),
       duration: Number(formData.duration),
@@ -126,7 +129,7 @@ export default function CreateProject() {
           description: "",
           targetAchieved: "",
           location: "",
-          roi: "",
+          profitRatio: "",
           raisedAmount: "",
           investmentOptions: "",
           duration: "",
@@ -155,7 +158,7 @@ export default function CreateProject() {
     "description",
     "targetAchieved",
     "location",
-    "roi",
+    "profitRatio/Year",
     "raisedAmount",
     "investmentOptions",
     "duration",
@@ -178,24 +181,9 @@ export default function CreateProject() {
                   {key.replace(/([A-Z])/g, " $1").trim()}
                 </Label>
                 {key === "description" ? (
-                  <Textarea
-                    id={key}
-                    name={key}
-                    value={formData[key]}
-                    onChange={handleChange}
-                    className={`w-full ${errors[key] || apiErrors[key] ? "border-red-500" : ""}`}
-                  />
+                  <Textarea id={key} name={key} value={formData[key]} onChange={handleChange} />
                 ) : (
-                  <Input
-                    id={key}
-                    name={key}
-                    value={formData[key]}
-                    onChange={handleChange}
-                    className={`w-full ${errors[key] || apiErrors[key] ? "border-red-500" : ""}`}
-                  />
-                )}
-                {(errors[key] || apiErrors[key]) && (
-                  <p className="text-red-500 text-sm mt-1">{errors[key] || apiErrors[key]}</p>
+                  <Input id={key} name={key} value={formData[key]} onChange={handleChange} />
                 )}
               </div>
             ))}
@@ -208,4 +196,3 @@ export default function CreateProject() {
     </div>
   )
 }
-

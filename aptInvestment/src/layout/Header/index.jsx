@@ -50,7 +50,7 @@ const Header = () => {
             </DropdownMenuTrigger>
             <DropdownMenuContent align="end" className="w-56">
               <DropdownMenuItem asChild>
-                <Link to="/invest">{t('invest')}</Link>
+                <Link to="/investment/all">{t('projects')}</Link>
               </DropdownMenuItem>
               <DropdownMenuItem asChild>
                 <Link to="/promotions">{t('promotions')}</Link>
@@ -84,8 +84,8 @@ const Header = () => {
           </DropdownMenu>
 
           <nav className="hidden md:flex items-center space-x-4 flex-nowrap overflow-x-auto">
-            <Link to="/invest" className="text-black hover:text-[#456FE8]">
-              {t('invest')}
+            <Link to="/investment/all" className="text-black hover:text-[#456FE8]">
+              {t('projects')}
             </Link>
             <Link to="/promotions" className="text-black hover:text-[#456FE8]">
               {t('promotions')}

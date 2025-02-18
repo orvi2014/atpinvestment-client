@@ -1,154 +1,162 @@
 "use client"
 
-import { useState, useEffect } from "react"
+import { useState } from "react"
+import { useNavigate, Link } from "react-router-dom"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
-import { ChevronLeft } from "lucide-react"
-import { Card } from "@/components/ui/card"
-import {Link} from "react-router-dom"
-import "./index.css"
+import { Label } from "@/components/ui/label"
+import PromotionalSection from "@/components/promotionalSection.jsx"
 import { useTranslation } from "react-i18next"
 import logo from "../../assets/image/logo.png"
-import PromotionalSection from "@/components/promotionalSection.jsx"
+import { ChevronLeft } from "lucide-react"
 
 
 
-export default function SignIn() {
-  const [email, setEmail] = useState("")
-  const [password, setPassword] = useState("")
-  const [emailError, setEmailError] = useState("")
+
+const SignIn = () => {
+  const { t } = useTranslation()
+  const navigate = useNavigate()
+  const [formData, setFormData] = useState({
+    email: "",
+    password: "",
+  })
   const [error, setError] = useState("")
   const [loading, setLoading] = useState(false)
+  const [emailValid, setEmailValid] = useState(true)
 
-  const handleEmailChange = (e) => {
-    const value = e.target.value
-    setEmail(value)
-
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
-    if (!emailRegex.test(value)) {
-      setEmailError("Please enter a valid email address")
-    } else {
-      setEmailError("")
-    }
-  }
-
-  const handleLogin = async (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault()
-    setLoading(true)
     setError("")
+    setLoading(true)
 
-    if (!emailError) {
-      const requestBody = { email, password }
+    if (!/\S+@\S+\.\S+/.test(formData.email)) {
+      setEmailValid(false)
+      setError(t("invalidEmail"))
+      setLoading(false)
+      return
+    }
 
-      try {
-        const response = await fetch("https://atpinvestment.onrender.com/api/auth/login", {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify(requestBody),
-        })
+    setEmailValid(true)
 
-        const data = await response.json()
+    try {
+      const response = await fetch("https://atpinvestment.onrender.com/api/auth/login", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(formData),
+      })
 
-        if (response.ok) {
-          localStorage.setItem("token", data.token)
-          alert("Login successful!")
-          window.location.href = "/investment/all"
-        } else {
-          setError(data.message || "Login failed")
-        }
-      } catch (err) {
-        console.error("Login error:", err)
-        setError("Network error occurred")
+      const data = await response.json()
+
+      if (response.ok) {
+        localStorage.setItem("token", data.token)
+        window.alert(t("loginSuccessful"))
+        navigate("/investment/all")
+      } else {
+        setError(data.message || t("loginFailed"))
       }
+    } catch (err) {
+      console.error("Login error:", err)
+      setError(t("networkError"))
     }
 
     setLoading(false)
   }
 
+  const handleChange = (e) => {
+    const { name, value } = e.target
+    setFormData((prev) => ({
+      ...prev,
+      [name]: value,
+    }))
+  }
+
   return (
     <div className="flex min-h-screen">
-      <main className="flex-1 p-6 lg:p-12">
-        <header className="space-y-6 ">
-          <Link to="/" className="inline-flex items-center text-sm mb-8">
+      <div className="flex-1 px-4 py-6 sm:px-6 md:px-8 lg:px-12">
+        <div className="mx-auto max-w-md w-full">
+        <Link to="/" className="inline-flex items-center text-sm mb-8">
             <ChevronLeft className="back-button" />
            
           </Link>
-          <div className="flex items-center gap-2 ml-16">
-  <img
-    src={logo || "/placeholder.svg"}
-    alt="ATP Investment"
-    className="h-10 w-10"
-  />
-  <span className="text-blue-500 text-3xl font-bold">Aim To Prosperity</span>
-</div>
-
-        </header>
-
-        <section className="login-section">
-          <div className="space-y-2">
-            <h2 className="text-2xl font-semibold text-gray-900">Sign in to your account</h2>
-            <p className="text-sm text-gray-500">Enter your details to access your account</p>
+          <div className="mb-6 sm:mb-8 mt-4 sm:mt-8">
+            <div className="flex items-center gap-2">
+              <img src={logo || "/placeholder.svg"} alt="ATP Investment" className="w-8 h-8 sm:w-10 sm:h-10" />
+              <span className="text-xl sm:text-2xl font-bold text-blue-500">{t("companyName")}</span>
+            </div>
           </div>
 
-          <form className="space-y-4" onSubmit={handleLogin}>
-            <div className="space-y-2">
-              <label className="text-sm text-gray-500">Email Address</label>
-              <Input
-                type="email"
-                value={email}
-                onChange={handleEmailChange}
-                placeholder="Enter your email"
-                className={`h-12 ${emailError ? "border-red-500" : ""}`}
-                required
-              />
-              {emailError && <p className="text-sm text-red-500">{emailError}</p>}
+          <form onSubmit={handleSubmit} className="space-y-6">
+            <div className="space-y-4">
+              <h2 className="text-lg sm:text-xl font-semibold">{t("signInTitle")}</h2>
+
+              <div className="space-y-2">
+                <Label htmlFor="email" className="text-blue-500">
+                  {t("emailLabel")}
+                </Label>
+                <Input
+                  id="email"
+                  name="email"
+                  type="email"
+                  placeholder={t("emailPlaceholder")}
+                  value={formData.email}
+                  onChange={handleChange}
+                  className={`w-full h-11 sm:h-12 ${!emailValid ? "border-red-500 focus:border-red-500" : ""}`}
+                  required
+                />
+                {!emailValid && <p className="text-red-500 text-sm mt-1">{t("invalidEmail")}</p>}
+              </div>
+
+              <div className="space-y-2">
+                <Label htmlFor="password" className="text-blue-500">
+                  {t("passwordLabel")}
+                </Label>
+                <Input
+                  id="password"
+                  name="password"
+                  type="password"
+                  placeholder={t("passwordPlaceholder")}
+                  value={formData.password}
+                  onChange={handleChange}
+                  required
+                  className="w-full h-11 sm:h-12"
+                />
+              </div>
             </div>
 
-            <div className="space-y-2">
-              <label className="text-sm text-gray-500">Password</label>
-              <Input
-                type="password"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-                placeholder="Enter your password"
-                className="h-12"
-                required
-              />
-            </div>
-
-            {error && <p className="text-sm text-red-500">{error}</p>}
-
-            <div className="text-sm text-left text-blue-500 hover:underline focus:underline">
-              <Link>
-              Forget Password?
+            <div className="text-sm text-right">
+              <Link to="/forgot-password" className="text-blue-500 hover:underline">
+                {t("forgotPassword")}
               </Link>
             </div>
 
-            <Button type="submit" className="w-full h-12 text-base bg-blue-500 hover:bg-blue-600" disabled={loading}>
-              {loading ? "Signing in..." : "Sign In"}
-            </Button>
-          </form>
-
-          <div className="text-sm text-center text-gray-500">
-                 Don't have an account?{" "}
-            <Link
-              to="/signup"
-              className="text-blue-500 hover:underline focus:underline"
+            <Button
+              type="submit"
+              className="w-full h-11 sm:h-12 bg-blue-500 hover:bg-blue-600 text-white"
+              disabled={loading}
             >
-             Sign up
-            </Link>
-          </div>
+              {loading ? t("signingIn") : t("signIn")}
+            </Button>
 
+            {error && <p className="text-red-500 text-sm mt-4">{error}</p>}
 
-        </section>
-      </main>
-
-      <aside className=" hidden lg:block lg:w-1/2 ">
-        <div className=" h-full flex flex-col ">
-          <PromotionalSection />
+            <div className="text-sm text-center">
+              {t("noAccount")}{" "}
+              <Link to="/signup" className="text-blue-500 hover:underline">
+                {t("signUp")}
+              </Link>
+            </div>
+          </form>
         </div>
-      </aside>
+      </div>
+
+      <div className="hidden lg:block lg:flex-1">
+        <PromotionalSection />
+      </div>
     </div>
   )
 }
+
+export default SignIn
 

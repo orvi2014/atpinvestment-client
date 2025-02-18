@@ -39,14 +39,21 @@ export default function InvestmentsPage() {
   }, []);
 
   if (loading) {
-    return <div>{t("loading")}</div>;
+    return (
+      <div className="min-h-screen flex items-center justify-center">
+        <div className="text-center">
+          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-500 mx-auto mb-4"></div>
+          <p className="text-gray-600">{t("loading")}</p>
+        </div>
+      </div>
+    );
   }
 
   return (
     <div className="min-h-screen">
-      <div className="titleIN container mx-auto px-4">
-        <h1>{t("investment_opportunities")}</h1>
-        <p>{t("discover_investments")}</p>
+      <div className="titleIN container mx-auto px-4 pt-8">
+        <h1 className="text-3xl font-bold mb-2">{t("investment_opportunities")}</h1>
+        <p className="text-gray-600 mb-6">{t("discover_investments")}</p>
       </div>
       <div className="investment container mx-auto px-8 py-8 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
         {investments.map((investment) => (

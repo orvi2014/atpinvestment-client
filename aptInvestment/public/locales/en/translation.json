@@ -1,6 +1,6 @@
   {
         "companyName": "Aim To Prosperity",
-        "invest": "Invest",
+        "projects": "Projects",
         "promotions": "Promotions",
         "signIn": "Sign In",
         "signUp": "Sign Up",
@@ -13,9 +13,9 @@
           "viewAllProjects": "View All Projects",
           "loadingInvestments": "Loading investments...",
           "shariahFirstTitle": "Interest Fee",
-  "shariahFirstDescription": "Halal options only. Our internationally recognized Shariah advisors make sure that your profits are always halal.",
+  "shariahFirstDescription": "We focus on interest fee business policy.",
   "hassleFreeTitle": "Elite Network",
-  "hassleFreeDescription": "We take care of business assessment, legal contracts and repayments. You just choose which business you want to invest in.",
+  "hassleFreeDescription": "All our investors are well established in their own fields enabling us to build an elite network throughout the country. ",
   "beatsInflationTitle": "Beats Inflation",
   "beatsInflationDescription": "Higher profits offered from traditional investment options. Preserve the value of your hard-earned money.",
           "hero": {
@@ -83,9 +83,6 @@
   "needHelp": "Need help?",
   "promotional": {
     "headline": "Your Future Starts Here",
-    "subheadline": "Unlock New Opportunities",
-    "description": "Join us to explore limitless possibilities.",
-    "highlight": "Start your journey today!",
     "buttons": {
       "explore": "Explore",
       "invest": "Invest",
