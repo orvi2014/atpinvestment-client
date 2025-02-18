@@ -1,3 +1,6 @@
+html {
+  scroll-behavior: smooth;
+}
 /* General Styles */
 .titleIN {
   background-color: transparent;
@@ -26,26 +29,23 @@
   padding: 20px;
   margin-bottom: 20px;
   cursor: pointer;
-
 }
 
 .InveswstmentCard:hover {
   box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.15);
   transform: translateY(-4px);
   scale: 1.05;
-
 }
-
 
 /* Custom Animations */
 @keyframes fadeIn {
   from {
-      opacity: 0;
-      transform: translateY(10px);
+    opacity: 0;
+    transform: translateY(10px);
   }
   to {
-      opacity: 1;
-      transform: translateY(0);
+    opacity: 1;
+    transform: translateY(0);
   }
 }
 
@@ -55,19 +55,19 @@
 
 @media screen and (min-width: 640px) {
   .text-responsive {
-      font-size: 1rem;
+    font-size: 1rem;
   }
 }
 
 @media screen and (min-width: 768px) {
   .text-responsive {
-      font-size: 1.125rem;
+    font-size: 1.125rem;
   }
 }
 
 @media screen and (min-width: 1024px) {
   .text-responsive {
-      font-size: 1.25rem;
+    font-size: 1.25rem;
   }
 }
 
@@ -154,3 +154,4 @@
   font-weight: bold;
   color: #4285f4;
 }
+
