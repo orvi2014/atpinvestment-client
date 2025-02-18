@@ -21,7 +21,7 @@ export default function HomeInfo() {
               <Hero />
               <Status />
             </div>
-            <div className="relative aspect-[4/3]">
+            <div className="relative aspect-[4/3] hidden lg:block">
               <img
                 src={GroupImage} 
                 alt="Investment Illustration"
