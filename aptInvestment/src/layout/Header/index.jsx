@@ -61,7 +61,7 @@ const Header = () => {
                     <Link to="/signin" className="signin-button">{t('signIn')}</Link>
                   </DropdownMenuItem>
                   <DropdownMenuItem asChild>
-                    <Link to="/signup/verify" className="signup-button">{t('signUp')}</Link>
+                    <Link to="/signup" className="signup-button">{t('signUp')}</Link>
                   </DropdownMenuItem>
                   <DropdownMenuItem asChild>
                     <Link to="/download" className="download-button">{t('downloadApp')}</Link>

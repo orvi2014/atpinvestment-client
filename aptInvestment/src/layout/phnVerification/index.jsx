@@ -48,10 +48,11 @@ export default function PhoneVerification() {
 
   {/* Main Content */}
   <main className="flex-1 lg:w-1/2 p-6 mt-20 mx-20">
-    <header className="space-y-6">
-      <Link to="/" className="back-button mt-5">
+  <Link to="/" className="back-button mt-5">
         <ChevronLeft className="h-6 w-6" />
       </Link>
+    <header className="space-y-6">
+      
       <div className="brand-logo flex items-center gap-2 ">
         <img src={logo} alt="ATP Investment Logo" />
         <h1 className="text-blue-500 text-3xl font-bold">{t("companyName")}</h1>
