@@ -12,23 +12,23 @@
           "seeDetails": "See Details",
           "viewAllProjects": "View All Projects",
           "loadingInvestments": "Loading investments...",
-          "shariahFirstTitle": "Shariah First",
+          "shariahFirstTitle": "Interest Fee",
   "shariahFirstDescription": "Halal options only. Our internationally recognized Shariah advisors make sure that your profits are always halal.",
-  "hassleFreeTitle": "Hassle-free",
+  "hassleFreeTitle": "Elite Network",
   "hassleFreeDescription": "We take care of business assessment, legal contracts and repayments. You just choose which business you want to invest in.",
   "beatsInflationTitle": "Beats Inflation",
   "beatsInflationDescription": "Higher profits offered from traditional investment options. Preserve the value of your hard-earned money.",
           "hero": {
-            "title": "Ethical & Shariah-Compliant Wealth Growth ",
-            "description": "ATP Investment follows Shariah-compliant investment strategies, ensuring interest-free and ethical wealth growth. - ATP Investment follows interest fee investment strategies, ensuring collaboration and ethical wealth growth.",
-            "cta": "Explore Halal Investment Opportunities",
-            "subtitle": "Interest free Cooperative investment group"
+            "title": "Interest free Cooperative investment group",
+            "description": "ATP Investment follows interest fee investment strategies, ensuring collaboration and ethical wealth growth.",
+            "cta": "Explore Halal Investment Opportunities"
+            
           },
           "stats": {
-    "investments": "Investment-Projects",
-    "international": "International-Investors",
-    "financial": "Financial-Transactions",
-    "investmentStart": "Investment Start from 1 Lakh"
+    "investments": "Projects",
+    "international": "Investors",
+    "financial": "Transactions",
+    "investmentStart": "Investment Start from 1,00,000"
   },
   "toggleMenu": "Toggle Menu",
   "faq": {

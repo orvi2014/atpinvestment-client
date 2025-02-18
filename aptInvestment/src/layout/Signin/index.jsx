@@ -69,7 +69,7 @@ export default function SignIn() {
     <div className="flex min-h-screen">
       <main className="flex-1 p-6 lg:p-12">
         <header className="space-y-6 ">
-          <Link to="/" className="inline-flex items-center text-sm">
+          <Link to="/" className="inline-flex items-center text-sm mb-8">
             <ChevronLeft className="back-button" />
            
           </Link>

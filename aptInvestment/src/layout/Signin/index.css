@@ -121,9 +121,10 @@
 
 .back-button {
   color: #4285f4;
-  background-color: transparent; /* Ensures the background is transparent */
-  border: none; /* Removes any default borders */
-  padding: 0; /* Removes any padding */
+  background-color: transparent;
+  border: none; 
+  padding: 0; 
+  margin-bottom: 20px;
 }
 
 .back-button:hover{

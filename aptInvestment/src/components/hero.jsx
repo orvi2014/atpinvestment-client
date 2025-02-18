@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react'; // Added useState and useEffect imports
 import { useTranslation } from 'react-i18next';
 import { Button } from "@/components/ui/button";
+import { Link } from "react-router-dom";
 
 export default function Hero() {
   const { t, i18n } = useTranslation();
@@ -27,9 +28,6 @@ export default function Hero() {
         <h1 className="text-4xl font-bold tracking-tighter sm:text-5xl xl:text-6xl">
           {t('hero.title')}
         </h1>
-        <h4 className="text-xl font-semibold">
-          {t('hero.subtitle')}  
-        </h4>
         <p className="text-lg text-muted-foreground">
           {t('hero.description')}
         </p>
@@ -37,7 +35,8 @@ export default function Hero() {
           className="bg-[#456FE8] hover:bg-[#3655C4] text-white rounded-[20px] py-3 px-6 transition-all duration-300 hover:scale-105"
           size="lg"
         >
-          {t('hero.cta')}
+          <Link to= "/investment/all">{t('hero.cta')}</Link>
+          
         </Button>
       </div>
     </div>

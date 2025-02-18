@@ -22,47 +22,49 @@ const FooterBelow = () => {
   }
 
   return (
-    <div className="footer-info bg-background border-t shadow-none">
-      <div className="footer-content container py-4 grid grid-cols-1 sm:grid-cols-2 gap-4 ">
-        <div className="footer-left space-y-4 ">
+    <div className="footer-info bg-white shadow-none">
+      <div className="footer-content w-full p-4 grid gap-4 sm:grid-cols-2">
+        <div className="footer-left flex flex-col gap-4 sm:ml-40 sm:mt-5 items-center sm:items-start">
           <div className="logo flex items-center gap-2">
-            <img src={logo || "/placeholder.svg"} alt="ATP Investment logo" width={32} height={32} />
+            <img src={logo || "/placeholder.svg"} alt="ATP Investment logo" className="h-8 w-auto" />
             <span className="font-semibold text-lg">ATP Investment</span>
           </div>
-          <div className="contact-info space-y-2">
+          <div className="contact-info flex flex-col gap-2">
             <p className="text-muted-foreground">{t("contact.title")}</p>
-            <div className="flex items-center gap-2">
-              <MapPin className="h-4 w-4 text-muted-foreground" />
-              <span>
+            <div className="flex items-start gap-2">
+              <MapPin className="h-4 w-4 mt-1 flex-shrink-0 text-muted-foreground" />
+              <span className="text-sm">
                 {t("contact.address.title")}: {t("contact.address.value")}
               </span>
             </div>
           </div>
         </div>
 
-        <div className="footer-right space-y-4">
+        <div className="footer-right flex flex-col gap-4 sm:ml-64 sm:mt-5 items-center sm:items-start">
           <div className="footer-column">
-            <h3 className="font-semibold">{t("socials.title")}</h3>
-            <div className="social-links space-y-2">
+            <h3 className="font-semibold mb-2">{t("socials.title")}</h3>
+            <div className="social-links flex flex-col gap-2">
               <a
                 href="tel:01670407666"
                 className="text-muted-foreground hover:text-foreground transition-colors flex items-center gap-2"
               >
-                <Phone className="h-4 w-4" /> {t("contact.phone.value")}
+                <Phone className="h-4 w-4 flex-shrink-0" />
+                <span className="text-sm">{t("contact.phone.value")}</span>
               </a>
               <a
                 href="mailto:investmentatp@gmail.com"
                 className="text-muted-foreground hover:text-foreground transition-colors flex items-center gap-2"
               >
-                <Mail className="h-4 w-4" /> {t("contact.email.value")}
+                <Mail className="h-4 w-4 flex-shrink-0" />
+                <span className="text-sm">{t("contact.email.value")}</span>
               </a>
             </div>
           </div>
         </div>
       </div>
 
-      <div className="footer-center container py-4 border-t">
-        <p className="text-center text-sm text-muted-foreground">
+      <div className="footer-center w-full py-4 text-center">
+        <p className="text-xs sm:text-sm text-muted-foreground">
           © {new Date().getFullYear()} ATP Investment. All rights reserved
         </p>
       </div>
