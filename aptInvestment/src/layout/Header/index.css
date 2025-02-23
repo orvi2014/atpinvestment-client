@@ -12,20 +12,29 @@
   background-color: #fff;
 }
 
+.nav-link {
+  text-decoration: none;
+  color: black;
+  transition: color 0.3s;
+}
+
+.nav-link:hover {
+  color: #456FE8;
+}
+
+/* Button Styles */
 .ghost-button {
   background-color: transparent;
   color: black;
   padding: 0.5rem 1rem;
   border: none;
   border-radius: 4px;
-  text-align: center;
   font-size: 0.9rem;
   cursor: pointer;
-  transition: background-color 0.3s, color 0.3s;
+  transition: color 0.3s;
 }
 
 .ghost-button:hover {
-  background-color: white;
   color: #456FE8;
 }
 
@@ -35,10 +44,9 @@
   padding: 0.5rem 1rem;
   border: none;
   border-radius: 4px;
-  text-align: center;
   font-size: 0.9rem;
   cursor: pointer;
-  transition: color 0.3s, background-color 0.3s;
+  transition: color 0.3s;
 }
 
 .signup-button:hover {
@@ -46,13 +54,12 @@
   color: blue;
 }
 
-.download-button{
+.download-button {
   background-color: transparent;
   color: #456FE8;
   border: 1.6px solid #456FE8;
   padding: 0.5rem 1rem;
   border-radius: 20px;
-  text-align: center;
   font-size: 1rem;
   cursor: pointer;
   transition: background-color 0.3s, color 0.3s;
@@ -64,24 +71,34 @@
 }
 
 .profile-button {
-  background-color: transparent !important;
+  background-color: transparent;
   color: #456fe8;
   padding: 0.5rem 1rem;
-  border: none;
-  border-radius: 0;
-  text-align: center;
   font-size: 0.9rem;
   cursor: pointer;
   transition: color 0.3s;
-  display: flex;
-  align-items: center;
-  box-shadow: none;
+  border: 1.6px solid #456fe8;
+  border-radius: 20px;
 }
 
 .profile-button:hover {
-  background-color: transparent;
+  background-color: #d5def9;
+  color: #002793;
+}
+
+.deposite-button{
+  
+  color: #456fe8;
+  padding: 0.5rem 1rem;
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: color 0.3s;
   border: 1.6px solid #456fe8;
   border-radius: 20px;
+}
+
+.deposite-button:hover {
+  background-color: #d5def9;
   color: #002793;
 }
 
@@ -91,7 +108,6 @@
   padding: 0.5rem 1rem;
   border: 1.6px solid #456FE8;
   border-radius: 20px;
-  text-align: center;
   font-size: 0.9rem;
   cursor: pointer;
   transition: background-color 0.3s, color 0.3s;
@@ -101,4 +117,3 @@
   background-color: #d5def9;
   color: #002793;
 }
-

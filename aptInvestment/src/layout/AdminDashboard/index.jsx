@@ -1,48 +1,50 @@
-import React, { useState } from "react";
-import { Menu } from "lucide-react";
-import { Button } from "@/components/ui/button";
-import { useNavigate } from "react-router-dom";
-import logo from "../../assets/image/logo.png";
-import Sidebar from "../../components/sidebar";
-import UsersTable from "../../components/userTable";
-import ProjectsTable from "../../components/projectsTable";
-import "./index.css";
+"use client"
+
+import { useState } from "react"
+import { Menu } from "lucide-react"
+import { Button } from "@/components/ui/button"
+import { useNavigate } from "react-router-dom"
+import logo from "../../assets/image/logo.png"
+import Sidebar from "../../components/sidebar"
+import UsersTable from "../../components/userTable"
+import ProjectsTable from "../../components/projectsTable"
+import "./index.css"
+import DepositTable from "@/components/depositeTable"
+import BankDetails from "@/components/bankDetails"
 
 export default function Layout() {
-  const [activeTab, setActiveTab] = useState("users");
-  const [sidebarOpen, setSidebarOpen] = useState(false);
-  const [fetchTrigger, setFetchTrigger] = useState(false);
-  const [searchQuery, setSearchQuery] = useState("");
-  const navigate = useNavigate();
+  const [activeTab, setActiveTab] = useState("users")
+  const [sidebarOpen, setSidebarOpen] = useState(false)
+  const [fetchTrigger, setFetchTrigger] = useState(false)
+  const [searchQuery, setSearchQuery] = useState("")
+  const navigate = useNavigate()
 
   return (
     <div className="min-h-screen bg-background">
       {/* Header Section */}
       <header className="relative flex items-center justify-between border-b px-4 py-2 w-full md:flex-row flex-col text-center">
-  {/* Logo and Company Name */}
-  <div className="flex items-center gap-2 md:flex-row flex-col">
-    <img src={logo || "/placeholder.svg"} alt="logo" className="h-10 w-10" />
-    <span className="font-semibold text-xl text-blue-500 ">Aim To Prosperity
-    </span>
-  </div>
+        {/* Logo and Company Name */}
+        <div className="flex items-center gap-2 md:flex-row flex-col">
+          <img src={logo || "/placeholder.svg"} alt="logo" className="h-10 w-10" />
+          <span className="font-semibold text-xl text-blue-500 ">Aim To Prosperity</span>
+        </div>
 
-  {/* Admin Dashboard Title */}
-  <h1 className="md:absolute md:left-1/2 md:transform md:-translate-x-1/2 text-3xl font-semibold mt-1 md:mt-0 text-blue-500">
-    Admin Dashboard
-  </h1>
+        {/* Admin Dashboard Title */}
+        <h1 className="md:absolute md:left-1/2 md:transform md:-translate-x-1/2 text-3xl font-semibold mt-1 md:mt-0 text-blue-500">
+          Admin Dashboard
+        </h1>
 
-  {/* Sidebar Toggle Button (Moves to the right on small screens) */}
-  <Button
-    variant="ghost"
-    size="icon"
-    className="md:hidden self-end"
-    onClick={() => setSidebarOpen(!sidebarOpen)}
-    aria-label="Toggle sidebar"
-  >
-    <Menu className="h-6 w-6" />
-  </Button>
-</header>
-
+        {/* Sidebar Toggle Button (Moves to the right on small screens) */}
+        <Button
+          variant="ghost"
+          size="icon"
+          className="md:hidden self-end"
+          onClick={() => setSidebarOpen(!sidebarOpen)}
+          aria-label="Toggle sidebar"
+        >
+          <Menu className="h-6 w-6" />
+        </Button>
+      </header>
 
       {/* Search Box and Add Project Button */}
       <div className="flex items-center justify-end px-4 py-2 gap-4">
@@ -61,10 +63,7 @@ export default function Layout() {
             Search
           </Button>
         </div>
-        <Button
-          className="bg-blue-500 hover:bg-blue-600 text-white"
-          onClick={() => navigate("/admin/project/create")}
-        >
+        <Button className="bg-blue-500 hover:bg-blue-600 text-white" onClick={() => navigate("/admin/project/create")}>
           + Add Project
         </Button>
       </div>
@@ -78,11 +77,17 @@ export default function Layout() {
           activeTab={activeTab}
           setFetchTrigger={setFetchTrigger}
         />
-        <main className={`flex-1 p-6 ${sidebarOpen ? "md:ml-64" : ""}`}>
-          {activeTab === "users" && <UsersTable />}
-          {activeTab === "projects" && <ProjectsTable fetchTrigger={fetchTrigger} />}
+        <main className="flex-1 p-6 transition-all duration-300">
+          <div className="flex flex-col md:flex-row">
+            {/* Conditionally Render the Correct Table */}
+            {activeTab === "users" && <UsersTable />}
+            {activeTab === "projects" && <ProjectsTable fetchTrigger={fetchTrigger} />}
+            {activeTab === "deposite" && <DepositTable />}
+            {activeTab === "bank" && <BankDetails />}
+          </div>
         </main>
       </div>
     </div>
-  );
+  )
 }
+

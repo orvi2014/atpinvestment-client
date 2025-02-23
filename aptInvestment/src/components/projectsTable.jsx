@@ -15,7 +15,7 @@ export default function ProjectsTable({ fetchTrigger }) {
     setLoading(true);
     setError(null);
 
-    fetch("https://atpinvestment.onrender.com/api/project/list")
+    fetch("https://api.atpinvestment.com.bd/api/project/list")
       .then((response) => {
         if (!response.ok) {
           throw new Error("Failed to fetch projects");
@@ -41,7 +41,7 @@ export default function ProjectsTable({ fetchTrigger }) {
     if (!confirmDelete) return;
 
     try {
-      const response = await fetch(`https://atpinvestment.onrender.com/api/project/${projectId}`, {
+      const response = await fetch(`https://api.atpinvestment.com.bd/api/project/${projectId}`, {
         method: "DELETE",
       });
 

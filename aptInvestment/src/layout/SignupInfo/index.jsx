@@ -1,4 +1,4 @@
-'use client'
+"use client"
 
 import { useState, useEffect } from "react"
 import { useNavigate } from "react-router-dom"
@@ -9,8 +9,8 @@ import PromotionalSection from "../../components/promotionalSection.jsx"
 import { useTranslation } from "react-i18next"
 import logo from "../../assets/image/logo.png"
 import { ChevronLeft } from "lucide-react"
-import {Link} from "react-router-dom"
-
+import { Link } from "react-router-dom"
+import "./index.css"
 
 const SignUpForm = () => {
   const { t } = useTranslation()
@@ -21,8 +21,8 @@ const SignUpForm = () => {
     email: "",
     password: "",
   })
-  const [error, setError] = useState("")
-  const [success, setSuccess] = useState("")
+  const [errorMessage, setErrorMessage] = useState("")
+  const [successMessage, setSuccessMessage] = useState("")
   const [emailValid, setEmailValid] = useState(true)
 
   useEffect(() => {
@@ -33,46 +33,37 @@ const SignUpForm = () => {
     }))
   }, [])
 
-  const handleSubmit = async (e) => {
+  const handleSignup = async (e) => {
     e.preventDefault()
-    setError("")
-    setSuccess("")
-
-    if (!/\S+@\S+\.\S+/.test(formData.email)) {
-      setEmailValid(false)
-      setError(t("invalidEmail"))
-      return
-    }
-
-    setEmailValid(true)
-
-    const payload = {
-      customId: formData.customerId,
-      fullname: formData.fullname,
-      email: formData.email,
-      password: formData.password,
-    }
+    setErrorMessage("")
+    setSuccessMessage("")
 
     try {
-      const response = await fetch("https://atpinvestment.onrender.com/api/auth/signup", {
+      const response = await fetch("https://api.atpinvestment.com.bd/api/auth/signup", {
         method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(payload),
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          customId: formData.customerId,
+          fullname: formData.fullname,
+          email: formData.email,
+          password: formData.password,
+        }),
       })
 
       const data = await response.json()
+      console.log("Response Status:", response.status)
+      console.log("Response Data:", data)
 
       if (response.ok) {
-        setSuccess(data.message)
-        window.alert(data.message)
-        navigate("/investment/all")
+        setSuccessMessage(data.message)
+        // Pass the email to the verification page
+        navigate("/signup/verify/OTP", { state: { email: formData.email } })
       } else {
-        setError(data.error || "An error occurred. Please try again.")
+        setErrorMessage(data.message || "Signup failed.")
       }
-    } catch (err) {
-      setError("Something went wrong. Please try again later.")
+    } catch (error) {
+      console.error("Network Error:", error)
+      setErrorMessage("Network error. Please try again later.")
     }
   }
 
@@ -88,22 +79,17 @@ const SignUpForm = () => {
     <div className="flex min-h-screen">
       <div className="flex-1 px-4 py-6 sm:px-6 md:px-8 lg:px-12">
         <div className="mx-auto max-w-md w-full">
-        <Link to="/" className="inline-flex items-center text-sm mb-8">
+          <Link to="/" className="inline-flex items-center text-sm mb-8">
             <ChevronLeft className="back-button" />
-           
           </Link>
           <div className="mb-6 sm:mb-8 mt-4 sm:mt-8">
             <div className="flex items-center gap-2">
-              <img
-                src={logo || "/placeholder.svg"}
-                alt="ATP Investment"
-                className="w-8 h-8 sm:w-10 sm:h-10"
-              />
+              <img src={logo || "/placeholder.svg"} alt="ATP Investment" className="w-8 h-8 sm:w-10 sm:h-10" />
               <span className="text-xl sm:text-2xl font-bold text-blue-500">{t("companyName")}</span>
             </div>
           </div>
 
-          <form onSubmit={handleSubmit} className="space-y-6">
+          <form onSubmit={handleSignup} className="space-y-6">
             <div className="space-y-4">
               <h2 className="text-lg sm:text-xl font-semibold">{t("signupTitle")}</h2>
 
@@ -160,8 +146,8 @@ const SignUpForm = () => {
               {t("finishSignUp")}
             </Button>
 
-            {error && <p className="text-red-500 text-sm mt-4">{error}</p>}
-            {success && <p className="text-green-500 text-sm mt-4">{success}</p>}
+            {errorMessage && <p className="text-red-500 text-sm mt-4">{errorMessage}</p>}
+            {successMessage && <p className="text-green-500 text-sm mt-4">{successMessage}</p>}
           </form>
         </div>
       </div>
@@ -174,3 +160,4 @@ const SignUpForm = () => {
 }
 
 export default SignUpForm
+

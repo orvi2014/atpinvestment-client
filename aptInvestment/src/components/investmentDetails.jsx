@@ -1,22 +1,9 @@
-import React, { useState } from "react";
-import { MapPin } from "lucide-react";
-import { Button } from "@/components/ui/button";
-import { Progress } from "@/components/ui/progress";
-import { Link } from "react-router-dom";
+import { MapPin } from "lucide-react"
+import { Progress } from "@/components/ui/progress"
 
-export default function InvestmentDetails({
-  title,
-  location,
-  totalPayment,
-  roi,
-  raisedAmount,
-  raisedPercentage,
-  investmentOptions,
-}) {
-  const [selectedOption, setSelectedOption] = useState(null);
-
+export default function InvestmentDetails({ title, location, totalPayment, roi, raisedAmount, raisedPercentage }) {
   // Ensure price is numeric
-  const formattedPrice = Number.parseInt(totalPayment.replace(/[^0-9]/g, "")) || 0;
+  const formattedPrice = Number.parseInt(totalPayment.replace(/[^0-9]/g, "")) || 0
 
   return (
     <div className="space-y-6 px-4 md:px-8">
@@ -51,38 +38,7 @@ export default function InvestmentDetails({
         </div>
         <Progress value={raisedPercentage} className="h-2 bg-blue-200" indicatorClassName="bg-blue-500" />
       </div>
-
-      {/* Investment Options */}
-      <div>
-        <div className="text-l text-gray-500 mb-3">Let's Start Investing:</div>
-        <div className="grid grid-cols-2 sm:grid-cols-4 gap-2">
-          {investmentOptions.map((amount, index) => (
-            <Button
-              key={index}
-              variant="outline"
-              onClick={() => setSelectedOption(selectedOption === index ? null : index)}
-              className={`w-full text-sm font-normal ${
-                selectedOption === index ? "bg-blue-500 text-white border-blue-500" : "hover:bg-blue-50 hover:border-blue-500"
-              }`}
-            >
-              ${amount.toLocaleString()}
-            </Button>
-          ))}
-        </div>
-      </div>
-
-      {/* Deposit Button */}
-      <Button 
-        className="w-full sm:w-40 bg-blue-500 hover:bg-blue-600 text-white mx-auto text-sm py-2 rounded-[20px]"
-        disabled={selectedOption === null}
-      >
-        <Link 
-          to="/deposite" 
-          state={{ amount: selectedOption !== null ? investmentOptions[selectedOption] : null }}
-        >
-          Deposit Now
-        </Link>
-      </Button>
     </div>
-  );
+  )
 }
+

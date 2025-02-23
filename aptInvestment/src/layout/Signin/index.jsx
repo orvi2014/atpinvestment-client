@@ -1,100 +1,117 @@
 "use client"
 
-import { useState } from "react"
-import { useNavigate, Link } from "react-router-dom"
-import { Button } from "@/components/ui/button"
-import { Input } from "@/components/ui/input"
-import { Label } from "@/components/ui/label"
-import PromotionalSection from "@/components/promotionalSection.jsx"
-import { useTranslation } from "react-i18next"
-import logo from "../../assets/image/logo.png"
-import { ChevronLeft } from "lucide-react"
-
-
-
+import { useState } from "react";
+import { useNavigate, Link } from "react-router-dom";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import PromotionalSection from "@/components/promotionalSection.jsx";
+import { useTranslation } from "react-i18next";
+import logo from "../../assets/image/logo.png";
+import { ChevronLeft } from "lucide-react";
 
 const SignIn = () => {
-  const { t } = useTranslation()
-  const navigate = useNavigate()
-  const [formData, setFormData] = useState({
-    email: "",
-    password: "",
-  })
-  const [error, setError] = useState("")
-  const [loading, setLoading] = useState(false)
-  const [emailValid, setEmailValid] = useState(true)
-
-  const handleSubmit = async (e) => {
-    e.preventDefault()
-    setError("")
-    setLoading(true)
-
-    if (!/\S+@\S+\.\S+/.test(formData.email)) {
-      setEmailValid(false)
-      setError(t("invalidEmail"))
-      setLoading(false)
-      return
-    }
-
-    setEmailValid(true)
-
-    try {
-      const response = await fetch("https://atpinvestment.onrender.com/api/auth/login", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(formData),
-      })
-
-      const data = await response.json()
-
-      if (response.ok) {
-        localStorage.setItem("token", data.token)
-        window.alert(t("loginSuccessful"))
-        navigate("/investment/all")
-      } else {
-        setError(data.message || t("loginFailed"))
-      }
-    } catch (err) {
-      console.error("Login error:", err)
-      setError(t("networkError"))
-    }
-
-    setLoading(false)
-  }
+  const { t } = useTranslation();
+  const navigate = useNavigate();
+  
+  const [formData, setFormData] = useState({ email: "", password: "" });
+  const [error, setError] = useState("");
+  const [loading, setLoading] = useState(false);
+  const [emailValid, setEmailValid] = useState(true);
+  
+  const [resetEmail, setResetEmail] = useState("");
+  const [resetError, setResetError] = useState("");
+  const [resetSuccess, setResetSuccess] = useState("");
+  const [resetLoading, setResetLoading] = useState(false);
+  const [showResetModal, setShowResetModal] = useState(false);
 
   const handleChange = (e) => {
-    const { name, value } = e.target
-    setFormData((prev) => ({
-      ...prev,
-      [name]: value,
-    }))
-  }
+    setFormData({ ...formData, [e.target.name]: e.target.value });
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setError("");
+    setLoading(true);
+
+    if (!/\S+@\S+\.\S+/.test(formData.email)) {
+      setEmailValid(false);
+      setError(t("invalidEmail"));
+      setLoading(false);
+      return;
+    }
+
+    setEmailValid(true);
+
+    try {
+      const response = await fetch("https://api.atpinvestment.com.bd/api/auth/login", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(formData),
+      });
+
+      const data = await response.json();
+
+      if (response.ok) {
+        localStorage.setItem("token", data.token);
+        window.alert(t("loginSuccessful"));
+        navigate("/investment/all");
+      } else {
+        setError(data.message || t("loginFailed"));
+      }
+    } catch (err) {
+      setError(t("networkError"));
+    }
+    setLoading(false);
+  };
+
+  const handleForgotPassword = async (e) => {
+    e.preventDefault();
+    setResetError("");
+    setResetSuccess("");
+    setResetLoading(true);
+  
+    try {
+      const response = await fetch("https://atpinvestment.onrender.com/api/auth/forgot-password", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email: resetEmail }),
+      });
+  
+      const data = await response.json();
+  
+      if (response.ok) {
+        setResetSuccess(data.message);
+        setTimeout(() => {
+          navigate(`/password/reset?email=${encodeURIComponent(resetEmail)}`);
+        }, 2000); // Redirect after 2 seconds to show success message
+      } else {
+        setResetError(data.message || t("resetFailed"));
+      }
+    } catch (err) {
+      setResetError(t("networkError"));
+    }
+    setResetLoading(false);
+  };
+  
 
   return (
     <div className="flex min-h-screen">
       <div className="flex-1 px-4 py-6 sm:px-6 md:px-8 lg:px-12">
         <div className="mx-auto max-w-md w-full">
-        <Link to="/" className="inline-flex items-center text-sm mb-8">
+          <Link to="/" className="inline-flex items-center text-sm mb-8">
             <ChevronLeft className="back-button" />
-           
           </Link>
-          <div className="mb-6 sm:mb-8 mt-4 sm:mt-8">
-            <div className="flex items-center gap-2">
-              <img src={logo || "/placeholder.svg"} alt="ATP Investment" className="w-8 h-8 sm:w-10 sm:h-10" />
-              <span className="text-xl sm:text-2xl font-bold text-blue-500">{t("companyName")}</span>
-            </div>
+          <div className="mb-6 sm:mb-8 mt-4 sm:mt-8 flex items-center gap-2">
+            <img src={logo || "/placeholder.svg"} alt="ATP Investment" className="w-10 h-10" />
+            <span className="text-2xl font-bold text-blue-500">{t("companyName")}</span>
           </div>
 
           <form onSubmit={handleSubmit} className="space-y-6">
             <div className="space-y-4">
-              <h2 className="text-lg sm:text-xl font-semibold">{t("signInTitle")}</h2>
-
-              <div className="space-y-2">
-                <Label htmlFor="email" className="text-blue-500">
-                  {t("emailLabel")}
-                </Label>
+              <h2 className="text-xl font-semibold">{t("signInTitle")}</h2>
+              <div>
+                <Label htmlFor="email">{t("emailLabel")}</Label>
                 <Input
                   id="email"
                   name="email"
@@ -102,16 +119,13 @@ const SignIn = () => {
                   placeholder={t("emailPlaceholder")}
                   value={formData.email}
                   onChange={handleChange}
-                  className={`w-full h-11 sm:h-12 ${!emailValid ? "border-red-500 focus:border-red-500" : ""}`}
+                  className={!emailValid ? "border-red-500" : ""}
                   required
                 />
-                {!emailValid && <p className="text-red-500 text-sm mt-1">{t("invalidEmail")}</p>}
+                {!emailValid && <p className="text-red-500 text-sm">{t("invalidEmail")}</p>}
               </div>
-
-              <div className="space-y-2">
-                <Label htmlFor="password" className="text-blue-500">
-                  {t("passwordLabel")}
-                </Label>
+              <div>
+                <Label htmlFor="password">{t("passwordLabel")}</Label>
                 <Input
                   id="password"
                   name="password"
@@ -120,33 +134,21 @@ const SignIn = () => {
                   value={formData.password}
                   onChange={handleChange}
                   required
-                  className="w-full h-11 sm:h-12"
                 />
               </div>
             </div>
 
             <div className="text-sm text-right">
-              <Link to="/forgot-password" className="text-blue-500 hover:underline">
+              <button type="button" onClick={() => setShowResetModal(true)} className="text-blue-500 hover:underline">
                 {t("forgotPassword")}
-              </Link>
+              </button>
             </div>
 
-            <Button
-              type="submit"
-              className="w-full h-11 sm:h-12 bg-blue-500 hover:bg-blue-600 text-white"
-              disabled={loading}
-            >
+            <Button type="submit" className="w-full bg-blue-500 text-white" disabled={loading}>
               {loading ? t("signingIn") : t("signIn")}
             </Button>
 
-            {error && <p className="text-red-500 text-sm mt-4">{error}</p>}
-
-            <div className="text-sm text-center">
-              {t("noAccount")}{" "}
-              <Link to="/signup" className="text-blue-500 hover:underline">
-                {t("signUp")}
-              </Link>
-            </div>
+            {error && <p className="text-red-500 text-sm">{error}</p>}
           </form>
         </div>
       </div>
@@ -154,9 +156,32 @@ const SignIn = () => {
       <div className="hidden lg:block lg:flex-1">
         <PromotionalSection />
       </div>
+
+      {showResetModal && (
+        <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50">
+          <div className="bg-white p-6 rounded-lg shadow-md w-96">
+            <h2 className="text-lg font-semibold">{t("forgotPassword")}</h2>
+            <form onSubmit={handleForgotPassword} className="mt-4 space-y-4">
+              <Input
+                type="email"
+                name="resetEmail"
+                placeholder={t("emailPlaceholder")}
+                value={resetEmail}
+                onChange={(e) => setResetEmail(e.target.value)}
+                required
+              />
+              {resetError && <p className="text-red-500 text-sm">{resetError}</p>}
+              {resetSuccess && <p className="text-green-500 text-sm">{resetSuccess}</p>}
+              <Button type="submit" className="w-full bg-blue-500 text-white" disabled={resetLoading}>
+                {resetLoading ? t("sending") : t("sendResetLink")}
+              </Button>
+            </form>
+            <button onClick={() => setShowResetModal(false)} className="text-sm text-blue-500 mt-4">{t("close")}</button>
+          </div>
+        </div>
+      )}
     </div>
-  )
-}
+  );
+};
 
-export default SignIn
-
+export default SignIn;

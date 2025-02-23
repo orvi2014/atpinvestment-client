@@ -1,7 +1,5 @@
-import React from "react";
-import { useNavigate } from "react-router-dom"; // Import useNavigate
-import { Users, FolderKanban, Gift, CreditCard, X } from "lucide-react";
-import { Button } from "@/components/ui/button";
+import { Users, FolderKanban, Gift, CreditCard, X, Wallet, Landmark } from "lucide-react"
+import { Button } from "@/components/ui/button"
 
 const tabs = [
   { name: "Users", icon: Users },
@@ -9,11 +7,11 @@ const tabs = [
   { name: "Promotions", icon: Gift },
   { name: "Payments", icon: CreditCard },
   { name: "Deposite", icon: CreditCard },
-];
+  { name: "Expenses", icon: Wallet },
+  { name: "Bank", icon: Landmark },
+]
 
 export default function Sidebar({ open, setOpen, onTabChange, activeTab, setFetchTrigger }) {
-  const navigate = useNavigate(); // Initialize navigation function
-
   return (
     <aside
       role="navigation"
@@ -22,11 +20,11 @@ export default function Sidebar({ open, setOpen, onTabChange, activeTab, setFetc
     >
       <div className="flex justify-between items-center p-4 md:hidden">
         <h2 className="text-xl font-semibold">Menu</h2>
-        <Button 
-          variant="ghost" 
-          size="icon" 
-          onClick={() => setOpen(false)} 
-          className="md:hidden" 
+        <Button
+          variant="ghost"
+          size="icon"
+          onClick={() => setOpen(false)}
+          className="md:hidden"
           aria-label="Close menu"
         >
           <X className="h-6 w-6" />
@@ -36,32 +34,32 @@ export default function Sidebar({ open, setOpen, onTabChange, activeTab, setFetc
       {/* Navigation Links */}
       <nav className="flex flex-col gap-2 p-4">
         {tabs.map((tab) => {
-          const isActive = activeTab === tab.name.toLowerCase();
+          const isActive = activeTab === tab.name.toLowerCase()
           return (
             <Button
               key={tab.name}
               variant="ghost"
               className={`w-full justify-start transition-colors 
-                ${isActive 
-                  ? "bg-blue-500 text-gray-800 dark:text-gray-300 hover:bg-gray-400 dark:hover:bg-gray-600" 
-                  : "hover:bg-blue-100 dark:hover:bg-blue-900"}`}
+                ${
+                  isActive
+                    ? "bg-blue-500 text-gray-800 dark:text-gray-300 hover:bg-gray-400 dark:hover:bg-gray-600"
+                    : "hover:bg-blue-100 dark:hover:bg-blue-900"
+                }`}
               onClick={() => {
-                if (tab.name.toLowerCase() === "deposite") {
-                  navigate("/admin/deposite"); // Redirect to deposit page
-                } else {
-                  onTabChange(tab.name.toLowerCase());
-                  if (tab.name.toLowerCase() === "projects") {
-                    setFetchTrigger(true);
-                  }
+                onTabChange(tab.name.toLowerCase())
+                if (tab.name.toLowerCase() === "projects") {
+                  setFetchTrigger(true)
                 }
+                setOpen(false) // Close the sidebar on mobile after selecting a tab
               }}
             >
               <tab.icon className={`mr-2 h-4 w-4 ${isActive ? "text-gray-800 dark:text-gray-300" : ""}`} />
               {tab.name}
             </Button>
-          );
+          )
         })}
       </nav>
     </aside>
-  );
+  )
 }
+

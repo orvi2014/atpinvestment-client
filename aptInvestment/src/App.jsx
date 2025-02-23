@@ -15,6 +15,7 @@ import AdminLogin from './pages/adminLogin';
 import CreateProject from './pages/createProject';
 import Allinvestment from './pages/allInvestment';
 import Deposite from './layout/Deposit';
+import PassReset from './pages/resetPass';
 
 
 
@@ -35,6 +36,7 @@ function App() {
             <Route path="/admin/project/create" element={<CreateProject />} />
             <Route path="/investment/all" element={<Allinvestment />} />
             <Route path="/deposite" element={<Deposite />} />
+            <Route path="/password/reset" element={<PassReset />} />
           </Routes>
         </Router>
       </Suspense>

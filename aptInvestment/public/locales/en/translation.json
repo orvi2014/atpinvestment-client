@@ -5,6 +5,7 @@
         "signIn": "Sign In",
         "signUp": "Sign Up",
         "profile": "Profile",
+        "deposites": "Deposits",
         "downloadApp": "Download App",
         "ongoingInvestments": "Running Projects",
           "investmentDescription": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore.",
@@ -109,24 +110,22 @@
     "title": "About Us",
     "who_we_are": {
       "title": "Who We Are",
-      "description": "ATP Investment is a Shariah-compliant investment firm committed to ethical wealth-building by adhering to Islamic financial principles. We focus on halal investments that avoid interest (riba) and unethical businesses."
+      "description": "Founded on February 10-2023, ATPi is a credit bassed & equity gathering investment firm which only deals in 'Halal' ways. ",
+      "des" : "Here we deal with business, not with interest. Making assests & gaining profitwith idle money is the motto. "
     },
     "mission": {
-      "title": "Our Mission",
-      "description": "To provide secure, interest-free investment opportunities that align with Islamic financial ethics while delivering sustainable growth."
+      "title": "Our Mission and Vision",
+      "description": "Making visible assets like land, building, start ups, property etc.Growing our own businesses where we are the master.Investing in other's profitable business."
+      
     },
-    "vision": {
-      "title": "Our Vision",
-      "description": "To be the most trusted Sunnah-based investment firm in Bangladesh, empowering investors with Shariah-compliant financial solutions."
-    },
+    
     "core_values": {
       "title": "Core Values",
       "values": [
         "Integrity",
-        "Ethical Finance",
-        "Transparency",
-        "Risk Sharing",
-        "Long-Term Prosperity"
+        "Faith",
+        "collaboration",
+        "Innovation"
       ]
     }
   },

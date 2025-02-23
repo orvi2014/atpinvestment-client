@@ -27,17 +27,16 @@ export default function About() {
           <section>
             <h2 className="Cardtitle">{t("about.who_we_are.title")}</h2>
             <p className="text-muted-foreground">{t("about.who_we_are.description")}</p>
+            <p className="text-muted-foreground">{t("about.who_we_are.des")}</p>
           </section>
 
           <section>
             <h2 className="Cardtitle">{t("about.mission.title")}</h2>
             <p className="text-muted-foreground">{t("about.mission.description")}</p>
+           
           </section>
 
-          <section>
-            <h2 className="Cardtitle">{t("about.vision.title")}</h2>
-            <p className="text-muted-foreground">{t("about.vision.description")}</p>
-          </section>
+         
 
           <section>
             <h2 className="Cardtitle">{t("about.core_values.title")}</h2>

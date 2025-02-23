@@ -1,63 +1,25 @@
 "use client"
 
-import { useState, useCallback, useEffect } from "react"
-import { useNavigate, useLocation } from "react-router-dom"
+import { useState, useCallback } from "react"
+import { useNavigate, Link } from "react-router-dom"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
-import { X, Upload,ArrowLeft} from "lucide-react"
+import { X, Upload, ChevronLeft } from "lucide-react"
 import { Progress } from "@/components/ui/progress"
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
+import { Card, CardContent, CardTitle } from "@/components/ui/card"
 
 export default function DepositPage() {
   const navigate = useNavigate()
-  const location = useLocation()
 
-  const [investmentOptions, setInvestmentOptions] = useState([])
   const [file, setFile] = useState(null)
   const [uploadProgress, setUploadProgress] = useState(0)
   const [amount, setAmount] = useState("")
   const [errorMessage, setErrorMessage] = useState("")
-  const [isLoading, setIsLoading] = useState(true)
+  const [loading, setLoading] = useState(false)
 
-  useEffect(() => {
-    const fetchProjectDetails = async () => {
-      try {
-        const response = await fetch("https://atpinvestment.onrender.com/api/project/6793a709831479e739e62c94")
-        if (!response.ok) {
-          throw new Error("Failed to fetch project details")
-        }
-        const data = await response.json()
-        console.log("API response:", data)
-
-        if (data.project && data.project.investmentOptions && Array.isArray(data.project.investmentOptions)) {
-          setInvestmentOptions(data.project.investmentOptions)
-          console.log("Investment options set:", data.project.investmentOptions)
-
-          const amountFromState = location.state?.amount?.toString()
-          if (amountFromState && data.project.investmentOptions.includes(Number(amountFromState))) {
-            setAmount(amountFromState)
-          } else if (data.project.investmentOptions.length > 0) {
-            setAmount(data.project.investmentOptions[0].toString())
-          }
-        } else {
-          throw new Error("Invalid investment options data")
-        }
-        setIsLoading(false)
-      } catch (error) {
-        console.error("Error fetching project details:", error)
-        setErrorMessage("Failed to load investment options")
-        setIsLoading(false)
-      }
-    }
-
-    fetchProjectDetails()
-  }, [location.state])
-
-  useEffect(() => {
-    console.log("Current amount:", amount)
-  }, [amount])
+  const investmentOptions = [50, 100, 500, 1000] // Mock investment options
 
   const handleFileChange = useCallback((event) => {
     const selectedFile = event.target.files?.[0]
@@ -82,103 +44,82 @@ export default function DepositPage() {
     }, 200)
   }, [])
 
-  const handleConfirmDeposit = useCallback(async () => {
-    if (!amount) return setErrorMessage("Please select an amount to deposit.")
-    if (!file) return setErrorMessage("Please upload a screenshot of your deposit.")
-
-    try {
-      const formData = new FormData()
-      formData.append("file", file)
-
-      const uploadResponse = await fetch("https://api.imgbb.com/1/upload?key=YOUR_API_KEY", {
-        method: "POST",
-        body: formData,
-      })
-
-      const uploadData = await uploadResponse.json()
-      if (!uploadResponse.ok) throw new Error(uploadData.error.message || "File upload failed.")
-
-      const response = await fetch("https://atpinvestment.onrender.com/api/deposit?file", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ amount: Number.parseFloat(amount), url: uploadData.data.url }),
-      })
-
-      const data = await response.json()
-      if (!response.ok) throw new Error(data.message || "Deposit request failed.")
-
-      alert(`Deposit of $${data.deposit.amount} confirmed!`)
-      navigate("/admin")
-    } catch (error) {
-      setErrorMessage(error.message)
+  const handleDeposit = async () => {
+    if (!amount || !file) {
+      setErrorMessage("Please select an amount and upload a screenshot.");
+      return;
     }
-  }, [amount, file, navigate])
+  
+    setLoading(true);
+    const fileUrl = "https://example.com/assets/image/Frame2085667178.png"; // Replace with actual upload logic
+    const token = localStorage.getItem("token"); // Get the stored token
+  
+    try {
+      const response = await fetch("https://api.atpinvestment.com.bd/api/deposit?file", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          "Authorization": `Bearer ${token}`, // Use the stored token
+        },
+        body: JSON.stringify({
+          amount: parseInt(amount),
+          url: fileUrl,
+        }),
+      });
+  
+      const data = await response.json();
+      if (response.ok) {
+        alert("Deposit successful!");
+        navigate("/");
+      } else {
+        setErrorMessage(data.message || "Deposit failed. Please try again.");
+      }
+    } catch (error) {
+      setErrorMessage("Network error. Please try again later.");
+    } finally {
+      setLoading(false);
+    }
+  };
+  
 
   return (
     <div className="min-h-screen bg-gray-100 py-12 px-4 sm:px-6 lg:px-8">
+      <Link to="/" className="inline-flex items-center text-sm mb-8">
+        <ChevronLeft className="back-button" />
+      </Link>
       <div className="max-w-3xl mx-auto">
-     
         <Card className="shadow-lg">
-        
-            <CardTitle className="text-3xl font-semibold text-left ml-12 mt-12 text-black">Deposit Now</CardTitle>
+          <CardTitle className="text-3xl font-semibold text-left ml-12 mt-12 text-black">Deposit Now</CardTitle>
           <CardContent>
             <div className="space-y-8">
-              
-                
-                  <CardTitle className="text-xl font-semibold flex ml-6 mt-4 items-center">
-                  
-                    Bank Details
-                  </CardTitle>
-                
-                <CardContent>
-                  <div className="grid grid-cols-2 gap-4">
-                    <div className="text-sm font-medium text-muted-foreground">Bank Name</div>
-                    <div className="text-sm">Jemena Bank LTD</div>
-                    <div className="text-sm font-medium text-muted-foreground">Account Number</div>
-                    <div className="text-sm font-mono" title="Feb 495803948t935t76042023">
-                      Feb 495803948t935t76042023
-                    </div>
-                  </div>
-                </CardContent>
-              
+              <CardTitle className="text-xl font-semibold flex ml-6 mt-4 items-center">Bank Details</CardTitle>
+              <CardContent>
+                <div className="grid grid-cols-2 gap-4">
+                  <div className="text-sm font-medium text-muted-foreground">Bank Name</div>
+                  <div className="text-sm">Jemena Bank LTD</div>
+                  <div className="text-sm font-medium text-muted-foreground">Account Number</div>
+                  <div className="text-sm font-mono">Feb 495803948t935t76042023</div>
+                </div>
+              </CardContent>
 
               <div className="space-y-4 ml-6">
-                <Label htmlFor="amount-select" className="text-lg font-semibold flex items-center">
-                 
-                  Deposit Amount (USD) <span className="text-red-500 ml-1">*</span>
-                </Label>
-                {isLoading ? (
-                  <div className="text-muted-foreground">Loading investment options...</div>
-                ) : investmentOptions.length > 0 ? (
-                  <Select
-                    value={amount}
-                    onValueChange={(value) => {
-                      console.log("Selected value:", value)
-                      setAmount(value)
-                    }}
-                    defaultValue={investmentOptions[0]?.toString()}
-                  >
-                    <SelectTrigger id="amount-select" className="w-full">
-                      <SelectValue placeholder="Select amount" />
-                    </SelectTrigger>
-                    <SelectContent>
-                      {investmentOptions.map((option) => (
-                        <SelectItem key={option} value={option.toString()}>
-                          ${option.toLocaleString()}
-                        </SelectItem>
-                      ))}
-                    </SelectContent>
-                  </Select>
-                ) : (
-                  <div className="text-muted-foreground">No investment options available</div>
-                )}
+                <Label htmlFor="amount-select" className="text-lg font-semibold">Deposit Amount (USD)</Label>
+                <Select value={amount} onValueChange={setAmount}>
+                  <SelectTrigger id="amount-select" className="w-full">
+                    <SelectValue placeholder="Select amount" />
+                  </SelectTrigger>
+                  <SelectContent>
+                    {investmentOptions.map((option) => (
+                      <SelectItem key={option} value={option.toString()}>
+                        ${option.toLocaleString()}
+                      </SelectItem>
+                    ))}
+                  </SelectContent>
+                </Select>
               </div>
 
               <div className="space-y-4 ml-6">
-                <Label className="text-lg font-semibold flex items-center ">
-                  
-                  Attach a Screenshot
-                </Label>
+                <Label className="text-lg font-semibold">Attach a Screenshot</Label>
                 <div className="border-2 border-dashed border-gray-300 rounded-lg p-6">
                   <Input
                     type="file"
@@ -194,7 +135,6 @@ export default function DepositPage() {
                     <span className="mt-1 block text-xs text-gray-500">PNG, JPG (Max: 5MB)</span>
                   </Label>
                 </div>
-
                 {file && (
                   <div className="mt-4 p-4 bg-gray-50 rounded-lg">
                     <div className="flex items-center justify-between mb-2">
@@ -211,10 +151,8 @@ export default function DepositPage() {
               {errorMessage && <p className="text-red-500 text-sm mt-2">{errorMessage}</p>}
 
               <div className="flex justify-end space-x-4 mt-8">
-                <Button variant="outline" onClick={() => navigate("/investments/details/:id")}>
-                  Cancel
-                </Button>
-                <Button onClick={handleConfirmDeposit}>Confirm Deposit</Button>
+                <Button variant="outline" onClick={() => navigate("/")}>Cancel</Button>
+                <Button onClick={handleDeposit} disabled={loading}>{loading ? "Processing..." : "Confirm Deposit"}</Button>
               </div>
             </div>
           </CardContent>
@@ -223,4 +161,3 @@ export default function DepositPage() {
     </div>
   )
 }
-

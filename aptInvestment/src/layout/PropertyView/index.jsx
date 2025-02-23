@@ -1,51 +1,53 @@
-import React, { useState, useEffect } from 'react';
-import { useParams } from 'react-router-dom';
-import ImageGallery from '@/components/imageGallery';
-import InvestmentDetails from '@/components/investmentDetails';
-import { ProjectDescription } from '@/components/projectDescription';
-import "./index.css";
+"use client"
+
+import { useState, useEffect } from "react"
+import { useParams } from "react-router-dom"
+import ImageGallery from "@/components/imageGallery"
+import InvestmentDetails from "@/components/investmentDetails"
+import { ProjectDescription } from "@/components/projectDescription"
+import "./index.css"
 
 export default function InvestmentPage() {
-  const [investment, setInvestment] = useState(null);
-  const [loading, setLoading] = useState(true);
-  const { id } = useParams();
+  const [investment, setInvestment] = useState(null)
+  const [loading, setLoading] = useState(true)
+  const { id } = useParams()
 
   useEffect(() => {
     async function fetchInvestment() {
       if (!id) {
-        console.error('Investment ID is missing');
-        setLoading(false);
-        return;
+        console.error("Investment ID is missing")
+        setLoading(false)
+        return
       }
 
       try {
-        const response = await fetch(`https://atpinvestment.onrender.com/api/project/${id}`);
+        const response = await fetch(`https://api.atpinvestment.com.bd/api/project/${id}`)
         if (!response.ok) {
-          throw new Error('Failed to fetch investment data');
+          throw new Error("Failed to fetch investment data")
         }
-        const data = await response.json();
-        
+        const data = await response.json()
+
         if (data.project) {
-          setInvestment(data.project);
+          setInvestment(data.project)
         } else {
-          console.error('Investment not found for ID:', id);
+          console.error("Investment not found for ID:", id)
         }
       } catch (error) {
-        console.error('Error fetching investment:', error);
+        console.error("Error fetching investment:", error)
       } finally {
-        setLoading(false);
+        setLoading(false)
       }
     }
 
-    fetchInvestment();
-  }, [id]);
+    fetchInvestment()
+  }, [id])
 
   if (loading) {
-    return <div className="px-4 py-8">Loading...</div>;
+    return <div className="px-4 py-8">Loading...</div>
   }
 
   if (!investment) {
-    return <div className="px-4 py-8">Investment not found</div>;
+    return <div className="px-4 py-8">Investment not found</div>
   }
 
   return (
@@ -65,7 +67,6 @@ export default function InvestmentPage() {
             roi={investment.roi || 10}
             raisedAmount={investment.raisedAmount}
             raisedPercentage={investment.targetAchieved}
-            investmentOptions={investment.investmentOptions}
           />
         </div>
       </div>
@@ -75,5 +76,6 @@ export default function InvestmentPage() {
         <ProjectDescription description={investment.description || "No description available."} />
       </div>
     </div>
-  );
+  )
 }
+

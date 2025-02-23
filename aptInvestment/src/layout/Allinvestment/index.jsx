@@ -22,7 +22,7 @@ export default function InvestmentsPage() {
   useEffect(() => {
     async function fetchInvestments() {
       try {
-        const response = await fetch("https://atpinvestment.onrender.com/api/project/list");
+        const response = await fetch("https://api.atpinvestment.com.bd/api/project/list");
         const data = await response.json();
         
         if (data.projects) {

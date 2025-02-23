@@ -6,7 +6,7 @@ export default function UsersTable() {
   const [error, setError] = useState(null);
 
   useEffect(() => {
-    fetch("https://atpinvestment.onrender.com/api/auth/users")
+    fetch("https://api.atpinvestment.com.bd/api/auth/users")
       .then((response) => {
         if (!response.ok) {
           throw new Error("Failed to fetch users");
@@ -29,7 +29,7 @@ export default function UsersTable() {
   
     try {
       const response = await fetch(
-        `https://atpinvestment.onrender.com/api/api/v1/accounts/${_id}`,
+        `https://api.atpinvestment.com.bd/api/api/v1/accounts/${_id}`,
         { method: "DELETE" }
       );
   

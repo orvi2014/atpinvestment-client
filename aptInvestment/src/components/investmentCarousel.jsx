@@ -15,7 +15,7 @@ export default function InvestmentCarousel() {
   useEffect(() => {
     async function fetchInvestments() {
       try {
-        const response = await fetch('https://atpinvestment.onrender.com/api/project/list');
+        const response = await fetch('https://api.atpinvestment.com.bd/api/project/list');
         if (!response.ok) throw new Error(`Failed to fetch: ${response.statusText}`);
 
         const data = await response.json();
