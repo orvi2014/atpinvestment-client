@@ -11,6 +11,8 @@ import ProjectsTable from "../../components/projectsTable"
 import "./index.css"
 import DepositTable from "@/components/depositeTable"
 import BankDetails from "@/components/bankDetails"
+import DiscountTable from "@/components/discountTable"
+import ExpenseTable from "@/components/expenseTable"
 
 export default function Layout() {
   const [activeTab, setActiveTab] = useState("users")
@@ -84,6 +86,35 @@ export default function Layout() {
             {activeTab === "projects" && <ProjectsTable fetchTrigger={fetchTrigger} />}
             {activeTab === "deposite" && <DepositTable />}
             {activeTab === "bank" && <BankDetails />}
+            {activeTab === "discount" && (
+              <div className="w-full">
+                <div className="flex justify-between items-center mb-4">
+                  <h2 className="text-2xl font-bold">Discounts</h2>
+                  <Button
+                    className="bg-blue-500 hover:bg-blue-600 text-white"
+                    onClick={() => navigate("/admin/discount/create")}
+                  >
+                    + Add Discount
+                  </Button>
+                </div>
+                <div className="mt-10"></div>
+                <DiscountTable />
+              </div>
+            )}
+            {activeTab === "expenses" && (
+              <div className="w-full">
+                <div className="flex justify-between items-center mb-4">
+                  <h2 className="text-2xl font-bold">Expenses</h2>
+                  <Button
+                    className="bg-blue-500 hover:bg-blue-600 text-white"
+                    onClick={() => navigate("/admin/expense/create")}
+                  >
+                    + Add Expense
+                  </Button>
+                </div>
+                <ExpenseTable />
+              </div>
+            )}
           </div>
         </main>
       </div>

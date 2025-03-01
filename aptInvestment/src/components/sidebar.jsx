@@ -1,4 +1,4 @@
-import { Users, FolderKanban, Gift, CreditCard, X, Wallet, Landmark } from "lucide-react"
+import { Users, FolderKanban, Gift, CreditCard, X, Wallet, Landmark,TicketPercent } from "lucide-react"
 import { Button } from "@/components/ui/button"
 
 const tabs = [
@@ -9,6 +9,7 @@ const tabs = [
   { name: "Deposite", icon: CreditCard },
   { name: "Expenses", icon: Wallet },
   { name: "Bank", icon: Landmark },
+  { name: "Discount", icon: TicketPercent },
 ]
 
 export default function Sidebar({ open, setOpen, onTabChange, activeTab, setFetchTrigger }) {

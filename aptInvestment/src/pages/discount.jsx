@@ -1,12 +1,12 @@
-import "../layout/CreateProject/index.css"
-import CreateProject from "../layout/CreateProject"
+import "../layout/Discount/index.css"
+import Discount from "../layout/Discount"
 import logo from "../assets/image/logo.png"
 import { ChevronLeft } from "lucide-react"
 import { Link } from "react-router-dom"
 
-const ProjectLayout = ({ children }) => {
+const discountform = ({ children }) => {
   return (
-    <div className="project-layout bg-background p-6">
+    <div className="discount-layout bg-background p-6">
       <div className="flex flex-col items-start gap-4 mb-8">
       <Link to="/admin/dashboard" className="inline-flex items-center text-sm mb-8">
             <ChevronLeft className="back-button" />
@@ -17,12 +17,13 @@ const ProjectLayout = ({ children }) => {
           <span className="company font-bold text-2xl">Aim To Prosperity</span>
         </div>
       </div>
-      <main className="project-main">
-        <CreateProject />
+      <main className="discount-main bg-transparent">
+          <Discount />
       </main>
+
     </div>
   )
 }
 
-export default ProjectLayout
+export default discountform
 
