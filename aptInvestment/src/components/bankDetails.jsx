@@ -6,6 +6,7 @@ import { Card, CardContent, CardHeader, CardTitle, CardFooter } from "@/componen
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { Loader2, Save, PlusCircle, RefreshCw } from "lucide-react"
+import { showToast } from "@/components/utility/showtoaster" // Import showToast function
 
 export default function BankDetails() {
   const [bankInfo, setBankInfo] = useState(null)
@@ -52,13 +53,14 @@ export default function BankDetails() {
       })
       const data = await response.json()
       if (response.ok) {
-        alert(data.message)
+        showToast(data.message, "success") // Show success toast
         fetchBankDetails() // Refresh bank details
       } else {
         throw new Error(data.message || `Failed to ${action} bank details`)
       }
     } catch (err) {
       setError(err.message)
+      showToast(err.message, "error") // Show error toast
     } finally {
       setLoading(false)
     }
@@ -138,4 +140,3 @@ export default function BankDetails() {
     </Card>
   )
 }
-
