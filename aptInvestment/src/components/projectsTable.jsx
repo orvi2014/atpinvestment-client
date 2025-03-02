@@ -4,6 +4,8 @@ export default function ProjectsTable({ fetchTrigger }) {
   const [projects, setProjects] = useState([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
+  const [modalOpen, setModalOpen] = useState(false);
+  const [selectedProjectId, setSelectedProjectId] = useState(null);
 
   useEffect(() => {
     if (fetchTrigger) {
@@ -32,25 +34,23 @@ export default function ProjectsTable({ fetchTrigger }) {
       });
   };
 
-  const handleEdit = (projectId) => {
-    alert(`Edit project: ${projectId}`);
+  const handleDeleteClick = (projectId) => {
+    setSelectedProjectId(projectId);
+    setModalOpen(true);
   };
 
-  const handleDelete = async (projectId) => {
-    const confirmDelete = window.confirm("Are you sure you want to delete this project?");
-    if (!confirmDelete) return;
-
+  const confirmDelete = async () => {
+    if (!selectedProjectId) return;
     try {
-      const response = await fetch(`https://api.atpinvestment.com.bd/api/project/${projectId}`, {
+      const response = await fetch(`https://api.atpinvestment.com.bd/api/project/${selectedProjectId}`, {
         method: "DELETE",
       });
-
       if (!response.ok) {
         throw new Error("Failed to delete project");
       }
-
-      // Remove project from state
-      setProjects(projects.filter((project) => project._id !== projectId));
+      setProjects(projects.filter((project) => project._id !== selectedProjectId));
+      setModalOpen(false);
+      setSelectedProjectId(null);
     } catch (error) {
       alert(error.message);
     }
@@ -60,7 +60,6 @@ export default function ProjectsTable({ fetchTrigger }) {
     <div className="p-4">
       {loading && <p className="text-center">Loading projects...</p>}
       {error && <p className="text-center text-red-500">{error}</p>}
-
       {!loading && !error && projects.length > 0 && (
         <div className="overflow-x-auto bg-white rounded-lg p-4">
           <table className="w-full border-collapse border border-gray-300 text-xs md:text-base">
@@ -72,18 +71,12 @@ export default function ProjectsTable({ fetchTrigger }) {
                 <th className="border px-2 py-2 md:px-4">Raised</th>
                 <th className="border px-2 py-2 md:px-4">Target (%)</th>
                 <th className="border px-2 py-2 md:px-4">Location</th>
-                <th className="border px-2 py-2 md:px-4">Edit</th>
                 <th className="border px-2 py-2 md:px-4">Delete</th>
               </tr>
             </thead>
             <tbody>
               {projects.map((project, index) => (
-                <tr
-                  key={project._id}
-                  className={`${
-                    index % 2 === 0 ? "bg-gray-100" : "bg-white"
-                  } text-xs md:text-base`}
-                >
+                <tr key={project._id} className={`${index % 2 === 0 ? "bg-gray-100" : "bg-white"} text-xs md:text-base`}>
                   <td className="border px-2 py-2 md:px-4">{project.title}</td>
                   <td className="border px-2 py-2 md:px-4">{project.price}</td>
                   <td className="border px-2 py-2 md:px-4">{project.roi}</td>
@@ -91,18 +84,7 @@ export default function ProjectsTable({ fetchTrigger }) {
                   <td className="border px-2 py-2 md:px-4">{project.targetAchieved}%</td>
                   <td className="border px-2 py-2 md:px-4">{project.location}</td>
                   <td className="border px-2 py-2 md:px-4 text-center">
-                    <button
-                      onClick={() => handleEdit(project._id)}
-                      className="text-blue-500 hover:underline"
-                    >
-                      Edit
-                    </button>
-                  </td>
-                  <td className="border px-2 py-2 md:px-4 text-center">
-                    <button
-                      onClick={() => handleDelete(project._id)}
-                      className="text-red-500 hover:underline"
-                    >
+                    <button onClick={() => handleDeleteClick(project._id)} className="text-red-500 hover:underline">
                       Delete
                     </button>
                   </td>
@@ -113,8 +95,18 @@ export default function ProjectsTable({ fetchTrigger }) {
         </div>
       )}
 
-      {!loading && !error && projects.length === 0 && (
-        <p className="text-center">No projects found.</p>
+      {!loading && !error && projects.length === 0 && <p className="text-center">No projects found.</p>}
+
+      {modalOpen && (
+        <div className="fixed inset-0 flex items-center justify-center bg-gray-800 bg-opacity-50">
+          <div className="bg-white p-6 rounded-lg shadow-lg">
+            <p className="mb-4">Are you sure you want to delete this project?</p>
+            <div className="flex justify-end space-x-4">
+              <button onClick={() => setModalOpen(false)} className="px-4 py-2 bg-gray-300 rounded">Cancel</button>
+              <button onClick={confirmDelete} className="px-4 py-2 bg-red-500 text-white rounded">OK</button>
+            </div>
+          </div>
+        </div>
       )}
     </div>
   );

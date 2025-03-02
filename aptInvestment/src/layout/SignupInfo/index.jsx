@@ -1,42 +1,40 @@
-"use client"
+"use client";
 
-import { useState, useEffect } from "react"
-import { useNavigate } from "react-router-dom"
-import { Button } from "@/components/ui/button"
-import { Input } from "@/components/ui/input"
-import { Label } from "@/components/ui/label"
-import PromotionalSection from "../../components/promotionalSection.jsx"
-import { useTranslation } from "react-i18next"
-import logo from "../../assets/image/logo.png"
-import { ChevronLeft } from "lucide-react"
-import { Link } from "react-router-dom"
-import "./index.css"
+import { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import PromotionalSection from "../../components/promotionalSection.jsx";
+import { useTranslation } from "react-i18next";
+import logo from "../../assets/image/logo.png";
+import { ChevronLeft } from "lucide-react";
+import { Link } from "react-router-dom";
+import { showToast } from "@/components/utility/showToaster.jsx";
+import "./index.css";
 
 const SignUpForm = () => {
-  const { t } = useTranslation()
-  const navigate = useNavigate()
+  const { t } = useTranslation();
+  const navigate = useNavigate();
   const [formData, setFormData] = useState({
     customerId: "",
     fullname: "",
     email: "",
     password: "",
-  })
-  const [errorMessage, setErrorMessage] = useState("")
-  const [successMessage, setSuccessMessage] = useState("")
-  const [emailValid, setEmailValid] = useState(true)
+  });
+  const [loading, setLoading] = useState(false); // Button loading state
 
   useEffect(() => {
-    const customerId = `iv${Math.floor(Math.random() * 100000)}`
+    const customerId = `iv${Math.floor(Math.random() * 100000)}`;
     setFormData((prev) => ({
       ...prev,
       customerId,
-    }))
-  }, [])
+    }));
+  }, []);
 
   const handleSignup = async (e) => {
-    e.preventDefault()
-    setErrorMessage("")
-    setSuccessMessage("")
+    e.preventDefault();
+    setLoading(true);
 
     try {
       const response = await fetch("https://api.atpinvestment.com.bd/api/auth/signup", {
@@ -48,32 +46,33 @@ const SignUpForm = () => {
           email: formData.email,
           password: formData.password,
         }),
-      })
+      });
 
-      const data = await response.json()
-      console.log("Response Status:", response.status)
-      console.log("Response Data:", data)
+      const data = await response.json();
+      console.log("Response Status:", response.status);
+      console.log("Response Data:", data);
 
       if (response.ok) {
-        setSuccessMessage(data.message)
-        // Pass the email to the verification page
-        navigate("/signup/verify/OTP", { state: { email: formData.email } })
+        showToast(data.message, "success");
+        navigate("/signup/verify/OTP", { state: { email: formData.email } });
       } else {
-        setErrorMessage(data.message || "Signup failed.")
+        showToast(data.message || "Signup failed. Please try again.", "error");
       }
     } catch (error) {
-      console.error("Network Error:", error)
-      setErrorMessage("Network error. Please try again later.")
+      console.error("Network Error:", error);
+      showToast("Network error. Please check your connection and try again.", "error");
+    } finally {
+      setLoading(false);
     }
-  }
+  };
 
   const handleChange = (e) => {
-    const { name, value } = e.target
+    const { name, value } = e.target;
     setFormData((prev) => ({
       ...prev,
       [name]: value,
-    }))
-  }
+    }));
+  };
 
   return (
     <div className="flex min-h-screen">
@@ -119,10 +118,9 @@ const SignUpForm = () => {
                   placeholder={t("emailPlaceholder")}
                   value={formData.email}
                   onChange={handleChange}
-                  className={`w-full h-11 sm:h-12 ${!emailValid ? "border-red-500 focus:border-red-500" : ""}`}
                   required
+                  className="w-full h-11 sm:h-12"
                 />
-                {!emailValid && <p className="text-red-500 text-sm mt-1">{t("invalidEmail")}</p>}
               </div>
 
               <div className="space-y-2">
@@ -142,12 +140,14 @@ const SignUpForm = () => {
               </div>
             </div>
 
-            <Button type="submit" className="w-full h-11 sm:h-12 bg-blue-500 hover:bg-blue-600 text-white">
-              {t("finishSignUp")}
+            {/* Finish Sign Up Button */}
+            <Button
+              type="submit"
+              className="w-full h-11 sm:h-12 bg-blue-500 hover:bg-blue-600 text-white"
+              disabled={loading}
+            >
+              {loading ? t("signingUp") : t("finishSignUp")}
             </Button>
-
-            {errorMessage && <p className="text-red-500 text-sm mt-4">{errorMessage}</p>}
-            {successMessage && <p className="text-green-500 text-sm mt-4">{successMessage}</p>}
           </form>
         </div>
       </div>
@@ -156,8 +156,7 @@ const SignUpForm = () => {
         <PromotionalSection />
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default SignUpForm
-
+export default SignUpForm;

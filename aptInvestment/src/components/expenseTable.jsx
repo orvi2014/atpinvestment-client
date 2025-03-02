@@ -2,11 +2,7 @@ import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@
 import { Button } from "@/components/ui/button"
 
 const expenses = [
-  { id: 1, description: "Office Rent", amount: 2000, date: "2023-05-01", category: "Rent" },
-  { id: 2, description: "Utilities", amount: 500, date: "2023-05-05", category: "Utilities" },
-  { id: 3, description: "Office Supplies", amount: 300, date: "2023-05-10", category: "Supplies" },
-  { id: 4, description: "Employee Salaries", amount: 10000, date: "2023-05-15", category: "Salaries" },
-  { id: 5, description: "Marketing Campaign", amount: 1500, date: "2023-05-20", category: "Marketing" },
+  
 ]
 
 export default function ExpenseTable() {

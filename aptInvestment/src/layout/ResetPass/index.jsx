@@ -6,6 +6,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { useTranslation } from "react-i18next";
+import { showToast } from "@/components/utility/showtoaster"; // Import showToast function
 
 const ResetPassword = () => {
   const { t } = useTranslation();
@@ -53,14 +54,17 @@ const ResetPassword = () => {
       const data = await response.json();
 
       if (response.ok) {
-        window.alert(t("passwordResetSuccess"));
+        // Replace window.alert with showToast
+        showToast(t("passwordResetSuccess"), "success");
         navigate("/"); // Redirect to sign-in page after reset
       } else {
         setError(data.error || t("passwordResetFailed"));
+        showToast(data.error || t("passwordResetFailed"), "error"); // Show error toast
       }
     } catch (err) {
       console.error("Reset password error:", err);
       setError(t("networkError"));
+      showToast(t("networkError"), "error"); // Show error toast
     }
     setLoading(false);
   };

@@ -1,7 +1,8 @@
-"use client"
+"use client";
 
 import { useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
+import { toast } from "react-hot-toast";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -9,19 +10,18 @@ import PromotionalSection from "@/components/promotionalSection.jsx";
 import { useTranslation } from "react-i18next";
 import logo from "../../assets/image/logo.png";
 import { ChevronLeft } from "lucide-react";
+import {showToast} from "@/components/utility/showToaster";
+
 
 const SignIn = () => {
   const { t } = useTranslation();
   const navigate = useNavigate();
-  
+
   const [formData, setFormData] = useState({ email: "", password: "" });
-  const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
   const [emailValid, setEmailValid] = useState(true);
   
   const [resetEmail, setResetEmail] = useState("");
-  const [resetError, setResetError] = useState("");
-  const [resetSuccess, setResetSuccess] = useState("");
   const [resetLoading, setResetLoading] = useState(false);
   const [showResetModal, setShowResetModal] = useState(false);
 
@@ -31,12 +31,11 @@ const SignIn = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    setError("");
     setLoading(true);
 
     if (!/\S+@\S+\.\S+/.test(formData.email)) {
       setEmailValid(false);
-      setError(t("invalidEmail"));
+      showToast(t("invalidEmail"), "error"); // Using showToast for error
       setLoading(false);
       return;
     }
@@ -54,46 +53,44 @@ const SignIn = () => {
 
       if (response.ok) {
         localStorage.setItem("token", data.token);
-        window.alert(t("loginSuccessful"));
+        showToast(t("loginSuccessful"), "success"); // Using showToast for success
         navigate("/investment/all");
       } else {
-        setError(data.message || t("loginFailed"));
+        showToast(data.message || t("loginFailed"), "error");
       }
     } catch (err) {
-      setError(t("networkError"));
+      showToast(t("networkError"), "error");
     }
     setLoading(false);
   };
+;
 
   const handleForgotPassword = async (e) => {
     e.preventDefault();
-    setResetError("");
-    setResetSuccess("");
     setResetLoading(true);
-  
+
     try {
       const response = await fetch("https://atpinvestment.onrender.com/api/auth/forgot-password", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ email: resetEmail }),
       });
-  
+
       const data = await response.json();
-  
+
       if (response.ok) {
-        setResetSuccess(data.message);
+        toast.success(data.message);
         setTimeout(() => {
           navigate(`/password/reset?email=${encodeURIComponent(resetEmail)}`);
-        }, 2000); // Redirect after 2 seconds to show success message
+        }, 2000);
       } else {
-        setResetError(data.message || t("resetFailed"));
+        toast.error(data.message || t("resetFailed"));
       }
     } catch (err) {
-      setResetError(t("networkError"));
+      toast.error(t("networkError"));
     }
     setResetLoading(false);
   };
-  
 
   return (
     <div className="flex min-h-screen">
@@ -147,8 +144,6 @@ const SignIn = () => {
             <Button type="submit" className="w-full bg-blue-500 text-white" disabled={loading}>
               {loading ? t("signingIn") : t("signIn")}
             </Button>
-
-            {error && <p className="text-red-500 text-sm">{error}</p>}
           </form>
         </div>
       </div>
@@ -170,8 +165,6 @@ const SignIn = () => {
                 onChange={(e) => setResetEmail(e.target.value)}
                 required
               />
-              {resetError && <p className="text-red-500 text-sm">{resetError}</p>}
-              {resetSuccess && <p className="text-green-500 text-sm">{resetSuccess}</p>}
               <Button type="submit" className="w-full bg-blue-500 text-white" disabled={resetLoading}>
                 {resetLoading ? t("sending") : t("sendResetLink")}
               </Button>

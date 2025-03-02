@@ -2,9 +2,7 @@ import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@
 import { Button } from "@/components/ui/button"
 
 const discounts = [
-  { id: 1, name: "Summer Sale", code: "SUMMER20", percentage: 20, startDate: "2023-06-01", endDate: "2023-08-31" },
-  { id: 2, name: "New User", code: "NEWUSER10", percentage: 10, startDate: "2023-01-01", endDate: "2023-12-31" },
-  { id: 3, name: "Holiday Special", code: "HOLIDAY15", percentage: 15, startDate: "2023-12-01", endDate: "2023-12-25" },
+  
 ]
 
 export default function DiscountTable() {

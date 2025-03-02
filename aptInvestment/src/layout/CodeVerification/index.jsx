@@ -1,60 +1,57 @@
-"use client"
+"use client";
 
-import { useState, useEffect } from "react"
-import { Button } from "@/components/ui/button"
-import { Input } from "@/components/ui/input"
-import { Link, useNavigate, useLocation } from "react-router-dom"
-import { ArrowLeft } from "lucide-react"
-import logo from "../../assets/image/logo.png"
-import PromotionalSection from "../../components/promotionalSection.jsx"
-import { useTranslation } from "react-i18next"
-import "./index.css"
+import { useState, useEffect } from "react";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { Link, useNavigate, useLocation } from "react-router-dom";
+import { ArrowLeft } from "lucide-react";
+import logo from "../../assets/image/logo.png";
+import PromotionalSection from "../../components/promotionalSection.jsx";
+import { useTranslation } from "react-i18next";
+import { showToast } from "../../components/utility/showToaster"; // Importing showToast
+import "./index.css";
 
 const VerificationCode = () => {
-  const [code, setCode] = useState(["", "", "", "", "", ""])
-  const { t, i18n } = useTranslation()
-  const [language, setLanguage] = useState(localStorage.getItem("lang") || "en")
-  const navigate = useNavigate()
-  const location = useLocation()
-  const [error, setError] = useState("")
-  const [email, setEmail] = useState("")
+  const [code, setCode] = useState(["", "", "", "", "", ""]);
+  const { t, i18n } = useTranslation();
+  const [language, setLanguage] = useState(localStorage.getItem("lang") || "en");
+  const navigate = useNavigate();
+  const location = useLocation();
+  const [email, setEmail] = useState("");
 
   useEffect(() => {
-    i18n.changeLanguage(language)
-    // Get the email from the location state
-    const emailFromState = location.state?.email
+    i18n.changeLanguage(language);
+    const emailFromState = location.state?.email;
     if (emailFromState) {
-      setEmail(emailFromState)
+      setEmail(emailFromState);
     } else {
-      // If email is not in state, redirect back to signup or handle appropriately
-      console.error("Email not provided")
-      navigate("/signup")
+      console.error("Email not provided");
+      navigate("/signup");
     }
-  }, [language, i18n, location.state, navigate])
+  }, [language, i18n, location.state, navigate]);
 
   const changeLanguage = (lang) => {
-    i18n.changeLanguage(lang)
-    setLanguage(lang)
-    localStorage.setItem("lang", lang)
-  }
+    i18n.changeLanguage(lang);
+    setLanguage(lang);
+    localStorage.setItem("lang", lang);
+  };
 
   const handleChange = (index, value) => {
     if (value.length <= 1 && /^\d*$/.test(value)) {
-      const newCode = [...code]
-      newCode[index] = value
-      setCode(newCode)
+      const newCode = [...code];
+      newCode[index] = value;
+      setCode(newCode);
 
-      // Auto-focus next input
       if (value && index < code.length - 1) {
-        const nextInput = document.querySelector(`input[name="code-${index + 1}"]`)
-        nextInput?.focus()
+        const nextInput = document.querySelector(`input[name="code-${index + 1}"]`);
+        nextInput?.focus();
       }
     }
-  }
+  };
 
   const handleVerify = async () => {
-    const verificationCode = code.join("")
-    if (verificationCode.length === code.length) {
+    const verificationCode = code.join("");
+    if (verificationCode.length === 6) {
       try {
         const response = await fetch("https://atpinvestment.onrender.com/api/auth/verify-otp", {
           method: "POST",
@@ -65,29 +62,47 @@ const VerificationCode = () => {
             email: email,
             otp: verificationCode,
           }),
-        })
+        });
 
-        const data = await response.json()
+        const data = await response.json();
 
         if (response.ok) {
-          console.log("OTP verified successfully")
-          navigate("/") // Redirect to dashboard or appropriate page after successful verification
+          showToast("OTP verified successfully!", "success");
+          navigate("/"); // Redirect to dashboard or appropriate page
         } else {
-          setError(data.message || "Invalid OTP. Please try again.")
+          showToast(data.message || "Invalid OTP. Please try again.", "error");
         }
       } catch (error) {
-        console.error("Error verifying OTP:", error)
-        setError("An error occurred. Please try again.")
+        console.error("Error verifying OTP:", error);
+        showToast("An error occurred. Please try again.", "error");
       }
     } else {
-      setError("Please enter a complete 6-digit code.")
+      showToast("Please enter a complete 6-digit code.", "error");
     }
-  }
+  };
 
-  const handleResend = () => {
-    // Add your logic to resend the verification code here
-    console.log("Resending code...")
-  }
+  const handleResend = async () => {
+    try {
+      const response = await fetch("https://atpinvestment.onrender.com/api/auth/resend-otp", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ email }),
+      });
+
+      const data = await response.json();
+
+      if (response.ok) {
+        showToast("Verification code resent successfully!", "success");
+      } else {
+        showToast(data.message || "Failed to resend OTP. Try again later.", "error");
+      }
+    } catch (error) {
+      console.error("Error resending OTP:", error);
+      showToast("Network error. Please try again later.", "error");
+    }
+  };
 
   return (
     <div className="flex flex-col lg:flex-row w-full min-h-screen">
@@ -125,7 +140,7 @@ const VerificationCode = () => {
             />
           ))}
         </div>
-        {error && <p className="text-red-500 text-sm mt-2 mb-4">{error}</p>}
+
         <Button className="w-full mb-4 verify-button rounded-[20px]" onClick={handleVerify}>
           {t("Verify")}
         </Button>
@@ -148,8 +163,7 @@ const VerificationCode = () => {
         <PromotionalSection />
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default VerificationCode
-
+export default VerificationCode;
