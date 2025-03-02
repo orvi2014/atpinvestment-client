@@ -53,10 +53,12 @@ const SignIn = () => {
 
       if (response.ok) {
         localStorage.setItem("token", data.token);
-        showToast(t("loginSuccessful"), "success"); // Using showToast for success
+        showToast(t("Login Successful"), "success", {
+          style: { minWidth: "40vh", maxWidth: "60vh", textAlign: "center" },
+        });        
         navigate("/investment/all");
       } else {
-        showToast(data.message || t("loginFailed"), "error");
+        showToast(data.message || t("Login Failed"), "error");
       }
     } catch (err) {
       showToast(t("networkError"), "error");
