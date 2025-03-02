@@ -53,7 +53,7 @@ export default function BankDetails() {
       })
       const data = await response.json()
       if (response.ok) {
-        showToast(data.message, "success") // Show success toast
+        showToast(data.message, "Success") // Show success toast
         fetchBankDetails() // Refresh bank details
       } else {
         throw new Error(data.message || `Failed to ${action} bank details`)

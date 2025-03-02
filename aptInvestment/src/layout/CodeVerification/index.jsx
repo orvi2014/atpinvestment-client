@@ -67,7 +67,7 @@ const VerificationCode = () => {
         const data = await response.json();
 
         if (response.ok) {
-          showToast("OTP verified successfully!", "success");
+          showToast("OTP verified successfully!", "Success");
           navigate("/"); // Redirect to dashboard or appropriate page
         } else {
           showToast(data.message || "Invalid OTP. Please try again.", "error");

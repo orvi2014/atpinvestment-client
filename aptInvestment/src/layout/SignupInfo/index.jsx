@@ -53,10 +53,10 @@ const SignUpForm = () => {
       console.log("Response Data:", data);
 
       if (response.ok) {
-        showToast(data.message, "success");
+        showToast(data.message, "Success");
         navigate("/signup/verify/OTP", { state: { email: formData.email } });
       } else {
-        showToast(data.message || "Signup failed. Please try again.", "error");
+        showToast(data.message || "Signup Failed. Please try again.", "error");
       }
     } catch (error) {
       console.error("Network Error:", error);
