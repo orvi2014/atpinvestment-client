@@ -30,12 +30,12 @@ jobs:
 
       # 4. Install dependencies
       - name: Install Dependencies
-        working-directory: ./main
+        working-directory: main
         run: npm ci
 
       # 5. Clean and Build Production Server
       - name: Clean and Build Production Server
-        working-directory: ./main
+        working-directory: main
         run: |
           export NODE_OPTIONS="--max-old-space-size=4096"
           rm -rf dist
