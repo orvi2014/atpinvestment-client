@@ -3,7 +3,7 @@ name: Deploy Agency Handy Web App to Production
 on:
   push:
     branches:
-      - master
+      - main
 
 jobs:
   deploy:
@@ -13,7 +13,7 @@ jobs:
       - name: Checkout Code
         uses: actions/checkout@v3
 
-      # 2. Cache npm dependencies
+      # 2. Cache npm dependencies.
       - name: Cache npm Dependencies
         uses: actions/cache@v3
         with:
@@ -32,7 +32,7 @@ jobs:
       # 4. Install dependencies
       - name: Install Dependencies
         run: |
-          cd main
+          cd atpInvestment
           npm ci
 
       # 5. Clean and Build Production Server
@@ -54,7 +54,7 @@ jobs:
       # 7. Deploy Static Assets to S3
       - name: Deploy Static Assets to S3
         run: |
-          aws s3 sync ./main/dist/ s3://atpinvestment.com.bd/ \
+          aws s3 sync ./aptinvestment/dist/ s3://atpinvestment.com.bd/ \
             --exclude "index.html" \
             --cache-control "max-age=31536000, public" \
             --delete
