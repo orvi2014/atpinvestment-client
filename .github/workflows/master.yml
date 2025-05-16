@@ -34,6 +34,15 @@ jobs:
           git log -1
           echo "Git show:"
           git show
+          echo "Checking if we're in the right directory:"
+          if [ "$(pwd)" = "/home/runner/work/atpinvestment-client/atpinvestment-client" ]; then
+            echo "We are in the correct directory"
+          else
+            echo "We are in the wrong directory"
+            cd /home/runner/work/atpinvestment-client/atpinvestment-client
+            echo "Changed to correct directory: $(pwd)"
+            ls -la
+          fi
 
       # 3. Cache npm dependencies.
       - name: Cache npm Dependencies
@@ -53,6 +62,7 @@ jobs:
       # 5. Install dependencies
       - name: Install Dependencies
         run: |
+          cd /home/runner/work/atpinvestment-client/atpinvestment-client
           echo "Searching for package.json..."
           find . -type f -name "package.json"
           echo "Searching for package-lock.json..."
@@ -74,6 +84,7 @@ jobs:
       # 6. Clean and Build Production Server
       - name: Clean and Build Production Server
         run: |
+          cd /home/runner/work/atpinvestment-client/atpinvestment-client
           PACKAGE_JSON=$(find . -type f -name "package.json" -not -path "*/node_modules/*" -not -path "*/dist/*" | head -n 1)
           PROJECT_DIR=$(dirname "$PACKAGE_JSON")
           cd "$PROJECT_DIR"
@@ -92,6 +103,7 @@ jobs:
       # 8. Deploy Static Assets to S3
       - name: Deploy Static Assets to S3
         run: |
+          cd /home/runner/work/atpinvestment-client/atpinvestment-client
           PACKAGE_JSON=$(find . -type f -name "package.json" -not -path "*/node_modules/*" -not -path "*/dist/*" | head -n 1)
           PROJECT_DIR=$(dirname "$PACKAGE_JSON")
           aws s3 sync "$PROJECT_DIR/dist/" s3://atpinvestment.com.bd/ \
@@ -102,6 +114,7 @@ jobs:
       # 9. Deploy Index.html with No Cache
       - name: Deploy index.html to S3
         run: |
+          cd /home/runner/work/atpinvestment-client/atpinvestment-client
           PACKAGE_JSON=$(find . -type f -name "package.json" -not -path "*/node_modules/*" -not -path "*/dist/*" | head -n 1)
           PROJECT_DIR=$(dirname "$PACKAGE_JSON")
           aws s3 cp "$PROJECT_DIR/dist/index.html" s3://atpinvestment.com.bd/index.html \
