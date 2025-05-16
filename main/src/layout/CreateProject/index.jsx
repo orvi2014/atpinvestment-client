@@ -7,7 +7,7 @@ import { Input } from "@/components/ui/input"
 import { Button } from "@/components/ui/button"
 import { Label } from "@/components/ui/label"
 import { Textarea } from "@/components/ui/textarea"
-import { showToast } from "@/components/utility/showtoaster"
+import { showToast } from "@/components/utility/showToaster"
 
 export default function CreateProject() {
   const [formData, setFormData] = useState({

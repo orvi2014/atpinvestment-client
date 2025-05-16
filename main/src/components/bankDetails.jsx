@@ -6,7 +6,7 @@ import { Card, CardContent, CardHeader, CardTitle, CardFooter } from "@/componen
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { Loader2, Save, PlusCircle, RefreshCw } from "lucide-react"
-import { showToast } from "@/components/utility/showtoaster" // Import showToast function
+import { showToast } from "@/components/utility/showToaster" // Import showToast function
 
 export default function BankDetails() {
   const [bankInfo, setBankInfo] = useState(null)
