@@ -1,0 +1,76 @@
+name: Deploy Agency Handy Web App to Production
+
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      # 1. Checkout the code
+      - name: Checkout Code
+        uses: actions/checkout@v3
+
+      # 2. Cache npm dependencies
+      - name: Cache npm Dependencies
+        uses: actions/cache@v3
+        with:
+          path: ~/.npm
+          key: ${{ runner.os }}-npm-${{ hashFiles('**/package-lock.json') 
+}}
+          restore-keys: |
+            ${{ runner.os }}-npm-
+
+      # 3. Set up Node.js
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: 18
+
+      # 4. Install dependencies
+      - name: Install Dependencies
+        run: |
+          cd main
+          npm ci
+
+      # 5. Clean and Build Production Server
+      - name: Clean and Build Production Server
+        run: |
+          export NODE_OPTIONS="--max-old-space-size=4096"
+          cd main
+          rm -rf dist
+          npm run prod:build
+
+      # 6. Configure AWS Credentials
+      - name: Configure AWS Credentials
+        uses: aws-actions/configure-aws-credentials@v2
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: ${{ secrets.AWS_REGION }}
+
+      # 7. Deploy Static Assets to S3
+      - name: Deploy Static Assets to S3
+        run: |
+          aws s3 sync ./main/dist/ s3://atpinvestment.com.bd/ \
+            --exclude "index.html" \
+            --cache-control "max-age=31536000, public" \
+            --delete
+
+      # 8. Deploy Index.html with No Cache
+      - name: Deploy index.html to S3
+        run: |
+          aws s3 cp ./main/dist/index.html 
+s3://agencyhandy-production/index.html \
+            --cache-control "max-age=0, no-cache, no-store, 
+must-revalidate"
+
+      # 9. Invalidate CloudFront Cache
+      - name: Invalidate CloudFront Cache
+        run: |
+          aws cloudfront create-invalidation \
+            --distribution-id ${{ secrets.DISTRIBUTION_PROD_ID }} \
+            --paths "/*"
+
