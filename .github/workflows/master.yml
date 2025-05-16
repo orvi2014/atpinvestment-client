@@ -34,22 +34,13 @@ jobs:
           git log -1
           echo "Git show:"
           git show
-          echo "Checking if we're in the right directory:"
-          if [ "$(pwd)" = "/home/runner/work/atpinvestment-client/atpinvestment-client" ]; then
-            echo "We are in the correct directory"
-          else
-            echo "We are in the wrong directory"
-            cd /home/runner/work/atpinvestment-client/atpinvestment-client
-            echo "Changed to correct directory: $(pwd)"
-            ls -la
-          fi
 
       # 3. Cache npm dependencies.
       - name: Cache npm Dependencies
         uses: actions/cache@v3
         with:
           path: ~/.npm
-          key: ${{ runner.os }}-npm-${{ hashFiles('**/package-lock.json') }}
+          key: ${{ runner.os }}-npm-${{ hashFiles('main/package-lock.json') }}
           restore-keys: |
             ${{ runner.os }}-npm-
 
@@ -65,22 +56,11 @@ jobs:
           echo "Current directory: $(pwd)"
           echo "Listing all directories:"
           ls -la
-          echo "Searching for package.json..."
-          find . -type f -name "package.json"
-          echo "Searching for package-lock.json..."
-          find . -type f -name "package-lock.json"
-          PACKAGE_JSON=$(find . -type f -name "package.json" -not -path "*/node_modules/*" -not -path "*/dist/*" | head -n 1)
-          if [ -z "$PACKAGE_JSON" ]; then
-            echo "Error: package.json not found"
-            echo "Current directory contents:"
-            ls -la
-            echo "Parent directory contents:"
-            ls -la ..
-            exit 1
-          fi
-          PROJECT_DIR=$(dirname "$PACKAGE_JSON")
-          echo "Found package.json in: $PROJECT_DIR"
-          cd "$PROJECT_DIR"
+          echo "Changing to main directory..."
+          cd main
+          echo "Current directory after cd: $(pwd)"
+          echo "Listing main directory:"
+          ls -la
           echo "Installing dependencies..."
           npm ci
           echo "Dependencies installed successfully"
@@ -89,6 +69,9 @@ jobs:
       - name: Clean and Build Production Server
         run: |
           echo "Current directory: $(pwd)"
+          echo "Changing to main directory..."
+          cd main
+          echo "Current directory after cd: $(pwd)"
           echo "Listing src directory:"
           ls -la src
           echo "Listing components directory:"
@@ -113,7 +96,7 @@ jobs:
       - name: Deploy Static Assets to S3
         run: |
           echo "Deploying static assets..."
-          aws s3 sync ./dist/ s3://atpinvestment.com.bd/ \
+          aws s3 sync ./main/dist/ s3://atpinvestment.com.bd/ \
             --exclude "index.html" \
             --cache-control "max-age=31536000, public" \
             --delete
@@ -122,7 +105,7 @@ jobs:
       - name: Deploy index.html to S3
         run: |
           echo "Deploying index.html..."
-          aws s3 cp ./dist/index.html s3://atpinvestment.com.bd/index.html \
+          aws s3 cp ./main/dist/index.html s3://atpinvestment.com.bd/index.html \
             --cache-control "max-age=0, no-cache, no-store, must-revalidate"
 
       # 10. Invalidate CloudFront Cache
