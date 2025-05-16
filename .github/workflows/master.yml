@@ -12,19 +12,25 @@ jobs:
       # 1. Checkout the code
       - name: Checkout Code
         uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+          submodules: true
 
       # 2. Debug directory structure
       - name: Debug Directory Structure
         run: |
-          pwd
+          echo "Current directory: $(pwd)"
+          echo "Listing all directories:"
           ls -la
+          echo "Listing main directory:"
+          ls -la main || echo "main directory not found"
 
       # 3. Cache npm dependencies.
       - name: Cache npm Dependencies
         uses: actions/cache@v3
         with:
           path: ~/.npm
-          key: ${{ runner.os }}-npm-${{ hashFiles('**/package-lock.json') }}
+          key: ${{ runner.os }}-npm-${{ hashFiles('main/package-lock.json') }}
           restore-keys: |
             ${{ runner.os }}-npm-
 
@@ -37,12 +43,21 @@ jobs:
       # 5. Install dependencies
       - name: Install Dependencies
         run: |
-          ls -la
+          if [ ! -d "main" ]; then
+            echo "Error: main directory not found"
+            exit 1
+          fi
+          cd main
+          if [ ! -f "package-lock.json" ]; then
+            echo "Error: package-lock.json not found in main directory"
+            exit 1
+          fi
           npm ci
 
       # 6. Clean and Build Production Server
       - name: Clean and Build Production Server
         run: |
+          cd main
           export NODE_OPTIONS="--max-old-space-size=4096"
           rm -rf dist
           npm run build
@@ -58,7 +73,7 @@ jobs:
       # 8. Deploy Static Assets to S3
       - name: Deploy Static Assets to S3
         run: |
-          aws s3 sync ./dist/ s3://atpinvestment.com.bd/ \
+          aws s3 sync ./main/dist/ s3://atpinvestment.com.bd/ \
             --exclude "index.html" \
             --cache-control "max-age=31536000, public" \
             --delete
@@ -66,7 +81,7 @@ jobs:
       # 9. Deploy Index.html with No Cache
       - name: Deploy index.html to S3
         run: |
-          aws s3 cp ./dist/index.html s3://atpinvestment.com.bd/index.html \
+          aws s3 cp ./main/dist/index.html s3://atpinvestment.com.bd/index.html \
             --cache-control "max-age=0, no-cache, no-store, must-revalidate"
 
       # 10. Invalidate CloudFront Cache
