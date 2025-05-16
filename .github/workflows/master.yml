@@ -81,17 +81,25 @@ jobs:
           PROJECT_DIR=$(dirname "$PACKAGE_JSON")
           echo "Found package.json in: $PROJECT_DIR"
           cd "$PROJECT_DIR"
+          echo "Installing dependencies..."
           npm ci
+          echo "Dependencies installed successfully"
 
       # 6. Clean and Build Production Server
       - name: Clean and Build Production Server
         run: |
-          PACKAGE_JSON=$(find . -type f -name "package.json" -not -path "*/node_modules/*" -not -path "*/dist/*" | head -n 1)
-          PROJECT_DIR=$(dirname "$PACKAGE_JSON")
-          cd "$PROJECT_DIR"
+          echo "Current directory: $(pwd)"
+          echo "Listing src directory:"
+          ls -la src
+          echo "Listing components directory:"
+          ls -la src/components
+          echo "Listing utility directory:"
+          ls -la src/components/utility
+          echo "Building project..."
           export NODE_OPTIONS="--max-old-space-size=4096"
           rm -rf dist
           npm run build
+          echo "Build completed"
 
       # 7. Configure AWS Credentials
       - name: Configure AWS Credentials
@@ -104,9 +112,8 @@ jobs:
       # 8. Deploy Static Assets to S3
       - name: Deploy Static Assets to S3
         run: |
-          PACKAGE_JSON=$(find . -type f -name "package.json" -not -path "*/node_modules/*" -not -path "*/dist/*" | head -n 1)
-          PROJECT_DIR=$(dirname "$PACKAGE_JSON")
-          aws s3 sync "$PROJECT_DIR/dist/" s3://atpinvestment.com.bd/ \
+          echo "Deploying static assets..."
+          aws s3 sync ./dist/ s3://atpinvestment.com.bd/ \
             --exclude "index.html" \
             --cache-control "max-age=31536000, public" \
             --delete
@@ -114,14 +121,14 @@ jobs:
       # 9. Deploy Index.html with No Cache
       - name: Deploy index.html to S3
         run: |
-          PACKAGE_JSON=$(find . -type f -name "package.json" -not -path "*/node_modules/*" -not -path "*/dist/*" | head -n 1)
-          PROJECT_DIR=$(dirname "$PACKAGE_JSON")
-          aws s3 cp "$PROJECT_DIR/dist/index.html" s3://atpinvestment.com.bd/index.html \
+          echo "Deploying index.html..."
+          aws s3 cp ./dist/index.html s3://atpinvestment.com.bd/index.html \
             --cache-control "max-age=0, no-cache, no-store, must-revalidate"
 
       # 10. Invalidate CloudFront Cache
       - name: Invalidate CloudFront Cache
         run: |
+          echo "Invalidating CloudFront cache..."
           aws cloudfront create-invalidation \
             --distribution-id ${{ secrets.DISTRIBUTION_PROD_ID }} \
             --paths "/*"
