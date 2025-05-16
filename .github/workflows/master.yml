@@ -12,15 +12,12 @@ jobs:
       # 1. Checkout the code
       - name: Checkout Code
         uses: actions/checkout@v3
-        with:
-          fetch-depth: 0
 
       # 2. Debug directory structure
       - name: Debug Directory Structure
         run: |
           pwd
           ls -la
-          ls -la $GITHUB_WORKSPACE/main || echo "main directory not found"
 
       # 3. Cache npm dependencies.
       - name: Cache npm Dependencies
@@ -40,13 +37,12 @@ jobs:
       # 5. Install dependencies
       - name: Install Dependencies
         run: |
-          cd $GITHUB_WORKSPACE/main
+          ls -la
           npm ci
 
       # 6. Clean and Build Production Server
       - name: Clean and Build Production Server
         run: |
-          cd $GITHUB_WORKSPACE/main
           export NODE_OPTIONS="--max-old-space-size=4096"
           rm -rf dist
           npm run build
@@ -62,7 +58,7 @@ jobs:
       # 8. Deploy Static Assets to S3
       - name: Deploy Static Assets to S3
         run: |
-          aws s3 sync $GITHUB_WORKSPACE/main/dist/ s3://atpinvestment.com.bd/ \
+          aws s3 sync ./dist/ s3://atpinvestment.com.bd/ \
             --exclude "index.html" \
             --cache-control "max-age=31536000, public" \
             --delete
@@ -70,7 +66,7 @@ jobs:
       # 9. Deploy Index.html with No Cache
       - name: Deploy index.html to S3
         run: |
-          aws s3 cp $GITHUB_WORKSPACE/main/dist/index.html s3://atpinvestment.com.bd/index.html \
+          aws s3 cp ./dist/index.html s3://atpinvestment.com.bd/index.html \
             --cache-control "max-age=0, no-cache, no-store, must-revalidate"
 
       # 10. Invalidate CloudFront Cache
