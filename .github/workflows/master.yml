@@ -61,10 +61,8 @@ jobs:
       # 8. Deploy Index.html with No Cache
       - name: Deploy index.html to S3
         run: |
-          aws s3 cp ./main/dist/index.html 
-s3://agencyhandy-production/index.html \
-            --cache-control "max-age=0, no-cache, no-store, 
-must-revalidate"
+          aws s3 cp ./main/dist/index.html s3://agencyhandy-production/index.html \
+            --cache-control "max-age=0, no-cache, no-store, must-revalidate"
 
       # 9. Invalidate CloudFront Cache
       - name: Invalidate CloudFront Cache
