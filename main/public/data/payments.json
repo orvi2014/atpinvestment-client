@@ -1,0 +1,71 @@
+[
+    {
+        "id" : 1,
+        "amount" : "3000",
+        "status" : "completed",
+        "date" : "2025-01-01"
+    },
+
+    {
+        "id" : 2,
+        "amount" : "3000",
+        "status" : "completed",
+        "date" : "2025-02-01"
+    },
+
+    {
+        "id" : 3,
+        "amount" : "3000",
+        "status" : "completed",
+        "date" : "2025-03-01"
+    },
+
+    {
+        "id" : 4,
+        "amount" : "3000",
+        "status" : "completed",
+        "date" : "2025-04-01"
+    },
+
+    {
+        "id" : 5,
+        "amount" : "3000",
+        "status" : "completed",
+        "date" : "2025-05-01"
+    },
+
+    {
+        "id" : 6,
+        "amount" : "3000",
+        "status" : "completed",
+        "date" : "2025-06-01"
+    },
+
+    {
+        "id" : 7,
+        "amount" : "3000",
+        "status" : "completed",
+        "date" : "2025-07-01"
+    },
+
+    {
+        "id" : 8,
+        "amount" : "3000",
+        "status" : "completed",
+        "date" : "2025-08-01"
+    },
+
+    {
+        "id" : 9,
+        "amount" : "3000",
+        "status" : "completed",
+        "date" : "2025-09-01"
+    },
+
+    {
+        "id" : 10,
+        "amount" : "3000",
+        "status" : "completed",
+        "date" : "2025-10-01"
+    }
+]

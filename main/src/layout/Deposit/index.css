@@ -1,0 +1,178 @@
+.deposit-page {
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #f3f4f6;
+    padding: 2rem;
+}
+
+.deposit-container {
+    background-color: white;
+    border-radius: 0.75rem;
+    box-shadow: 0 6px 10px -1px rgba(0, 0, 0, 0.1), 0 4px 6px -1px rgba(0, 0, 0, 0.06);
+    padding: 2.5rem;
+    width: 100%;
+    max-width: 600px;
+}
+
+.page-title {
+    font-size: 1.75rem;
+    font-weight: 700;
+    margin-bottom: 2rem;
+    text-align: center;
+    color: #1f2937;
+}
+
+.content {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+}
+
+.bank-details {
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+}
+
+.section-title {
+    font-size: 1.125rem;
+    font-weight: 600;
+    color: #374151;
+}
+
+.bank-grid {
+    display: grid;
+    grid-template-columns: minmax(0, 4fr) minmax(0, 6fr);
+    gap: 0.75rem;
+    font-size: 1rem;
+}
+
+.value {
+    font-weight: 600;
+    color: #1f2937;
+    white-space: nowrap; 
+    overflow: hidden;
+    text-overflow: ellipsis; 
+    cursor: pointer;
+}
+
+
+.label {
+    color: #6b7280;
+    font-weight: 500;
+}
+
+
+
+.amount-section, .upload-section {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+}
+
+.amount-label {
+    display: flex;
+    gap: 0.25rem;
+    align-items: center;
+    font-weight: 600;
+}
+
+.required {
+    color: #ef4444;
+    font-size: 1.125rem;
+}
+
+.upload-area {
+    border: 2px dashed #9ca3af;
+    border-radius: 0.75rem;
+    padding: 1.5rem;
+    text-align: center;
+    background-color: #f9fafb;
+    transition: all 0.3s ease-in-out;
+}
+
+.upload-area:hover {
+    background-color: #e5e7eb;
+    border-color: #3b82f6;
+}
+
+.file-input {
+    display: none;
+}
+
+.upload-label {
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.75rem;
+    color: #1f2937;
+    font-size: 1rem;
+}
+
+.upload-icon {
+    height: 40px;
+    width: 40px;
+    color: #6b7280;
+}
+
+.upload-text {
+    font-size: 1rem;
+    font-weight: 500;
+    color: #2563eb;
+}
+
+.upload-subtext {
+    font-size: 0.875rem;
+    color: #6b7280;
+}
+
+.file-preview {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+}
+
+.file-info {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-size: 1rem;
+    font-weight: 500;
+}
+
+.remove-file {
+    height: 28px;
+    width: 28px;
+    padding: 0;
+    cursor: pointer;
+}
+
+.upload-progress {
+    height: 10px;
+    background-color: #3b82f6;
+    border-radius: 0.5rem;
+}
+
+.action-buttons {
+    display: flex;
+    gap: 0.75rem;
+    justify-content: flex-end;
+}
+
+.icon-small {
+    height: 20px;
+    width: 20px;
+}
+
+@media (max-width: 640px) {
+    .deposit-container {
+        padding: 1.5rem;
+    }
+
+    .bank-grid {
+        grid-template-columns: 1fr;
+    }
+}

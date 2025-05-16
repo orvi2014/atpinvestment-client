@@ -1,0 +1,32 @@
+[
+    {
+      "code": "bd",
+      "name": "Bangladesh",
+      "flag": "../../src/assets/flag/bangladesh.png",
+      "phonePrefix": "+880"
+    },
+    {
+      "code": "us",
+      "name": "United States",
+      "flag": "../../src/assets/flag/USA.png",
+      "phonePrefix": "+1"
+    },
+    {
+      "code": "in",
+      "name": "India",
+      "flag": "../../src/assets/flag/india.png",
+      "phonePrefix": "+91"
+    },
+    {
+      "code": "gb",
+      "name": "United Kingdom",
+      "flag": "../../src/assets/flag/united-kingdom.png",
+      "phonePrefix": "+44"
+    },
+    {
+      "code": "ca",
+      "name": "Canada",
+      "flag": "../../src/assets/flag/canada.png",
+      "phonePrefix": "+1"
+    }
+]

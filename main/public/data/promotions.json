@@ -1,0 +1,29 @@
+[
+    {
+        "id" : 1,
+        "name" : "Summer Sale",
+        "discount" : "10%",
+        "validUntil" : "2025-12-31"
+    },
+
+    {
+        "id" : 2,
+        "name" : "Back to School",
+        "discount" : "15%",
+        "validUntil" : "2025-12-31"
+    },
+
+    {
+        "id" : 3,
+        "name" : "Winter Wonderland",
+        "discount" : "20%",
+        "validUntil" : "2025-12-31"
+    },
+
+    {
+        "id" : 4,
+        "name" : "Spring Fling",
+        "discount" : "25%",
+        "validUntil" : "2025-12-31"
+    }
+]
