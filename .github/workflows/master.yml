@@ -22,21 +22,21 @@ jobs:
           echo "Current directory: $(pwd)"
           echo "Listing all directories:"
           ls -la
-          echo "Listing main directory:"
-          ls -la main || echo "main directory not found"
           echo "Git status:"
           git status
           echo "Git branch:"
           git branch
           echo "Git remote:"
           git remote -v
+          echo "Finding package.json:"
+          find . -name "package.json"
 
       # 3. Cache npm dependencies.
       - name: Cache npm Dependencies
         uses: actions/cache@v3
         with:
           path: ~/.npm
-          key: ${{ runner.os }}-npm-${{ hashFiles('main/package-lock.json') }}
+          key: ${{ runner.os }}-npm-${{ hashFiles('**/package-lock.json') }}
           restore-keys: |
             ${{ runner.os }}-npm-
 
@@ -49,25 +49,22 @@ jobs:
       # 5. Install dependencies
       - name: Install Dependencies
         run: |
-          if [ ! -d "main" ]; then
-            echo "Error: main directory not found"
-            echo "Current directory contents:"
-            ls -la
+          PACKAGE_JSON=$(find . -name "package.json" -not -path "*/node_modules/*" -not -path "*/dist/*" | head -n 1)
+          if [ -z "$PACKAGE_JSON" ]; then
+            echo "Error: package.json not found"
             exit 1
           fi
-          cd main
-          if [ ! -f "package-lock.json" ]; then
-            echo "Error: package-lock.json not found in main directory"
-            echo "Main directory contents:"
-            ls -la
-            exit 1
-          fi
+          PROJECT_DIR=$(dirname "$PACKAGE_JSON")
+          echo "Found package.json in: $PROJECT_DIR"
+          cd "$PROJECT_DIR"
           npm ci
 
       # 6. Clean and Build Production Server
       - name: Clean and Build Production Server
         run: |
-          cd main
+          PACKAGE_JSON=$(find . -name "package.json" -not -path "*/node_modules/*" -not -path "*/dist/*" | head -n 1)
+          PROJECT_DIR=$(dirname "$PACKAGE_JSON")
+          cd "$PROJECT_DIR"
           export NODE_OPTIONS="--max-old-space-size=4096"
           rm -rf dist
           npm run build
@@ -83,7 +80,9 @@ jobs:
       # 8. Deploy Static Assets to S3
       - name: Deploy Static Assets to S3
         run: |
-          aws s3 sync ./main/dist/ s3://atpinvestment.com.bd/ \
+          PACKAGE_JSON=$(find . -name "package.json" -not -path "*/node_modules/*" -not -path "*/dist/*" | head -n 1)
+          PROJECT_DIR=$(dirname "$PACKAGE_JSON")
+          aws s3 sync "$PROJECT_DIR/dist/" s3://atpinvestment.com.bd/ \
             --exclude "index.html" \
             --cache-control "max-age=31536000, public" \
             --delete
@@ -91,7 +90,9 @@ jobs:
       # 9. Deploy Index.html with No Cache
       - name: Deploy index.html to S3
         run: |
-          aws s3 cp ./main/dist/index.html s3://atpinvestment.com.bd/index.html \
+          PACKAGE_JSON=$(find . -name "package.json" -not -path "*/node_modules/*" -not -path "*/dist/*" | head -n 1)
+          PROJECT_DIR=$(dirname "$PACKAGE_JSON")
+          aws s3 cp "$PROJECT_DIR/dist/index.html" s3://atpinvestment.com.bd/index.html \
             --cache-control "max-age=0, no-cache, no-store, must-revalidate"
 
       # 10. Invalidate CloudFront Cache
