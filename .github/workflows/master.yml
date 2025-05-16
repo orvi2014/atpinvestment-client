@@ -28,8 +28,12 @@ jobs:
           git branch
           echo "Git remote:"
           git remote -v
-          echo "Finding package.json:"
-          find . -name "package.json"
+          echo "Finding all files:"
+          find . -type f
+          echo "Git log:"
+          git log -1
+          echo "Git show:"
+          git show
 
       # 3. Cache npm dependencies.
       - name: Cache npm Dependencies
@@ -49,9 +53,17 @@ jobs:
       # 5. Install dependencies
       - name: Install Dependencies
         run: |
-          PACKAGE_JSON=$(find . -name "package.json" -not -path "*/node_modules/*" -not -path "*/dist/*" | head -n 1)
+          echo "Searching for package.json..."
+          find . -type f -name "package.json"
+          echo "Searching for package-lock.json..."
+          find . -type f -name "package-lock.json"
+          PACKAGE_JSON=$(find . -type f -name "package.json" -not -path "*/node_modules/*" -not -path "*/dist/*" | head -n 1)
           if [ -z "$PACKAGE_JSON" ]; then
             echo "Error: package.json not found"
+            echo "Current directory contents:"
+            ls -la
+            echo "Parent directory contents:"
+            ls -la ..
             exit 1
           fi
           PROJECT_DIR=$(dirname "$PACKAGE_JSON")
@@ -62,7 +74,7 @@ jobs:
       # 6. Clean and Build Production Server
       - name: Clean and Build Production Server
         run: |
-          PACKAGE_JSON=$(find . -name "package.json" -not -path "*/node_modules/*" -not -path "*/dist/*" | head -n 1)
+          PACKAGE_JSON=$(find . -type f -name "package.json" -not -path "*/node_modules/*" -not -path "*/dist/*" | head -n 1)
           PROJECT_DIR=$(dirname "$PACKAGE_JSON")
           cd "$PROJECT_DIR"
           export NODE_OPTIONS="--max-old-space-size=4096"
@@ -80,7 +92,7 @@ jobs:
       # 8. Deploy Static Assets to S3
       - name: Deploy Static Assets to S3
         run: |
-          PACKAGE_JSON=$(find . -name "package.json" -not -path "*/node_modules/*" -not -path "*/dist/*" | head -n 1)
+          PACKAGE_JSON=$(find . -type f -name "package.json" -not -path "*/node_modules/*" -not -path "*/dist/*" | head -n 1)
           PROJECT_DIR=$(dirname "$PACKAGE_JSON")
           aws s3 sync "$PROJECT_DIR/dist/" s3://atpinvestment.com.bd/ \
             --exclude "index.html" \
@@ -90,7 +102,7 @@ jobs:
       # 9. Deploy Index.html with No Cache
       - name: Deploy index.html to S3
         run: |
-          PACKAGE_JSON=$(find . -name "package.json" -not -path "*/node_modules/*" -not -path "*/dist/*" | head -n 1)
+          PACKAGE_JSON=$(find . -type f -name "package.json" -not -path "*/node_modules/*" -not -path "*/dist/*" | head -n 1)
           PROJECT_DIR=$(dirname "$PACKAGE_JSON")
           aws s3 cp "$PROJECT_DIR/dist/index.html" s3://atpinvestment.com.bd/index.html \
             --cache-control "max-age=0, no-cache, no-store, must-revalidate"
