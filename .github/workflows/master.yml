@@ -18,7 +18,7 @@ jobs:
         uses: actions/cache@v3
         with:
           path: ~/.npm
-          key: ${{ runner.os }}-npm-${{ hashFiles('**/package-lock.json') 
+          key: ${{ runner.os }}-npm-${{ hashFiles('**/package-lock.json') }}
           restore-keys: |
             ${{ runner.os }}-npm-
 
@@ -53,7 +53,7 @@ jobs:
       # 7. Deploy Static Assets to S3
       - name: Deploy Static Assets to S3
         run: |
-          aws s3 sync ./aptinvestment/dist/ s3://atpinvestment.com.bd/ \
+          aws s3 sync ./main/dist/ s3://atpinvestment.com.bd/ \
             --exclude "index.html" \
             --cache-control "max-age=31536000, public" \
             --delete
@@ -61,7 +61,7 @@ jobs:
       # 8. Deploy Index.html with No Cache
       - name: Deploy index.html to S3
         run: |
-          aws s3 cp ./main/dist/index.html s3://agencyhandy-production/index.html \
+          aws s3 cp ./main/dist/index.html s3://atpinvestment.com.bd/index.html \
             --cache-control "max-age=0, no-cache, no-store, must-revalidate"
 
       # 9. Invalidate CloudFront Cache
