@@ -1,4 +1,4 @@
-name: Deploy Agency Handy Web App to Production
+name: Deploy Web App to Production
 
 on:
   push:
@@ -31,7 +31,7 @@ jobs:
       # 4. Install dependencies
       - name: Install Dependencies
         run: |
-          cd atpInvestment
+          cd atpinvestment
           npm ci
 
       # 5. Clean and Build Production Server
@@ -53,7 +53,7 @@ jobs:
       # 7. Deploy Static Assets to S3
       - name: Deploy Static Assets to S3
         run: |
-          aws s3 sync ./main/dist/ s3://atpinvestment.com.bd/ \
+          aws s3 sync ./atpinvestment/dist/ s3://atpinvestment.com.bd/ \
             --exclude "index.html" \
             --cache-control "max-age=31536000, public" \
             --delete
